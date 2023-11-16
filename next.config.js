@@ -18,10 +18,10 @@ const nextConfig = {
     domains: [
       "mediaim.expedia.com",
       "img.redbull.com",
-      "hips.hearstapps.com",
+      "cdn-kcapn.nitrocdn.com",
       "i0.wp.com",
-      "www.hamburg.com",
-      "www.chiemsee-alpenland.de",
+      "www.kiwi.com",
+      "www.travelandleisure.com",
     ],
   },
 };

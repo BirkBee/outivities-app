@@ -2,6 +2,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import Head from "next/head";
 import { outivities } from "@/lib/data";
+import Link from "next/link";
 
 export default function HomePage() {
   return (
@@ -11,7 +12,6 @@ export default function HomePage() {
       </Head>
 
       <StyledTitle>All Outivities</StyledTitle>
-
       <main>
         <article>
           <StyledOutivityCardContainer>
