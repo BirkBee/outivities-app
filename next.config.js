@@ -13,6 +13,17 @@ const nextConfig = {
 
     return config;
   },
+
+  images: {
+    domains: [
+      "mediaim.expedia.com",
+      "img.redbull.com",
+      "hips.hearstapps.com",
+      "i0.wp.com",
+      "www.hamburg.com",
+      "www.chiemsee-alpenland.de",
+    ],
+  },
 };
 
 module.exports = nextConfig;
