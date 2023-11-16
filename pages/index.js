@@ -3,7 +3,7 @@ import Image from "next/image";
 import styled from "styled-components";
 import Head from "next/head";
 
-export default function HomePage() {
+export default function HomePage({ outivities }) {
   return (
     <>
       <Head>
