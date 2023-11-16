@@ -3,17 +3,17 @@ import { Poppins } from "next/font/google";
 import { Gochi_Hand } from "next/font/google";
 import { Pacifico } from "next/font/google";
 
-export const poppins = Poppins({
+export const poppins400 = Poppins({
   weight: "400",
+  subsets: ["latin"],
+});
+
+export const poppins200 = Poppins({
+  weight: "200",
   subsets: ["latin"],
 });
 
 export const pacifico = Pacifico({
-  weight: "400",
-  subsets: ["latin"],
-});
-
-export const gochiHand = Gochi_Hand({
   weight: "400",
   subsets: ["latin"],
 });
@@ -39,7 +39,7 @@ export default createGlobalStyle`
 
 
   body {
-    font-family: ${poppins.style.fontFamily};
+    font-family: ${poppins400.style.fontFamily};
   }
 
   main {
@@ -57,6 +57,10 @@ export default createGlobalStyle`
   h1 {
     font-family: ${pacifico.style.fontFamily};
     letter-spacing: 2px;
+  }
+  
+  p {
+    font-family: ${poppins200.style.fontFamily};
   }
 
 `;

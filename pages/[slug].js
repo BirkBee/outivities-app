@@ -1,22 +1,44 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Image from "next/image";
 
 export default function OutivityDetail({ outivities }) {
   const router = useRouter();
   const { slug } = router.query;
   const outivity = outivities.find((outivity) => outivity.slug === slug);
-  console.log(outivity);
-  /* if (!outivity) {
+
+  if (!outivity) {
     return <p>Loading...</p>;
-  } */
+  }
+
+  console.log(outivity);
   return (
     <>
       <Head>
-        <title title={outivity.title}>{outivity.title}</title>
+        <title>{outivity.title}</title>
       </Head>
-      <ul>
-        <li></li>
-      </ul>
+
+      <main>
+        <article>
+          <ul>
+            <li>
+              <h2>{outivity.title}</h2>
+              <Image
+                src={outivity.image}
+                alt={outivity.title}
+                width={300}
+                height={200}
+              />
+              <p>
+                <strong>Location: </strong> {outivity.location}
+              </p>
+              <p>
+                <strong>Description: </strong> {outivity.description}
+              </p>
+            </li>
+          </ul>
+        </article>
+      </main>
     </>
   );
 }

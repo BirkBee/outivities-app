@@ -1,9 +1,9 @@
-import { outivities } from "@/lib/data";
 import Image from "next/image";
 import styled from "styled-components";
 import Head from "next/head";
+import { outivities } from "@/lib/data";
 
-export default function HomePage({ outivities }) {
+export default function HomePage() {
   return (
     <>
       <Head>
