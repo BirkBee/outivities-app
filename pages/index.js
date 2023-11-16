@@ -17,12 +17,19 @@ export default function HomePage() {
           <StyledOutivityCardContainer>
             {outivities.map((outivity) => (
               <StyledOutivityCard key={outivity.id}>
-                <StyledImage
-                  src={outivity.image}
-                  alt={outivity.title}
-                  width={300}
-                  height={200}
-                />
+                <Link
+                  href={{
+                    pathname: `[slug]`,
+                    query: { slug: outivity.slug },
+                  }}
+                >
+                  <StyledImage
+                    src={outivity.image}
+                    alt={outivity.title}
+                    width={300}
+                    height={200}
+                  />
+                </Link>
                 <StyledOutivityTitle>{outivity.title}</StyledOutivityTitle>
                 <StyledOutivityCityName>
                   in {outivity.location}
