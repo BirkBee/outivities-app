@@ -11,7 +11,6 @@ export default function OutivityDetail({ outivities }) {
     return <p>Loading...</p>;
   }
 
-  console.log(outivity);
   return (
     <>
       <Head>
