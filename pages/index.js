@@ -4,20 +4,6 @@ import styled from "styled-components";
 import Head from "next/head";
 
 export default function HomePage() {
-  if (!outivities) {
-    return (
-      <>
-        <main>
-          <h1>Ooops... </h1>
-          <p>
-            Error Loading Outivities. We were unable to load the Outivities
-            list. Please try again later.
-          </p>
-        </main>
-      </>
-    );
-  }
-
   return (
     <>
       <Head>
