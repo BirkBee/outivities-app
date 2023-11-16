@@ -39,8 +39,13 @@ export default createGlobalStyle`
 
 
   body {
-    margin: 0;
     font-family: ${poppins.style.fontFamily};
+  }
+
+  main {
+    overflow-y: auto;
+    padding: 0;
+    margin: 30px;
   }
 
   ul {

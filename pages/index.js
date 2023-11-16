@@ -1,42 +1,53 @@
 import { outivities } from "@/lib/data";
 import Image from "next/image";
 import styled from "styled-components";
+import Head from "next/head";
 
 export default function HomePage() {
-  try {
+  if (!outivities) {
     return (
       <>
-        <StyledTitle>All Outivities</StyledTitle>
-        <StyledOutivitieCardContainer>
-          {outivities.map((outivity) => (
-            <StyledOutivitieCard key={outivity.id}>
-              <StyledImage
-                src={outivity.image}
-                alt={outivity.title}
-                width={300}
-                height={200}
-              />
-              <StyledOutivityTitle>{outivity.title}</StyledOutivityTitle>
-              <StyledOutivityCityName>
-                in {outivity.location}
-              </StyledOutivityCityName>
-            </StyledOutivitieCard>
-          ))}
-        </StyledOutivitieCardContainer>
-      </>
-    );
-  } catch (error) {
-    console.log(error);
-    return (
-      <>
-        <h1>Ooops... </h1>
-        <p>
-          Error Loading Outivities. We were unable to load the Outivities list.
-          Please try again later.
-        </p>
+        <main>
+          <h1>Ooops... </h1>
+          <p>
+            Error Loading Outivities. We were unable to load the Outivities
+            list. Please try again later.
+          </p>
+        </main>
       </>
     );
   }
+
+  return (
+    <>
+      <Head>
+        <title>My Outivities</title>
+      </Head>
+
+      <StyledTitle>All Outivities</StyledTitle>
+
+      <main>
+        <article>
+          <StyledOutivityCardContainer>
+            {outivities.map((outivity) => (
+              <StyledOutivityCard key={outivity.id}>
+                <StyledImage
+                  src={outivity.image}
+                  alt={outivity.title}
+                  width={300}
+                  height={200}
+                />
+                <StyledOutivityTitle>{outivity.title}</StyledOutivityTitle>
+                <StyledOutivityCityName>
+                  in {outivity.location}
+                </StyledOutivityCityName>
+              </StyledOutivityCard>
+            ))}
+          </StyledOutivityCardContainer>
+        </article>
+      </main>
+    </>
+  );
 }
 
 const StyledTitle = styled.h1`
@@ -47,15 +58,14 @@ const StyledTitle = styled.h1`
   color: var(--neutral-color);
 `;
 
-const StyledOutivitieCardContainer = styled.ul`
+const StyledOutivityCardContainer = styled.ul`
   display: grid;
-  gap: 1rem;
   padding: 20px;
   place-content: center;
   gap: 50px;
 `;
 
-const StyledOutivitieCard = styled.li`
+const StyledOutivityCard = styled.li`
   position: relative;
   place-content: center;
   max-width: 640px;
