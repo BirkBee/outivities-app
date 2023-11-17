@@ -1,20 +1,19 @@
 import { createGlobalStyle } from "styled-components";
 import { Poppins } from "next/font/google";
-import { Gochi_Hand } from "next/font/google";
-import { Pacifico } from "next/font/google";
+import { Rubik } from "next/font/google";
 
 export const poppins = Poppins({
-  weight: "400",
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
 });
 
-export const pacifico = Pacifico({
-  weight: "400",
+export const poppins200 = Poppins({
+  weight: "200",
   subsets: ["latin"],
 });
 
-export const gochiHand = Gochi_Hand({
-  weight: "400",
+export const rubik = Rubik({
+  weight: "600",
   subsets: ["latin"],
 });
 
@@ -32,14 +31,15 @@ export default createGlobalStyle`
     --primary-color-hover: #FFBC0A;
     --neutral-color: #E5E5E5;
 
-    @media (max-width: 599px) {font-size: 16px;}
-    @media (min-width: 600px) {font-size: 18px;}
-    @media (min-width: 1200px) {font-size: 20px;}
+    @media (max-width: 599px) {font-size: 14px;}
+    @media (min-width: 600px) {font-size: 16px;}
+    @media (min-width: 1200px) {font-size: 18px;}
   }
 
 
   body {
     font-family: ${poppins.style.fontFamily};
+
   }
 
   main {
@@ -55,8 +55,12 @@ export default createGlobalStyle`
   }
 
   h1 {
-    font-family: ${pacifico.style.fontFamily};
+    font-family: ${rubik.style.fontFamily};
     letter-spacing: 2px;
+  }
+  
+  p {
+    font-family: ${poppins.style.fontFamily};
   }
 
 `;
