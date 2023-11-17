@@ -18,7 +18,7 @@ export default function HomePage() {
           <StyledOutivityCardContainer>
             {outivities.map((outivity) => (
               <StyledOutivityCard key={outivity.id}>
-                <Link href={`/${outivity.slug}`}>
+                <Link href={`/${outivity.id}`}>
                   <StyledOutivityImage
                     src={outivity.image}
                     alt={outivity.title}

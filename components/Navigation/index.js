@@ -1,11 +1,17 @@
 import Link from "next/link";
 import styled from "styled-components";
 import HomeSvg from "@/public/home.svg";
+import PlusSvg from "@/public/plus.svg";
 
 export default function Navigation() {
   return (
     <StyledNavigation>
       <StyledList>
+        <li>
+          <StyledLink href="/">
+            <StyledSvg />
+          </StyledLink>
+        </li>
         <li>
           <StyledLink href="/">
             <StyledSvg />

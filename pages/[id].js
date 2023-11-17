@@ -6,8 +6,8 @@ import { StyledOutivityImage } from "@/components/OutivityImage/StyledOutivityIm
 
 export default function OutivityDetail({ outivities }) {
   const router = useRouter();
-  const { slug } = router.query;
-  const outivity = outivities.find((outivity) => outivity.slug === slug);
+  const { id } = router.query;
+  const outivity = outivities.find((outivity) => outivity.id === id);
 
   if (!outivity) {
     return <p>Loading...</p>;
