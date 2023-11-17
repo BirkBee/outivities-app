@@ -18,7 +18,7 @@ const nextConfig = {
     domains: [
       "mediaim.expedia.com",
       "img.redbull.com",
-      "cdn-kcapn.nitrocdn.com",
+      "media.tacdn.com",
       "i0.wp.com",
       "www.kiwi.com",
       "www.travelandleisure.com",

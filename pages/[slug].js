@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
 import styled from "styled-components";
+import { StyledOutivityImage } from "@/components/OutivityImage/StyledOutivityImage";
 
 export default function OutivityDetail({ outivities }) {
   const router = useRouter();
@@ -21,7 +22,7 @@ export default function OutivityDetail({ outivities }) {
         <article>
           <ul>
             <li>
-              <StyledOutivityTitle>{outivity.title}</StyledOutivityTitle>
+              <h2>{outivity.title}</h2>
               <StyledOutivityImage
                 src={outivity.image}
                 alt={outivity.title}
@@ -29,8 +30,10 @@ export default function OutivityDetail({ outivities }) {
                 height={200}
               />
               <p>
-                <strong>Location: </strong> {outivity.location}
+                <strong>Location: </strong> {outivity.area},
+                <StyledCountryName>{outivity.country}</StyledCountryName>
               </p>
+
               <p>
                 <strong>Description: </strong> {outivity.description}
               </p>
@@ -41,12 +44,6 @@ export default function OutivityDetail({ outivities }) {
     </>
   );
 }
-
-const StyledOutivityImage = styled(Image)`
-  overflow: clip;
-  overflow-clip-margin: content-box;
-  margin: 5px;
-`;
-const StyledOutivityTitle = styled.h2`
-  margin: 5px;
+const StyledCountryName = styled.a`
+  margin-left: 7px;
 `;

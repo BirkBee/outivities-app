@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Head from "next/head";
 import { outivities } from "@/lib/data";
 import Link from "next/link";
+import { StyledOutivityImage } from "@/components/OutivityImage/StyledOutivityImage";
 
 export default function HomePage() {
   return (
@@ -23,7 +24,7 @@ export default function HomePage() {
                     query: { slug: outivity.slug },
                   }}
                 >
-                  <StyledImage
+                  <StyledOutivityImage
                     src={outivity.image}
                     alt={outivity.title}
                     width={300}
@@ -32,7 +33,7 @@ export default function HomePage() {
                 </Link>
                 <StyledOutivityTitle>{outivity.title}</StyledOutivityTitle>
                 <StyledOutivityCityName>
-                  in {outivity.location}
+                  in {outivity.area}
                 </StyledOutivityCityName>
               </StyledOutivityCard>
             ))}
@@ -67,11 +68,6 @@ const StyledOutivityCard = styled.li`
   box-shadow: var(--neutral-color) 0px 2px 1px, var(--neutral-color) 0px 4px 2px,
     var(--neutral-color) 0px 8px 4px, var(--neutral-color) 0px 16px 8px,
     var(--neutral-color) 0px 32px 16px;
-`;
-
-const StyledImage = styled(Image)`
-  overflow: clip;
-  overflow-clip-margin: content-box;
 `;
 
 const StyledOutivityTitle = styled.h2`

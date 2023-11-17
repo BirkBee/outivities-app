@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import HomeSvg from "@/public/home.svg";
 
 export default function Navigation() {
   return (
@@ -7,20 +8,7 @@ export default function Navigation() {
       <StyledList>
         <li>
           <StyledLink href="/">
-            <StyledSvg
-              xmlns="http://www.w3.org/2000/svg"
-              width="35"
-              height="35"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M20 9v11a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V9" />
-              <path d="M9 22V12h6v10M2 10.6L12 2l10 8.6" />
-            </StyledSvg>
+            <StyledSvg />
           </StyledLink>
         </li>
       </StyledList>
@@ -38,6 +26,8 @@ const StyledNavigation = styled.nav`
   position: fixed;
   bottom: 0;
   padding: 15px;
+  display: grid;
+  z-index: 1;
 `;
 
 const StyledList = styled.ul`
@@ -52,13 +42,9 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   align-items: center;
   width: 50%;
-  &:hover {
-    color: greenyellow;
-    letter-spacing: 2px;
-  }
 `;
 
-const StyledSvg = styled.svg`
-  position: relative;
-  left: -250px;
+const StyledSvg = styled(HomeSvg)`
+  display: grid;
+  place-items: center;
 `;
