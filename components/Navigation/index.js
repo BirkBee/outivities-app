@@ -17,12 +17,8 @@ export default function Navigation() {
 }
 const StyledNavigation = styled.nav`
   width: 100%;
-  margin-bottom: auto;
   background-color: var(--primary-color);
   color: var(--neutral-color);
-  bottom: 0;
-  color: white;
-  padding: 15px 0;
   position: fixed;
   bottom: 0;
   padding: 15px;
@@ -38,7 +34,7 @@ const StyledList = styled.ul`
 `;
 
 const StyledLink = styled(Link)`
-  color: white;
+  color: var(--neutral-color);
   text-decoration: none;
   align-items: center;
   width: 50%;

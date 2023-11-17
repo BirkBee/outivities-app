@@ -44,6 +44,6 @@ export default function OutivityDetail({ outivities }) {
     </>
   );
 }
-const StyledCountryName = styled.a`
+const StyledCountryName = styled.span`
   margin-left: 7px;
 `;
