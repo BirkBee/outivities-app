@@ -1,49 +1,19 @@
 import { useRouter } from "next/router";
-import Head from "next/head";
-import Image from "next/image";
-import styled from "styled-components";
-import { StyledOutivityImage } from "@/components/OutivityImage/StyledOutivityImage";
+import OutivityDetail from "@/components/OutivityDetail";
+import { initialOutivities } from "@/lib/data";
 
-export default function OutivityDetail({ outivities }) {
+export default function OutivityDetailsPage() {
   const router = useRouter();
   const { id } = router.query;
-  const outivity = outivities.find((outivity) => outivity.id === id);
-
+  const outivity = initialOutivities.find((outivity) => outivity.id === id);
+  console.log(outivity);
   if (!outivity) {
     return <p>Loading...</p>;
   }
 
   return (
     <>
-      <Head>
-        <title>{outivity.title}</title>
-      </Head>
-      <main>
-        <article>
-          <ul>
-            <li>
-              <h2>{outivity.title}</h2>
-              <StyledOutivityImage
-                src={outivity.image}
-                alt={outivity.title}
-                width={300}
-                height={200}
-              />
-              <p>
-                <strong>Location: </strong> {outivity.area},
-                <StyledCountryName>{outivity.country}</StyledCountryName>
-              </p>
-
-              <p>
-                <strong>Description: </strong> {outivity.description}
-              </p>
-            </li>
-          </ul>
-        </article>
-      </main>
+      <OutivityDetail outivity={outivity} />
     </>
   );
 }
-const StyledCountryName = styled.span`
-  margin-left: 7px;
-`;

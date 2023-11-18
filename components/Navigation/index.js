@@ -9,25 +9,28 @@ export default function Navigation() {
       <StyledList>
         <li>
           <StyledLink href="/">
-            <StyledSvg />
+            <StyledHomeSvg />
           </StyledLink>
+          <StyledSpan>Home</StyledSpan>
         </li>
         <li>
-          <StyledLink href="/">
-            <StyledSvg />
+          <StyledLink href="/create">
+            <StyledPlusSvg />
           </StyledLink>
         </li>
       </StyledList>
     </StyledNavigation>
   );
 }
+
 const StyledNavigation = styled.nav`
   width: 100%;
   background-color: var(--primary-color);
   color: var(--neutral-color);
   position: fixed;
   bottom: 0;
-  padding: 15px;
+  left: 0px;
+  height: 70px;
   display: grid;
   z-index: 1;
 `;
@@ -37,6 +40,7 @@ const StyledList = styled.ul`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  text-align: center;
 `;
 
 const StyledLink = styled(Link)`
@@ -46,7 +50,15 @@ const StyledLink = styled(Link)`
   width: 50%;
 `;
 
-const StyledSvg = styled(HomeSvg)`
+const StyledHomeSvg = styled(HomeSvg)`
   display: grid;
-  place-items: center;
+`;
+
+const StyledPlusSvg = styled(PlusSvg)`
+  display: grid;
+`;
+
+const StyledSpan = styled.span`
+  font-weight: 200;
+  font-size: 12px;
 `;
