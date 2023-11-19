@@ -1,8 +1,10 @@
-import Link from "next/link";
 import styled from "styled-components";
+import { useRouter } from "next/router";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function CreateOutivity({ onAddOutivity, selectedImage }) {
+  const router = useRouter();
   function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -10,9 +12,7 @@ export default function CreateOutivity({ onAddOutivity, selectedImage }) {
     onAddOutivity(data);
     event.target.reset();
   }
-
   const [selctedImage, setSelectedImage] = useState(null);
-
   return (
     <main>
       <StyledNewOutivitiesForm onSubmit={handleSubmit}>
@@ -88,7 +88,14 @@ export default function CreateOutivity({ onAddOutivity, selectedImage }) {
             <StyledCancelButton as={Link} href="/">
               cancel
             </StyledCancelButton>
-            <StyledSaveButton type="submit">save</StyledSaveButton>
+            <StyledSaveButton
+              type="submit"
+              onClick={() => {
+                router.push("/");
+              }}
+            >
+              save
+            </StyledSaveButton>
           </StyledNewOutivitiesFormSpan>
         </StyledNewOutivitiesFormFields>
       </StyledNewOutivitiesForm>
@@ -160,4 +167,7 @@ const StyledSaveButton = styled.button`
   color: var(--neutral-color);
   background-color: var(--third-color);
   letter-spacing: 2px;
+  &:hover {
+    cursor: pointer;
+  }
 `;

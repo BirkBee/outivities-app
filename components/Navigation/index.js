@@ -11,7 +11,7 @@ export default function Navigation() {
           <StyledLink href="/">
             <StyledHomeSvg />
           </StyledLink>
-          <StyledSpan>Home</StyledSpan>
+          <StyledSpan></StyledSpan>
         </li>
         <li>
           <StyledLink href="/create">
