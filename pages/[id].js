@@ -6,7 +6,7 @@ export default function OutivityDetailsPage() {
   const router = useRouter();
   const { id } = router.query;
   const outivity = initialOutivities.find((outivity) => outivity.id === id);
-  console.log(outivity);
+
   if (!outivity) {
     return <p>Loading...</p>;
   }

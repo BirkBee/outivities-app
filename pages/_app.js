@@ -1,7 +1,7 @@
 import GlobalStyle from "../styles";
 import { initialOutivities } from "@/lib/data";
 import Layout from "@/components/Layout";
-import { uid } from "uid";
+
 import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
   });
 
   function handleAddOutivity(newOutivity) {
-    setOutivities([...outivities, { id: uid(), ...newOutivity }]);
+    setOutivities([newOutivity, ...outivities]);
   }
 
   return (
@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         initialOutivities={outivities}
-        onAddOutivity={handleAddOutivity}
+        handleAddOutivity={handleAddOutivity}
       />
       <Layout />
     </>

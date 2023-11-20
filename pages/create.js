@@ -2,33 +2,48 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useState } from "react";
+import { uid } from "uid";
+import Image from "next/image";
 
-export default function CreateOutivity({ onAddOutivity, selectedImage }) {
+export default function CreateOutivity({ handleAddOutivity, selectedImage }) {
   const router = useRouter();
-  function handleSubmit(event) {
+  function CreateOutivity(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    onAddOutivity(data);
-    event.target.reset();
+
+    const newOutivity = {
+      id: uid(),
+      title: data.outivityName,
+      area: data.outivityArea,
+      country: data.outivityCountry,
+      image: data.myImage,
+      description: data.outivityDescription,
+    };
+
+    handleAddOutivity(newOutivity);
+    // event.target.reset();
+
+    router.push("/");
   }
   const [selctedImage, setSelectedImage] = useState(null);
   return (
     <main>
-      <StyledNewOutivitiesForm onSubmit={handleSubmit}>
+      <StyledNewOutivitiesForm onSubmit={CreateOutivity}>
         <h1>New Outivity</h1>
         <StyledNewOutivitiesFormFields>
           <StyledNewOutivitiesFormField>
             <label htmlFor="image">Image</label>
-            <image src="image" alt="title" width={300} height={200} />
+            {/* <Image src="image" alt="title" width={300} height={200} /> */}
             {selectedImage && (
               <>
-                <image
+                <Image
+                  href={`/${outivity.id}`}
+                  src={URL.createObjectURL(selectedImage)}
                   alt="outivity-image"
                   name="outivityImage"
                   width={300}
                   height={200}
-                  src={URL.createObjectURL(selectedImage)}
                 />
                 <button onClick={() => setSelectedImage(null)}>Remove</button>
               </>
@@ -47,8 +62,8 @@ export default function CreateOutivity({ onAddOutivity, selectedImage }) {
             <StyledNewOutivitiesFormInput
               autofocus
               type="text"
-              name="outivitiyName"
-              id="outivitiyName"
+              name="outivityName"
+              id="outivityName"
               placeholder="Type in a name..."
               required
             />
@@ -90,9 +105,9 @@ export default function CreateOutivity({ onAddOutivity, selectedImage }) {
             </StyledCancelButton>
             <StyledSaveButton
               type="submit"
-              onClick={() => {
-                router.push("/");
-              }}
+              // onClick={() => {
+              //   router.push("/");
+              // }}
             >
               save
             </StyledSaveButton>
