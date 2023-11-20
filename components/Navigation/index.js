@@ -2,20 +2,29 @@ import Link from "next/link";
 import styled from "styled-components";
 import HomeSvg from "@/public/home.svg";
 import PlusSvg from "@/public/plus.svg";
+import { useRouter } from "next/router";
 
 export default function Navigation({ handleSvgClick }) {
+  const router = useRouter();
+  console.log(router.pathname);
   return (
     <StyledNavigation>
       <StyledList>
         <li>
           <StyledLink href="/">
-            <StyledHomeSvg onClick={handleSvgClick} />
+            <StyledHomeSvg
+              $isActive={router.pathname === "/"}
+              onClick={handleSvgClick}
+            />
           </StyledLink>
           <StyledSpan></StyledSpan>
         </li>
         <li>
           <StyledLink href="/create">
-            <StyledPlusSvg onClick={handleSvgClick} />
+            <StyledPlusSvg
+              $isActive={router.pathname === "/create"}
+              onClick={handleSvgClick}
+            />
           </StyledLink>
         </li>
       </StyledList>
@@ -44,7 +53,6 @@ const StyledList = styled.ul`
 `;
 
 const StyledLink = styled(Link)`
-  color: var(--neutral-color);
   text-decoration: none;
   align-items: center;
   width: 50%;
@@ -52,10 +60,16 @@ const StyledLink = styled(Link)`
 
 const StyledHomeSvg = styled(HomeSvg)`
   display: grid;
+  path {
+    stroke: ${(props) => (props.$isActive ? "blue" : "white")};
+  }
 `;
 
 const StyledPlusSvg = styled(PlusSvg)`
   display: grid;
+  path {
+    fill: ${(props) => (props.$isActive ? "blue" : "white")};
+  }
 `;
 
 const StyledSpan = styled.span`

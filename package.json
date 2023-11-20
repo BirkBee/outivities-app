@@ -20,6 +20,7 @@
     "react-dom": "18.2.0",
     "styled-components": "^6.0.2",
     "uid": "^2.0.2",
+    "use-local-storage": "^3.0.0",
     "use-local-storage-state": "^19.1.0"
   },
   "devDependencies": {
