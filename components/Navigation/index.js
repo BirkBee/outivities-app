@@ -3,19 +3,19 @@ import styled from "styled-components";
 import HomeSvg from "@/public/home.svg";
 import PlusSvg from "@/public/plus.svg";
 
-export default function Navigation() {
+export default function Navigation({ handleSvgClick }) {
   return (
     <StyledNavigation>
       <StyledList>
         <li>
           <StyledLink href="/">
-            <StyledHomeSvg />
+            <StyledHomeSvg onClick={handleSvgClick} />
           </StyledLink>
           <StyledSpan></StyledSpan>
         </li>
         <li>
           <StyledLink href="/create">
-            <StyledPlusSvg />
+            <StyledPlusSvg onClick={handleSvgClick} />
           </StyledLink>
         </li>
       </StyledList>

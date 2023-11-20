@@ -1,12 +1,14 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { uid } from "uid";
 import Image from "next/image";
+import { useRef } from "react";
 
 export default function CreateOutivity({ handleAddOutivity }) {
   const router = useRouter();
   const [selectedImage, setSelectedImage] = useState(null);
+  const outivityInputRef = useRef();
   const handleCancel = () => {
     const confirmed = window.confirm("Are you sure you want to cancel?");
     if (confirmed) {
@@ -30,6 +32,8 @@ export default function CreateOutivity({ handleAddOutivity }) {
     };
 
     handleAddOutivity(newOutivity);
+
+    outivityInputRef.current.focus();
 
     router.push("/");
   }
@@ -55,6 +59,7 @@ export default function CreateOutivity({ handleAddOutivity }) {
               id="outivityImage"
               placeholder="Please insert your url from unsplash here..."
               required
+              ref={(el) => (outivityInputRef.current = el)}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
