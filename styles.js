@@ -23,7 +23,7 @@ export default createGlobalStyle`
     --primary-color: #172633;
     --secondary-color: #323332;
     --third-color: #0C71E0;
-    --forth-color: #08A689;
+    --forth-color: #B2EEF8;
     --neutral-color: #E5E5E5;
 
     @media (max-width: 599px) {font-size: 14px;}

@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styled from "styled-components";
-import { StyledOutivityImage } from "../OutivityImage/StyledOutivityImage";
+import Image from "next/image";
 
 export default function OutivityDetail({ outivity }) {
   return (
@@ -37,4 +37,9 @@ export default function OutivityDetail({ outivity }) {
 
 const StyledCountryName = styled.span`
   margin-left: 7px;
+`;
+
+const StyledOutivityImage = styled(Image)`
+  overflow: clip;
+  overflow-clip-margin: content-box;
 `;

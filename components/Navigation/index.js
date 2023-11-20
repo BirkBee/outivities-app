@@ -4,27 +4,20 @@ import HomeSvg from "@/public/home.svg";
 import PlusSvg from "@/public/plus.svg";
 import { useRouter } from "next/router";
 
-export default function Navigation({ handleSvgClick }) {
+export default function Navigation() {
   const router = useRouter();
-  console.log(router.pathname);
   return (
     <StyledNavigation>
       <StyledList>
         <li>
           <StyledLink href="/">
-            <StyledHomeSvg
-              $isActive={router.pathname === "/"}
-              onClick={handleSvgClick}
-            />
+            <StyledHomeSvg isActive={router.pathname === "/"} />
           </StyledLink>
           <StyledSpan></StyledSpan>
         </li>
         <li>
           <StyledLink href="/create">
-            <StyledPlusSvg
-              $isActive={router.pathname === "/create"}
-              onClick={handleSvgClick}
-            />
+            <StyledPlusSvg isActive={router.pathname === "/create"} />
           </StyledLink>
         </li>
       </StyledList>
@@ -61,14 +54,18 @@ const StyledLink = styled(Link)`
 const StyledHomeSvg = styled(HomeSvg)`
   display: grid;
   path {
-    stroke: ${(props) => (props.$isActive ? "blue" : "white")};
+    fill: ${(props) =>
+      props.isActive ? "var(--third-color)" : "var(--neutral-color)"};
+    transition: fill 0.3s ease-in-out;
   }
 `;
 
 const StyledPlusSvg = styled(PlusSvg)`
   display: grid;
   path {
-    fill: ${(props) => (props.$isActive ? "blue" : "white")};
+    fill: ${(props) =>
+      props.isActive ? "var(--third-color)" : "var(--neutral-color)"};
+    transition: fill 0.3s ease-in-out;
   }
 `;
 

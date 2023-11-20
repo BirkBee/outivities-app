@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import { StyledOutivityImage } from "../OutivityImage/StyledOutivityImage";
+import Image from "next/image";
 
 export default function OutivitiesListItem({ outivity }) {
   return (
@@ -36,4 +36,9 @@ const StyledOutivityTitle = styled.h2`
 
 const StyledOutivityCityName = styled.p`
   margin: 0px 20px 20px 20px;
+`;
+
+const StyledOutivityImage = styled(Image)`
+  overflow: clip;
+  overflow-clip-margin: content-box;
 `;
