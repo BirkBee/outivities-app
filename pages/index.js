@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Head from "next/head";
 import OutivitiesList from "@/components/OutivitiesList";
 
-export default function HomePage({ initialOutivities }) {
+export default function HomePage({ outivities }) {
   return (
     <>
       <Head>
@@ -12,7 +12,7 @@ export default function HomePage({ initialOutivities }) {
       <StyledTitle>All Outivities</StyledTitle>
 
       <main>
-        <OutivitiesList outivities={initialOutivities} />
+        <OutivitiesList outivities={outivities} />
       </main>
     </>
   );

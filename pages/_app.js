@@ -19,7 +19,7 @@ export default function App({ Component, pageProps }) {
 
       <Component
         {...pageProps}
-        initialOutivities={outivities}
+        outivities={outivities}
         handleAddOutivity={handleAddOutivity}
       />
       <Layout />
