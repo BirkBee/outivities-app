@@ -1,32 +1,39 @@
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { useState } from "react";
 import { uid } from "uid";
 import Image from "next/image";
 
-export default function CreateOutivity({ handleAddOutivity, selectedImage }) {
+export default function CreateOutivity({ handleAddOutivity }) {
   const router = useRouter();
+  const [selectedImage, setSelectedImage] = useState(null);
+  const handleCancel = () => {
+    const confirmed = window.confirm("Are you sure you want to cancel?");
+    if (confirmed) {
+      router.push("/");
+    }
+  };
+
   function CreateOutivity(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
+    setSelectedImage(data.outivityImage);
     const newOutivity = {
       id: uid(),
       title: data.outivityName,
       area: data.outivityArea,
       country: data.outivityCountry,
-      image: data.myImage,
+      image: data.outivityImage,
       description: data.outivityDescription,
     };
 
     handleAddOutivity(newOutivity);
-    // event.target.reset();
 
     router.push("/");
   }
-  const [selctedImage, setSelectedImage] = useState(null);
+
   return (
     <main>
       <StyledNewOutivitiesForm onSubmit={CreateOutivity}>
@@ -34,33 +41,25 @@ export default function CreateOutivity({ handleAddOutivity, selectedImage }) {
         <StyledNewOutivitiesFormFields>
           <StyledNewOutivitiesFormField>
             <label htmlFor="image">Image</label>
-            {/* <Image src="image" alt="title" width={300} height={200} /> */}
             {selectedImage && (
-              <>
-                <Image
-                  href={`/${outivity.id}`}
-                  src={URL.createObjectURL(selectedImage)}
-                  alt="outivity-image"
-                  name="outivityImage"
-                  width={300}
-                  height={200}
-                />
-                <button onClick={() => setSelectedImage(null)}>Remove</button>
-              </>
+              <Image
+                src="/{selectedImage}"
+                alt="outivity-image"
+                width={300}
+                height={200}
+              />
             )}
-            <input
-              type="file"
-              name="myImage"
-              onChange={(event) => {
-                console.log(event.target.files[0]);
-                setSelectedImage(event.target.files[0]);
-              }}
+            <StyledNewOutivitiesFormInput
+              type="text"
+              name="outivityImage"
+              id="outivityImage"
+              placeholder="Please insert your url from unsplash here..."
+              required
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivitiy">Outivity</label>
             <StyledNewOutivitiesFormInput
-              autofocus
               type="text"
               name="outivityName"
               id="outivityName"
@@ -100,17 +99,10 @@ export default function CreateOutivity({ handleAddOutivity, selectedImage }) {
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormSpan>
-            <StyledCancelButton as={Link} href="/">
+            <StyledCancelButton onClick={handleCancel}>
               cancel
             </StyledCancelButton>
-            <StyledSaveButton
-              type="submit"
-              // onClick={() => {
-              //   router.push("/");
-              // }}
-            >
-              save
-            </StyledSaveButton>
+            <StyledSaveButton type="submit">save</StyledSaveButton>
           </StyledNewOutivitiesFormSpan>
         </StyledNewOutivitiesFormFields>
       </StyledNewOutivitiesForm>
@@ -159,7 +151,7 @@ const StyledNewOutivitiesFormSpan = styled.span`
   margin-bottom: 30px;
 `;
 
-const StyledCancelButton = styled(Link)`
+const StyledCancelButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   margin: 10px;
@@ -170,6 +162,9 @@ const StyledCancelButton = styled(Link)`
   border: 1px solid var(--secondary-color);
   color: var(--secondary-color);
   background-color: var(--neutral-color);
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledSaveButton = styled.button`

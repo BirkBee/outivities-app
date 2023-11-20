@@ -22,6 +22,7 @@ const nextConfig = {
       "i0.wp.com",
       "www.kiwi.com",
       "www.travelandleisure.com",
+      "images.unsplash.com",
     ],
   },
 };
