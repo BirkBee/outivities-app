@@ -1,7 +1,7 @@
 import GlobalStyle from "../styles";
 import { initialOutivities } from "@/lib/data";
 import Layout from "@/components/Layout";
-import React from "react";
+
 import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {

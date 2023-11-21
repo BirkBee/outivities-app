@@ -11,13 +11,13 @@ export default function Navigation() {
       <StyledList>
         <li>
           <StyledLink href="/">
-            <StyledHomeSvg isActive={router.pathname === "/"} />
+            <StyledHomeSvg $isActive={router.pathname === "/"} />
           </StyledLink>
           <StyledSpan></StyledSpan>
         </li>
         <li>
           <StyledLink href="/create">
-            <StyledPlusSvg isActive={router.pathname === "/create"} />
+            <StyledPlusSvg $isActive={router.pathname === "/create"} />
           </StyledLink>
         </li>
       </StyledList>
@@ -31,7 +31,6 @@ const StyledNavigation = styled.nav`
   color: var(--neutral-color);
   position: fixed;
   bottom: 0;
-  left: 0px;
   height: 70px;
   display: grid;
   z-index: 1;
@@ -55,7 +54,7 @@ const StyledHomeSvg = styled(HomeSvg)`
   display: grid;
   path {
     fill: ${(props) =>
-      props.isActive ? "var(--third-color)" : "var(--neutral-color)"};
+      props.$isActive ? "var(--third-color)" : "var(--neutral-color)"};
     transition: fill 0.3s ease-in-out;
   }
 `;
@@ -64,7 +63,7 @@ const StyledPlusSvg = styled(PlusSvg)`
   display: grid;
   path {
     fill: ${(props) =>
-      props.isActive ? "var(--third-color)" : "var(--neutral-color)"};
+      props.$isActive ? "var(--third-color)" : "var(--neutral-color)"};
     transition: fill 0.3s ease-in-out;
   }
 `;

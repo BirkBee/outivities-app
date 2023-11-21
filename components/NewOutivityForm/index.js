@@ -1,36 +1,35 @@
 import styled from "styled-components";
-import Image from "next/image";
+import { useRef, useEffect } from "react";
 
-export default function NewOutivityForm({
-  CreateOutivity,
-  handleCancel,
-  selectedImage,
-}) {
+export default function NewOutivityForm({ createOutivity, handleCancel }) {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, []);
+
   return (
     <main>
-      <StyledNewOutivitiesForm onSubmit={CreateOutivity}>
+      <StyledNewOutivitiesForm onSubmit={createOutivity}>
         <h1>New Outivity</h1>
         <StyledNewOutivitiesFormFields>
           <StyledNewOutivitiesFormField>
-            <label htmlFor="image">Image</label>
-            {selectedImage && (
-              <Image
-                src="/{selectedImage}"
-                alt="outivity-image"
-                width={300}
-                height={200}
-              />
-            )}
+            <label htmlFor="outivityImage">Image</label>
+
             <StyledNewOutivitiesFormInput
               type="text"
               name="outivityImage"
               id="outivityImage"
               placeholder="Insert a url from unsplash..."
               required
+              autoFocus
+              ref={inputRef}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
-            <label htmlFor="outivitiy">Outivity</label>
+            <label htmlFor="outivityName">Outivity</label>
             <StyledNewOutivitiesFormInput
               type="text"
               name="outivityName"
@@ -40,7 +39,7 @@ export default function NewOutivityForm({
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
-            <label htmlFor="area">Area</label>
+            <label htmlFor="outivityArea">Area</label>
             <StyledNewOutivitiesFormInput
               type="text"
               name="outivityArea"
@@ -50,7 +49,7 @@ export default function NewOutivityForm({
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
-            <label htmlFor="country">Country</label>
+            <label htmlFor="outivityCountry">Country</label>
             <StyledNewOutivitiesFormInput
               type="text"
               name="outivityCountry"
@@ -60,7 +59,7 @@ export default function NewOutivityForm({
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
-            <label htmlFor="description">Description</label>
+            <label htmlFor="outivityDescription">Description</label>
             <StyledNewOutivitiesFormTextarea
               type="text"
               name="outivityDescription"
@@ -71,7 +70,7 @@ export default function NewOutivityForm({
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormSpan>
-            <StyledCancelButton onClick={handleCancel}>
+            <StyledCancelButton type="button" onClick={handleCancel}>
               cancel
             </StyledCancelButton>
             <StyledSaveButton type="submit">save</StyledSaveButton>
