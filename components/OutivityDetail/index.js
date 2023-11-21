@@ -1,18 +1,8 @@
-import { useRouter } from "next/router";
 import Head from "next/head";
-import Image from "next/image";
 import styled from "styled-components";
-import { StyledOutivityImage } from "@/components/OutivityImage/StyledOutivityImage";
+import Image from "next/image";
 
-export default function OutivityDetail({ outivities }) {
-  const router = useRouter();
-  const { slug } = router.query;
-  const outivity = outivities.find((outivity) => outivity.slug === slug);
-
-  if (!outivity) {
-    return <p>Loading...</p>;
-  }
-
+export default function OutivityDetail({ outivity }) {
   return (
     <>
       <Head>
@@ -44,6 +34,12 @@ export default function OutivityDetail({ outivities }) {
     </>
   );
 }
+
 const StyledCountryName = styled.span`
   margin-left: 7px;
+`;
+
+const StyledOutivityImage = styled(Image)`
+  overflow: clip;
+  overflow-clip-margin: content-box;
 `;
