@@ -42,4 +42,5 @@ const StyledCountryName = styled.span`
 const StyledOutivityImage = styled(Image)`
   overflow: clip;
   overflow-clip-margin: content-box;
+  height: auto;
 `;
