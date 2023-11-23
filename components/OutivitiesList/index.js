@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import OutivitiesListItem from "../OutivitiesListItem";
 
-export default function OutivitiesList({ outivities, handleDeleteOutivity }) {
+export default function OutivitiesList({ outivities, onDeleteOutivity }) {
   return (
     <article>
       <StyledOutivityCardContainer>
@@ -9,7 +9,7 @@ export default function OutivitiesList({ outivities, handleDeleteOutivity }) {
           <OutivitiesListItem
             key={outivity.id}
             outivity={outivity}
-            handleDeleteOutivity={handleDeleteOutivity}
+            onDeleteOutivity={onDeleteOutivity}
           />
         ))}
       </StyledOutivityCardContainer>
