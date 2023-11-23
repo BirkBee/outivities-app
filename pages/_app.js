@@ -3,11 +3,14 @@ import { initialOutivities } from "@/lib/data";
 import Layout from "@/components/Layout";
 
 import useLocalStorageState from "use-local-storage-state";
+import { useRouter } from "next/router";
 
 export default function App({ Component, pageProps }) {
   const [outivities, setOutivities] = useLocalStorageState("outivities", {
     defaultValue: initialOutivities,
   });
+
+  const router = useRouter();
 
   function handleAddOutivity(newOutivity) {
     setOutivities([newOutivity, ...outivities]);
@@ -16,7 +19,7 @@ export default function App({ Component, pageProps }) {
   function handleDeleteOutivity(id) {
     setOutivities(outivities.filter((outivity) => outivity.id !== id));
   }
-  // const handleDelete = () => {
+  // const handleDelete = (id) => {
   //   const confirmed = window.confirm(
   //     "Are you sure you want to delete this Outivity?"
   //   );
@@ -33,6 +36,7 @@ export default function App({ Component, pageProps }) {
         outivities={outivities}
         handleAddOutivity={handleAddOutivity}
         onDeleteOutivity={handleDeleteOutivity}
+        // handleDelete={handleDelete}
       />
       <Layout />
     </>

@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import OutivitiesListItem from "../OutivitiesListItem";
 
-export default function OutivitiesList({
-  outivities,
-  handleDeleteOutivity,
-  onDeleteOutivity,
-}) {
+export default function OutivitiesList({ outivities, handleDeleteOutivity }) {
   return (
     <article>
       <StyledOutivityCardContainer>
