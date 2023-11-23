@@ -2,14 +2,23 @@ import Head from "next/head";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
 
 export default function OutivityDetail({
   outivity,
   onDeleteOutivity,
-  handleDelete,
+  handleDeleteOutivity,
 }) {
   const router = useRouter();
+
+  const confirmDelete = () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this Outivity?"
+    );
+    if (confirmed) {
+      onDeleteOutivity(outivity.id);
+      router.push("/");
+    }
+  };
 
   return (
     <>
@@ -37,13 +46,7 @@ export default function OutivityDetail({
               </p>
             </li>
           </ul>
-          <StyledDeleteButton
-            type="button"
-            onClick={() => {
-              confirm && router.push("/");
-              onDeleteOutivity(outivity.id);
-            }}
-          >
+          <StyledDeleteButton type="button" onClick={confirmDelete}>
             delete
           </StyledDeleteButton>
         </article>
