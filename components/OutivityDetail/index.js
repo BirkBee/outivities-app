@@ -3,13 +3,8 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-export default function OutivityDetail({
-  outivity,
-  onDeleteOutivity,
-  handleDeleteOutivity,
-}) {
+export default function OutivityDetail({ outivity, onDeleteOutivity }) {
   const router = useRouter();
-
   const confirmDelete = () => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this Outivity?"
