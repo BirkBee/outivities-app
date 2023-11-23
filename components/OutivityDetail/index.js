@@ -4,7 +4,11 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-export default function OutivityDetail({ outivity, onDeleteOutivity }) {
+export default function OutivityDetail({
+  outivity,
+  onDeleteOutivity,
+  handleDeleteOutivity,
+}) {
   const router = useRouter();
 
   return (
@@ -33,7 +37,12 @@ export default function OutivityDetail({ outivity, onDeleteOutivity }) {
               </p>
             </li>
           </ul>
-          <StyledDeleteButton type="button">delete</StyledDeleteButton>
+          <StyledDeleteButton
+            type="button"
+            onClick={() => handleDeleteOutivity(outivity.id)}
+          >
+            delete
+          </StyledDeleteButton>
         </article>
       </main>
     </>

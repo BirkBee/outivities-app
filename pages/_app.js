@@ -13,9 +13,9 @@ export default function App({ Component, pageProps }) {
     setOutivities([newOutivity, ...outivities]);
   }
 
-  // function handleDeleteOutivity(id) {
-  //   setOutivities(outivities.filter((outivity) => outivity.id !== id));
-  // }
+  function handleDeleteOutivity(id) {
+    setOutivities(outivities.filter((outivity) => outivity.id !== id));
+  }
   // const handleDelete = () => {
   //   const confirmed = window.confirm(
   //     "Are you sure you want to delete this Outivity?"
@@ -32,7 +32,7 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         outivities={outivities}
         handleAddOutivity={handleAddOutivity}
-        // handleDelete={handleDelete}
+        onDeleteOutivity={handleDeleteOutivity}
       />
       <Layout />
     </>
