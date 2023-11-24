@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Link from "next/link";
-import Image from "next/image";
+import { Image } from "cloudinary-react";
 
 export default function OutivitiesListItem({ outivity }) {
   return (
@@ -8,6 +8,7 @@ export default function OutivitiesListItem({ outivity }) {
       <Link href={`/${outivity.id}`}>
         <StyledOutivityImage
           src={outivity.image}
+          cloudName="outivities"
           alt={outivity.title}
           width={300}
           height={200}

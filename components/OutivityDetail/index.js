@@ -1,6 +1,6 @@
 import Head from "next/head";
 import styled from "styled-components";
-import Image from "next/image";
+import { Image } from "cloudinary-react";
 
 export default function OutivityDetail({ outivity }) {
   return (
