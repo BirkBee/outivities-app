@@ -30,6 +30,7 @@ export default function OutivityDetail({ outivity, onDeleteOutivity }) {
                 alt={outivity.title}
                 width={300}
                 height={200}
+                layout="fixed"
               />
               <p>
                 <strong>Location: </strong> {outivity.area},
