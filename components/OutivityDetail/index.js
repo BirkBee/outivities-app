@@ -1,8 +1,20 @@
 import Head from "next/head";
 import styled from "styled-components";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
-export default function OutivityDetail({ outivity }) {
+export default function OutivityDetail({ outivity, onDeleteOutivity }) {
+  const router = useRouter();
+  const confirmDelete = () => {
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this Outivity?"
+    );
+    if (confirmed) {
+      onDeleteOutivity(outivity.id);
+      router.push("/");
+    }
+  };
+
   return (
     <>
       <Head>
@@ -18,6 +30,7 @@ export default function OutivityDetail({ outivity }) {
                 alt={outivity.title}
                 width={300}
                 height={200}
+                layout="fixed"
               />
               <p>
                 <strong>Location: </strong> {outivity.area},
@@ -29,6 +42,9 @@ export default function OutivityDetail({ outivity }) {
               </p>
             </li>
           </ul>
+          <StyledDeleteButton type="button" onClick={confirmDelete}>
+            delete
+          </StyledDeleteButton>
         </article>
       </main>
     </>
@@ -42,4 +58,21 @@ const StyledCountryName = styled.span`
 const StyledOutivityImage = styled(Image)`
   overflow: clip;
   overflow-clip-margin: content-box;
+  height: auto;
+`;
+
+const StyledDeleteButton = styled.button`
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  margin: 10px;
+  padding: 10px 20px;
+  font-weight: 400;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  background-color: var(--danger-color);
+  &:hover {
+    cursor: pointer;
+  }
 `;

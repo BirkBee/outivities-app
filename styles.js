@@ -25,6 +25,7 @@ export default createGlobalStyle`
     --third-color: #0C71E0;
     --forth-color: #B2EEF8;
     --neutral-color: #E5E5E5;
+    --danger-color: #F05A47;
 
     @media (max-width: 599px) {font-size: 14px;}
     @media (min-width: 600px) {font-size: 16px;}

@@ -1,7 +1,6 @@
 import GlobalStyle from "../styles";
 import { initialOutivities } from "@/lib/data";
 import Layout from "@/components/Layout";
-
 import useLocalStorageState from "use-local-storage-state";
 
 export default function App({ Component, pageProps }) {
@@ -13,6 +12,10 @@ export default function App({ Component, pageProps }) {
     setOutivities([newOutivity, ...outivities]);
   }
 
+  function handleDeleteOutivity(id) {
+    setOutivities(outivities.filter((outivity) => outivity.id !== id));
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -21,6 +24,7 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         outivities={outivities}
         handleAddOutivity={handleAddOutivity}
+        onDeleteOutivity={handleDeleteOutivity}
       />
       <Layout />
     </>
