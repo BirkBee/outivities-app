@@ -23,7 +23,6 @@ const nextConfig = {
       "www.kiwi.com",
       "www.travelandleisure.com",
       "images.unsplash.com",
-      "res.cloudinary.com/",
     ],
   },
 };

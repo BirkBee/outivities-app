@@ -22,13 +22,13 @@ export default function NewOutivityForm({
         <h1>New Outivity</h1>
         <StyledNewOutivitiesFormFields>
           <StyledNewOutivitiesFormField>
-            <label htmlFor="file">Image</label>
+            <label htmlFor="outivityImage">Image</label>
 
             {selectedImage && (
               <>
                 <StyledFormPreviewImage
                   alt="imagePreview"
-                  name="fimagePreview"
+                  name="imagePreview"
                   width={300}
                   height={200}
                   src={URL.createObjectURL(selectedImage)}
@@ -43,8 +43,8 @@ export default function NewOutivityForm({
             )}
             <StyledNewOutivitiesFormInput
               type="file"
-              name="file"
-              id="file"
+              name="outivityImage"
+              id="outivityImage"
               accept=".png, .jpeg, .jpg, .webp"
               required
               onChange={(event) => {

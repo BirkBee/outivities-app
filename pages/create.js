@@ -24,22 +24,21 @@ export default function CreateOutivity({ handleAddOutivity }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    console.log("response: ", response);
 
     const newOutivity = {
       id: uid(),
       title: data.outivityName,
       area: data.outivityArea,
       country: data.outivityCountry,
-      image: data.outivityImage,
+      image: selectedImage,
       description: data.outivityDescription,
     };
-
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-
-    const uploadData = await response.json();
 
     handleAddOutivity(newOutivity);
     router.push("/");

@@ -29,5 +29,7 @@ export default async function handler(request, response) {
     folder: "outivities",
   });
 
+  // console.log("result from cloudinary: ", result);
+
   response.status(200).json(result);
 }
