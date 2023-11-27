@@ -78,7 +78,7 @@ export default function OutivityDetail({
       ) : (
         <main>
           <StyledNewOutivitiesForm onSubmit={editOutivity}>
-            <h1>Edit Outivity</h1>
+            <h1>Editc Outivity</h1>
             <StyledNewOutivitiesFormFields>
               <StyledNewOutivitiesFormField>
                 <label htmlFor="outivityImage">Image</label>
