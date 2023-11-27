@@ -29,6 +29,7 @@ export default function CreateOutivity({ handleAddOutivity }) {
       body: formData,
     });
 
+    console.log("data: ", data);
     console.log("response: ", response);
 
     const newOutivity = {
