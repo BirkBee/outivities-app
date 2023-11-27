@@ -15,6 +15,13 @@ export default function App({ Component, pageProps }) {
   function handleDeleteOutivity(id) {
     setOutivities(outivities.filter((outivity) => outivity.id !== id));
   }
+  function handleEditOutivity(editedOutivity) {
+    setOutivities(
+      outivities.map((outivity) =>
+        outivity.id === editedOutivity.id ? editedOutivity : outivity
+      )
+    );
+  }
 
   return (
     <>
@@ -25,6 +32,7 @@ export default function App({ Component, pageProps }) {
         outivities={outivities}
         handleAddOutivity={handleAddOutivity}
         onDeleteOutivity={handleDeleteOutivity}
+        onEditOutivity={handleEditOutivity}
       />
       <Layout />
     </>

@@ -5,6 +5,7 @@ export default function OutivityDetailsPage({
   outivities,
   onDeleteOutivity,
   handleDelete,
+  onEditOutivity,
 }) {
   const router = useRouter();
   const { id } = router.query;
@@ -20,6 +21,7 @@ export default function OutivityDetailsPage({
         outivity={outivity}
         onDeleteOutivity={onDeleteOutivity}
         handleDelete={handleDelete}
+        onEditOutivity={onEditOutivity}
       />
     </>
   );
