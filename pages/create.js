@@ -28,6 +28,7 @@ export default function CreateOutivity({ handleAddOutivity }) {
       method: "POST",
       body: formData,
     });
+    const image = await response.json();
 
     console.log("data: ", data);
     console.log("response: ", response);
@@ -41,6 +42,7 @@ export default function CreateOutivity({ handleAddOutivity }) {
       description: data.outivityDescription,
     };
 
+    setSelectedImage(image);
     handleAddOutivity(newOutivity);
     router.push("/");
   }
