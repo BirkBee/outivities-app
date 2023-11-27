@@ -19,8 +19,6 @@ export default function OutivitiesList({ outivities, onDeleteOutivity }) {
 
 const StyledOutivityCardContainer = styled.ul`
   display: grid;
-  padding: 10px;
-  place-content: center;
-  gap: 50px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
 `;
