@@ -21,7 +21,7 @@ export default async function handler(request, response) {
 
   const form = formidable({});
   const [fields, files] = await form.parse(request);
-  const file = files.file[0];
+  const file = files.outivityImage[0];
   const { newFilename, filepath } = file;
 
   const result = await cloudinary.v2.uploader.upload(filepath, {

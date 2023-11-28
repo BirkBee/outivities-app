@@ -16,6 +16,11 @@ export default function NewOutivityForm({
     }
   }, []);
 
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(URL.createObjectURL(file));
+  };
+
   return (
     <main>
       <StyledNewOutivitiesForm onSubmit={createOutivity}>
@@ -31,7 +36,7 @@ export default function NewOutivityForm({
                   name="imagePreview"
                   width={300}
                   height={200}
-                  src={URL.createObjectURL(selectedImage)}
+                  src={selectedImage}
                 />
                 <StyledFormRemoveButton
                   type="button"
@@ -47,9 +52,8 @@ export default function NewOutivityForm({
               id="outivityImage"
               accept=".png, .jpeg, .jpg, .webp"
               required
-              onChange={(event) => {
-                setSelectedImage(event.target.files[0]);
-              }}
+              src={selectedImage}
+              onChange={handleImageChange}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>

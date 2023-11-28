@@ -6,8 +6,8 @@ import { uid } from "uid";
 export default function CreateOutivity({ handleAddOutivity }) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
-
   const [selectedImage, setSelectedImage] = useState("");
+
   const uploadImage = () => {
     const formData = new FormData();
     formData.append("file", selectedImage);
@@ -38,7 +38,7 @@ export default function CreateOutivity({ handleAddOutivity }) {
       title: data.outivityName,
       area: data.outivityArea,
       country: data.outivityCountry,
-      image: selectedImage,
+      image: image.secure_url,
       description: data.outivityDescription,
     };
 
