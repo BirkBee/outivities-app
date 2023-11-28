@@ -30,9 +30,6 @@ export default function CreateOutivity({ handleAddOutivity }) {
     });
     const image = await response.json();
 
-    console.log("data: ", data);
-    console.log("response: ", response);
-
     const newOutivity = {
       id: uid(),
       title: data.outivityName,
