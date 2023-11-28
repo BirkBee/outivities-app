@@ -15,13 +15,14 @@ export default function EditOutivityForm({
     description: outivity.description,
   });
 
-  const saveEdits = () => {
+  const saveEdits = (event) => {
+    event.preventDefault();
     onEditOutivity(editedOutivity);
     setIsEdit(false);
   };
 
   return (
-    <StyledNewOutivitiesForm>
+    <StyledNewOutivitiesForm onSubmit={saveEdits}>
       <h1>Edit Outivity</h1>
       <StyledNewOutivitiesFormFields>
         <StyledNewOutivitiesFormField>
@@ -32,12 +33,6 @@ export default function EditOutivityForm({
             name="outivityImage"
             id="outivityImage"
             value={editedOutivity.image}
-            onChange={(event) =>
-              setEditedOutivity({
-                ...editedOutivity,
-                image: event.target.value,
-              })
-            }
           />
         </StyledNewOutivitiesFormField>
         <StyledNewOutivitiesFormField>
@@ -47,12 +42,6 @@ export default function EditOutivityForm({
             name="outivityName"
             id="outivityName"
             value={editedOutivity.title}
-            onChange={(event) =>
-              setEditedOutivity({
-                ...editedOutivity,
-                title: event.target.value,
-              })
-            }
           />
         </StyledNewOutivitiesFormField>
         <StyledNewOutivitiesFormField>
@@ -62,12 +51,6 @@ export default function EditOutivityForm({
             name="outivityArea"
             id="outivityArea"
             value={editedOutivity.area}
-            onChange={(event) =>
-              setEditedOutivity({
-                ...editedOutivity,
-                area: event.target.value,
-              })
-            }
           />
         </StyledNewOutivitiesFormField>
         <StyledNewOutivitiesFormField>
@@ -77,12 +60,6 @@ export default function EditOutivityForm({
             name="outivityCountry"
             id="outivityCountry"
             value={editedOutivity.country}
-            onChange={(event) =>
-              setEditedOutivity({
-                ...editedOutivity,
-                country: event.target.value,
-              })
-            }
           />
         </StyledNewOutivitiesFormField>
         <StyledNewOutivitiesFormField>
@@ -91,12 +68,6 @@ export default function EditOutivityForm({
             name="outivityDescription"
             id="outivityDescription"
             value={editedOutivity.description}
-            onChange={(event) =>
-              setEditedOutivity({
-                ...editedOutivity,
-                description: event.target.value,
-              })
-            }
           />
         </StyledNewOutivitiesFormField>
         <StyledNewOutivitiesFormSpan>

@@ -55,7 +55,7 @@ export default function OutivityDetail({
             </StyledDeleteButton>
 
             <StyledEditButton type="button" onClick={() => setIsEdit(true)}>
-              Edit
+              edit
             </StyledEditButton>
           </article>
         </main>
@@ -82,7 +82,7 @@ const StyledOutivityImage = styled(Image)`
   height: auto;
 `;
 
-const StyledDeleteButton = styled.button`
+const StyledButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   margin: 10px;
@@ -92,23 +92,13 @@ const StyledDeleteButton = styled.button`
   border-radius: 5px;
   border: 1px solid var(--secondary-color);
   color: var(--secondary-color);
-  background-color: var(--danger-color);
   &:hover {
     cursor: pointer;
   }
 `;
-const StyledEditButton = styled.button`
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
-  margin: 10px;
-  padding: 10px 20px;
-  font-weight: 400;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid var(--secondary-color);
-  color: var(--secondary-color);
+const StyledEditButton = styled(StyledButton)`
   background-color: var(--neutral-color);
-  &:hover {
-    cursor: pointer;
-  }
+`;
+const StyledDeleteButton = styled(StyledButton)`
+  background-color: var(--danger-color);
 `;
