@@ -34,6 +34,7 @@ export default function CreateOutivity({ handleAddOutivity }) {
       if (!response.ok) {
         throw new Error("Error uploading new Outivity. Please try again.");
       }
+
       const image = await response.json();
       const newOutivity = {
         id: uid(),

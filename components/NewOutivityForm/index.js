@@ -53,6 +53,7 @@ export default function NewOutivityForm({
                 </StyledFormRemoveButton>
               </>
             )}
+
             <StyledNewOutivitiesFormInput
               type="file"
               class="inputfile"
