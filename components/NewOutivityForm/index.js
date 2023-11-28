@@ -9,6 +9,7 @@ export default function NewOutivityForm({
   setSelectedImage,
 }) {
   const inputRef = useRef(null);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (inputRef.current) {
@@ -19,6 +20,12 @@ export default function NewOutivityForm({
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
+    setMessage(event.target.value);
+  };
+
+  const handleUnsetImagePreview = () => {
+    setMessage("");
+    setSelectedImage("");
   };
 
   return (
@@ -40,7 +47,7 @@ export default function NewOutivityForm({
                 />
                 <StyledFormRemoveButton
                   type="button"
-                  onClick={() => setSelectedImage(null)}
+                  onClick={handleUnsetImagePreview}
                 >
                   Remove
                 </StyledFormRemoveButton>
@@ -48,11 +55,12 @@ export default function NewOutivityForm({
             )}
             <StyledNewOutivitiesFormInput
               type="file"
+              class="inputfile"
               name="outivityImage"
               id="outivityImage"
               accept=".png, .jpeg, .jpg, .webp"
               required
-              src={selectedImage}
+              value={message}
               onChange={handleImageChange}
             />
           </StyledNewOutivitiesFormField>
