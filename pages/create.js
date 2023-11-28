@@ -1,15 +1,9 @@
-import NewOutivityForm from "@/components/NewOutivityForm";
+import OutivityForm from "@/components/OutivityForm";
 import { useRouter } from "next/router";
 import { uid } from "uid";
 
-export default function CreateOutivity({ onAddOutivity, onEditOutivity }) {
+export default function CreateOutivity({ onAddOutivity }) {
   const router = useRouter();
-  const handleCancel = () => {
-    const confirmed = window.confirm("Are you sure you want to cancel?");
-    if (confirmed) {
-      router.push("/");
-    }
-  };
 
   function createOutivity(event) {
     event.preventDefault();
@@ -29,11 +23,5 @@ export default function CreateOutivity({ onAddOutivity, onEditOutivity }) {
     router.push("/");
   }
 
-  return (
-    <NewOutivityForm
-      createOutivity={createOutivity}
-      handleCancel={handleCancel}
-      isEdited={false}
-    />
-  );
+  return <OutivityForm createOutivity={createOutivity} isEdit={false} />;
 }

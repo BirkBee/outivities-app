@@ -2,14 +2,11 @@ import GlobalStyle from "../styles";
 import { initialOutivities } from "@/lib/data";
 import Layout from "@/components/Layout";
 import useLocalStorageState from "use-local-storage-state";
-import { useState } from "react";
 
 export default function App({ Component, pageProps }) {
   const [outivities, setOutivities] = useLocalStorageState("outivities", {
     defaultValue: initialOutivities,
   });
-
-  const [isEdit, setIsEdit] = useState(false);
 
   function handleAddOutivity(newOutivity) {
     setOutivities([newOutivity, ...outivities]);
@@ -27,10 +24,6 @@ export default function App({ Component, pageProps }) {
     );
   }
 
-  function handleSetIsEdit() {
-    setIsEdit(!isEdit);
-  }
-
   return (
     <>
       <GlobalStyle />
@@ -41,8 +34,6 @@ export default function App({ Component, pageProps }) {
         onAddOutivity={handleAddOutivity}
         onDeleteOutivity={handleDeleteOutivity}
         onEditOutivity={handleEditOutivity}
-        isEdit={isEdit}
-        onSetIsEdit={handleSetIsEdit}
       />
       <Layout />
     </>

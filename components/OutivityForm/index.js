@@ -2,15 +2,21 @@ import styled from "styled-components";
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 
-export default function NewOutivityForm({
+export default function OutivityForm({
   outivity,
   onEditOutivity,
   createOutivity,
-  handleCancel,
   isEdit,
 }) {
-  const router = useRouter;
+  const router = useRouter();
   const inputRef = useRef(null);
+
+  const handleCancel = () => {
+    const confirmed = window.confirm("Are you sure you want to cancel?");
+    if (confirmed) {
+      router.push("/");
+    }
+  };
 
   useEffect(() => {
     if (inputRef.current) {
@@ -26,6 +32,17 @@ export default function NewOutivityForm({
         <h1>{isEdit ? "Edit Outivity" : "New Outivity"}</h1>
         <StyledNewOutivitiesFormFields>
           <StyledNewOutivitiesFormField>
+            <label htmlFor="outivityName">Outivity</label>
+            <StyledNewOutivitiesFormInput
+              type="text"
+              name="outivityName"
+              id="outivityName"
+              placeholder="Type in a name..."
+              required
+              defaultValue={isEdit ? outivity.title ?? "" : null}
+            />
+          </StyledNewOutivitiesFormField>
+          <StyledNewOutivitiesFormField>
             <label htmlFor="outivityImage">Image</label>
 
             <StyledNewOutivitiesFormInput
@@ -36,18 +53,7 @@ export default function NewOutivityForm({
               required
               autoFocus
               ref={inputRef}
-              defaultValue={isEdit ? data.outivityImage ?? "" : null}
-            />
-          </StyledNewOutivitiesFormField>
-          <StyledNewOutivitiesFormField>
-            <label htmlFor="outivityName">Outivity</label>
-            <StyledNewOutivitiesFormInput
-              type="text"
-              name="outivityName"
-              id="outivityName"
-              placeholder="Type in a name..."
-              required
-              defaultValue={isEdit ? outivity.name ?? "" : null}
+              defaultValue={isEdit ? outivity.image ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -115,20 +121,20 @@ const StyledNewOutivitiesFormField = styled.div`
   gap: 6px;
 `;
 
-const StyledInput = `
+const StyledNewOutivitiesFormInput = styled.input`
   padding: 20px;
   border: 1px solid var(--neutral-color);
   border-radius: 4px;
   font: inherit;
   resize: vertical;
-  `;
-
-const StyledNewOutivitiesFormInput = styled.input`
-  ${StyledInput}
 `;
 
 const StyledNewOutivitiesFormTextarea = styled.textarea`
-  ${StyledInput}
+  padding: 20px;
+  border: 1px solid var(--neutral-color);
+  border-radius: 4px;
+  font: inherit;
+  resize: vertical;
 `;
 
 const StyledNewOutivitiesFormSpan = styled.span`
@@ -138,8 +144,6 @@ const StyledNewOutivitiesFormSpan = styled.span`
 `;
 
 const StyledCancelButton = styled.button`
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
   margin: 10px;
   padding: 10px 20px;
   font-weight: 400;

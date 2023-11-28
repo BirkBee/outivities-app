@@ -11,8 +11,6 @@ export default function OutivityDetailsPage({ outivities, onDeleteOutivity }) {
   }
 
   return (
-    <>
-      <OutivityDetail outivity={outivity} onDeleteOutivity={onDeleteOutivity} />
-    </>
+    <OutivityDetail outivity={outivity} onDeleteOutivity={onDeleteOutivity} />
   );
 }

@@ -1,44 +1,42 @@
 import { useRouter } from "next/router";
-import NewOutivityForm from "@/components/NewOutivityForm";
+import OutivityForm from "@/components/OutivityForm";
 
-export default function UpdateRecipeDetails({
-  outivities,
-  isEdit,
-  onSetisEdit,
-  onEditOutivity,
-}) {
+export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
   const router = useRouter();
   const { id } = router.query;
 
   const outivity = outivities.find((outivity) => outivity.id === id);
+
   if (!outivity) return <h2>Sorry. Outivity not found.</h2>;
 
-  function editOutivity(event) {
+  function handleEditOutivity(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
+    const newOutivityData = Object.fromEntries(formData);
+    const editedNewOutivityData = prepareFormData(newOutivityData);
 
-    const editedOutivity = {
-      id: uid(),
+    onEditOutivity(editedNewOutivityData, id);
+    router.push("/");
+  }
+
+  function prepareFormData(data) {
+    const editedNewOutivityData = {
+      id: id,
       title: data.outivityName,
       area: data.outivityArea,
       country: data.outivityCountry,
       image: data.outivityImage,
       description: data.outivityDescription,
     };
-
-    onEditOutivity(editedOutivity);
-    onSetisEdit();
+    return editedNewOutivityData;
   }
 
   return (
-    <>
-      <NewOutivityForm
-        outivities={outivities}
-        onEditOutivity={onEditOutivity}
-        isEdit={true}
-      />
-    </>
+    <OutivityForm
+      outivity={outivity}
+      onEditOutivity={handleEditOutivity}
+      isEdit={true}
+    />
   );
 }
