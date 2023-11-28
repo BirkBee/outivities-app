@@ -1,7 +1,15 @@
 import styled from "styled-components";
 import { useRef, useEffect } from "react";
+import { useRouter } from "next/router";
 
-export default function NewOutivityForm({ createOutivity, handleCancel }) {
+export default function NewOutivityForm({
+  outivity,
+  onEditOutivity,
+  createOutivity,
+  handleCancel,
+  isEdit,
+}) {
+  const router = useRouter;
   const inputRef = useRef(null);
 
   useEffect(() => {
@@ -12,8 +20,10 @@ export default function NewOutivityForm({ createOutivity, handleCancel }) {
 
   return (
     <main>
-      <StyledNewOutivitiesForm onSubmit={createOutivity}>
-        <h1>New Outivity</h1>
+      <StyledNewOutivitiesForm
+        onSubmit={isEdit ? onEditOutivity : createOutivity}
+      >
+        <h1>{isEdit ? "Edit Outivity" : "New Outivity"}</h1>
         <StyledNewOutivitiesFormFields>
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityImage">Image</label>
@@ -26,6 +36,7 @@ export default function NewOutivityForm({ createOutivity, handleCancel }) {
               required
               autoFocus
               ref={inputRef}
+              defaultValue={isEdit ? data.outivityImage ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -36,6 +47,7 @@ export default function NewOutivityForm({ createOutivity, handleCancel }) {
               id="outivityName"
               placeholder="Type in a name..."
               required
+              defaultValue={isEdit ? outivity.name ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -46,6 +58,7 @@ export default function NewOutivityForm({ createOutivity, handleCancel }) {
               id="outivityArea"
               placeholder="In which city/area is it located?"
               required
+              defaultValue={isEdit ? outivity.area ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -56,6 +69,7 @@ export default function NewOutivityForm({ createOutivity, handleCancel }) {
               id="outivityCountry"
               placeholder="In which country?"
               required
+              defaultValue={isEdit ? outivity.country ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -67,6 +81,7 @@ export default function NewOutivityForm({ createOutivity, handleCancel }) {
               placeholder="Type in some info..."
               rows="6"
               required
+              defaultValue={isEdit ? outivity.description ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormSpan>

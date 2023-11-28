@@ -1,12 +1,7 @@
 import { useRouter } from "next/router";
 import OutivityDetail from "@/components/OutivityDetail";
 
-export default function OutivityDetailsPage({
-  outivities,
-  onDeleteOutivity,
-  handleDelete,
-  onEditOutivity,
-}) {
+export default function OutivityDetailsPage({ outivities, onDeleteOutivity }) {
   const router = useRouter();
   const { id } = router.query;
   const outivity = outivities.find((outivity) => outivity.id === id);
@@ -17,12 +12,7 @@ export default function OutivityDetailsPage({
 
   return (
     <>
-      <OutivityDetail
-        outivity={outivity}
-        onDeleteOutivity={onDeleteOutivity}
-        handleDelete={handleDelete}
-        onEditOutivity={onEditOutivity}
-      />
+      <OutivityDetail outivity={outivity} onDeleteOutivity={onDeleteOutivity} />
     </>
   );
 }
