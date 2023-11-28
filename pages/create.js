@@ -22,26 +22,34 @@ export default function CreateOutivity({ handleAddOutivity }) {
 
   async function createOutivity(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    const response = await fetch("/api/upload", {
-      method: "POST",
-      body: formData,
-    });
-    const image = await response.json();
 
-    const newOutivity = {
-      id: uid(),
-      title: data.outivityName,
-      area: data.outivityArea,
-      country: data.outivityCountry,
-      image: image.secure_url,
-      description: data.outivityDescription,
-    };
+    try {
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
 
-    setSelectedImage(image);
-    handleAddOutivity(newOutivity);
-    router.push("/");
+      if (!response.ok) {
+        throw new Error("Error uploading image. Please try again.");
+      }
+      const image = await response.json();
+      const newOutivity = {
+        id: uid(),
+        title: data.outivityName,
+        area: data.outivityArea,
+        country: data.outivityCountry,
+        image: image.secure_url,
+        description: data.outivityDescription,
+      };
+
+      setSelectedImage(image);
+      handleAddOutivity(newOutivity);
+      router.push("/");
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   }
 
   return (
