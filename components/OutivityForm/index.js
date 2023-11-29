@@ -39,6 +39,8 @@ export default function OutivityForm({
               id="outivityName"
               placeholder="Type in a name..."
               required
+              autoFocus
+              ref={inputRef}
               defaultValue={isEdit ? outivity.title ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
@@ -51,8 +53,6 @@ export default function OutivityForm({
               id="outivityImage"
               placeholder="Insert a url from unsplash..."
               required
-              autoFocus
-              ref={inputRef}
               defaultValue={isEdit ? outivity.image ?? "" : null}
             />
           </StyledNewOutivitiesFormField>

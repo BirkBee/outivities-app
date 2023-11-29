@@ -17,7 +17,7 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
     const editedNewOutivityData = prepareFormData(newOutivityData);
 
     onEditOutivity(editedNewOutivityData, id);
-    router.push("/");
+    router.push(`/${id}`);
   }
 
   function prepareFormData(data) {
