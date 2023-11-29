@@ -1,15 +1,20 @@
 import styled from "styled-components";
 import { useRef, useEffect } from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import { useState } from "react";
 
 export default function OutivityForm({
   outivity,
   onEditOutivity,
   createOutivity,
   isEdit,
+  selectedImage,
+  setSelectedImage,
 }) {
   const router = useRouter();
   const inputRef = useRef(null);
+  const [message, setMessage] = useState("");
 
   const handleCancel = () => {
     const confirmed = window.confirm("Are you sure you want to cancel?");
@@ -23,6 +28,17 @@ export default function OutivityForm({
       inputRef.current.focus();
     }
   }, []);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(URL.createObjectURL(file));
+    setMessage(event.target.value);
+  };
+
+  const handleUnsetImagePreview = () => {
+    setMessage("");
+    setSelectedImage("");
+  };
 
   return (
     <main>
@@ -44,17 +60,48 @@ export default function OutivityForm({
               defaultValue={isEdit ? outivity.title ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
+
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityImage">Image</label>
 
+            {selectedImage && (
+              <>
+                <StyledFormPreviewImage
+                  alt="imagePreview"
+                  name="imagePreview"
+                  width={300}
+                  height={200}
+                  src={selectedImage}
+                />
+                <StyledFormRemoveButton
+                  type="button"
+                  onClick={handleUnsetImagePreview}
+                >
+                  Remove
+                </StyledFormRemoveButton>
+              </>
+            )}
+
             <StyledNewOutivitiesFormInput
+              type="file"
+              class="inputfile"
+              name="outivityImage"
+              id="outivityImage"
+              accept=".png, .jpeg, .jpg, .webp"
+              required
+              value={message}
+              onChange={handleImageChange}
+              defaultValue={isEdit ? outivity.image ?? "" : null}
+            />
+
+            {/* <StyledNewOutivitiesFormInput
               type="text"
               name="outivityImage"
               id="outivityImage"
               placeholder="Insert a url from unsplash..."
               required
               defaultValue={isEdit ? outivity.image ?? "" : null}
-            />
+            /> */}
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityArea">Area</label>
@@ -167,6 +214,24 @@ const StyledSaveButton = styled.button`
   color: var(--neutral-color);
   background-color: var(--third-color);
   letter-spacing: 2px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const StyledFormPreviewImage = styled(Image)`
+  width: 150px;
+  height: auto;
+`;
+
+const StyledFormRemoveButton = styled.button`
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  font-weight: 400;
+  border-radius: 3px;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  background-color: var(--neutral-color);
   &:hover {
     cursor: pointer;
   }

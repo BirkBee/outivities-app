@@ -1,27 +1,55 @@
 import OutivityForm from "@/components/OutivityForm";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { uid } from "uid";
 
 export default function CreateOutivity({ onAddOutivity }) {
   const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [selectedImage, setSelectedImage] = useState("");
 
-  function createOutivity(event) {
+  const uploadImage = () => {
+    const formData = new FormData();
+    formData.append("file", selectedImage);
+  };
+
+  async function createOutivity(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
 
-    const newOutivity = {
-      id: uid(),
-      title: data.outivityName,
-      area: data.outivityArea,
-      country: data.outivityCountry,
-      image: data.outivityImage,
-      description: data.outivityDescription,
-    };
+    try {
+      const formData = new FormData(event.target);
+      const data = Object.fromEntries(formData);
+      const response = await fetch("/api/upload", {
+        method: "POST",
+        body: formData,
+      });
 
-    onAddOutivity(newOutivity);
-    router.push("/");
+      if (!response.ok) {
+        throw new Error("Error uploading new Outivity. Please try again.");
+      }
+
+      const image = await response.json();
+      const newOutivity = {
+        id: uid(),
+        title: data.outivityName,
+        area: data.outivityArea,
+        country: data.outivityCountry,
+        image: image.secure_url,
+        description: data.outivityDescription,
+      };
+
+      setSelectedImage(image);
+      onAddOutivity(newOutivity);
+      router.push("/");
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   }
 
-  return <OutivityForm createOutivity={createOutivity} isEdit={false} />;
+  return (
+    <>
+      {errorMessage && <p>{errorMessage}</p>}
+      <OutivityForm createOutivity={createOutivity} isEdit={false} />;
+    </>
+  );
 }

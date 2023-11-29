@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import OutivityForm from "@/components/OutivityForm";
+import { useState } from "react";
 
 export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
   const router = useRouter();
   const { id } = router.query;
+  const [selectedImage, setSelectedImage] = useState("");
 
   const outivity = outivities.find((outivity) => outivity.id === id);
 
@@ -26,15 +28,19 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
       title: data.outivityName,
       area: data.outivityArea,
       country: data.outivityCountry,
-      image: data.outivityImage,
+      image: image.secure_url,
       description: data.outivityDescription,
     };
+    setSelectedImage(image);
+
     return editedNewOutivityData;
   }
 
   return (
     <OutivityForm
       outivity={outivity}
+      selectedImage={selectedImage}
+      setSelectedImage={setSelectedImage}
       onEditOutivity={handleEditOutivity}
       isEdit={true}
     />
