@@ -1,14 +1,32 @@
 import styled from "styled-components";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import Image from "next/image";
 
-export default function NewOutivityForm({ createOutivity, handleCancel }) {
+export default function NewOutivityForm({
+  createOutivity,
+  handleCancel,
+  selectedImage,
+  setSelectedImage,
+}) {
   const inputRef = useRef(null);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedImage(URL.createObjectURL(file));
+    setMessage(event.target.value);
+  };
+
+  const handleUnsetImagePreview = () => {
+    setMessage("");
+    setSelectedImage("");
+  };
 
   return (
     <main>
@@ -18,14 +36,33 @@ export default function NewOutivityForm({ createOutivity, handleCancel }) {
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityImage">Image</label>
 
+            {selectedImage && (
+              <>
+                <StyledFormPreviewImage
+                  alt="imagePreview"
+                  name="imagePreview"
+                  width={300}
+                  height={200}
+                  src={selectedImage}
+                />
+                <StyledFormRemoveButton
+                  type="button"
+                  onClick={handleUnsetImagePreview}
+                >
+                  Remove
+                </StyledFormRemoveButton>
+              </>
+            )}
+
             <StyledNewOutivitiesFormInput
-              type="text"
+              type="file"
+              class="inputfile"
               name="outivityImage"
               id="outivityImage"
-              placeholder="Insert a url from unsplash..."
+              accept=".png, .jpeg, .jpg, .webp"
               required
-              autoFocus
-              ref={inputRef}
+              value={message}
+              onChange={handleImageChange}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -36,6 +73,8 @@ export default function NewOutivityForm({ createOutivity, handleCancel }) {
               id="outivityName"
               placeholder="Type in a name..."
               required
+              autoFocus
+              ref={inputRef}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -123,8 +162,6 @@ const StyledNewOutivitiesFormSpan = styled.span`
 `;
 
 const StyledCancelButton = styled.button`
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
   margin: 10px;
   padding: 10px 20px;
   font-weight: 400;
@@ -148,6 +185,24 @@ const StyledSaveButton = styled.button`
   color: var(--neutral-color);
   background-color: var(--third-color);
   letter-spacing: 2px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const StyledFormPreviewImage = styled(Image)`
+  width: 150px;
+  height: auto;
+`;
+
+const StyledFormRemoveButton = styled.button`
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  font-weight: 400;
+  border-radius: 3px;
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  background-color: var(--neutral-color);
   &:hover {
     cursor: pointer;
   }
