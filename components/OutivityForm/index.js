@@ -82,6 +82,7 @@ export default function OutivityForm({
               name="outivityImage"
               id="outivityImage"
               accept=".png, .jpeg, .jpg, .webp"
+              required={!isEdit}
               value={message}
               onChange={handleImageChange}
             />
@@ -94,7 +95,7 @@ export default function OutivityForm({
               id="outivityArea"
               placeholder="In which city/area is it located?"
               required
-              defaultValue={isEdit ? outivity.area ?? "" : null}
+              defaultValue={isEdit ? outivity.area : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -105,7 +106,7 @@ export default function OutivityForm({
               id="outivityCountry"
               placeholder="In which country?"
               required
-              defaultValue={isEdit ? outivity.country ?? "" : null}
+              defaultValue={isEdit ? outivity.country : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -117,7 +118,7 @@ export default function OutivityForm({
               placeholder="Type in some info..."
               rows="6"
               required
-              defaultValue={isEdit ? outivity.description ?? "" : null}
+              defaultValue={isEdit ? outivity.description : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormSpan>

@@ -24,7 +24,7 @@ export default function OutivityDetail({ outivity, onDeleteOutivity }) {
       </Head>
       <main>
         <article>
-          <h2>{outivity.title}</h2>
+          <h1>{outivity.title}</h1>
           <StyledOutivityImage
             src={outivity.image}
             alt={outivity.image}
