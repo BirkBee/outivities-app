@@ -65,13 +65,15 @@ export default function OutivityForm({
                   height={200}
                   src={selectedImage}
                 />
+                <StyledFormPreviewImageUrl>
+                  {outivity?.image}
+                </StyledFormPreviewImageUrl>
                 <StyledFormRemoveButton
                   type="button"
                   onClick={handleUnsetImagePreview}
                 >
                   Remove
                 </StyledFormRemoveButton>
-                <div>{outivity?.image}</div>
               </>
             )}
             <StyledNewOutivitiesFormInput
@@ -207,4 +209,9 @@ const StyledFormRemoveButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const StyledFormPreviewImageUrl = styled.div`
+  font-size: 11px;
+  line-height: 1;
 `;
