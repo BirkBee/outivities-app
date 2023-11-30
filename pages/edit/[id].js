@@ -13,7 +13,6 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
     if (currentOutivity) {
       setOutivity(currentOutivity);
       setSelectedImage(currentOutivity.image);
-    } else {
     }
   }, [id, outivities]);
 
