@@ -82,7 +82,6 @@ export default function OutivityForm({
               name="outivityImage"
               id="outivityImage"
               accept=".png, .jpeg, .jpg, .webp"
-              required
               value={message}
               onChange={handleImageChange}
             />
