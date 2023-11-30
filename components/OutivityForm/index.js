@@ -1,9 +1,7 @@
 import styled from "styled-components";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import { useState } from "react";
-
 export default function OutivityForm({
   outivity,
   onEditOutivity,
@@ -15,26 +13,22 @@ export default function OutivityForm({
   const router = useRouter();
   const inputRef = useRef(null);
   const [message, setMessage] = useState("");
-
   const handleCancel = () => {
     const confirmed = window.confirm("Are you sure you want to cancel?");
     if (confirmed) {
       router.push("/");
     }
   };
-
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
     setMessage(event.target.value);
   };
-
   const handleUnsetImagePreview = () => {
     setMessage("");
     setSelectedImage("");
@@ -60,10 +54,8 @@ export default function OutivityForm({
               defaultValue={isEdit ? outivity.title ?? "" : null}
             />
           </StyledNewOutivitiesFormField>
-
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityImage">Image</label>
-
             {selectedImage && (
               <>
                 <StyledFormPreviewImage
@@ -79,9 +71,9 @@ export default function OutivityForm({
                 >
                   Remove
                 </StyledFormRemoveButton>
+                <div>{outivity?.image}</div>
               </>
             )}
-
             <StyledNewOutivitiesFormInput
               type="file"
               class="inputfile"
@@ -91,17 +83,7 @@ export default function OutivityForm({
               required
               value={message}
               onChange={handleImageChange}
-              defaultValue={isEdit ? outivity.image ?? "" : null}
             />
-
-            {/* <StyledNewOutivitiesFormInput
-              type="text"
-              name="outivityImage"
-              id="outivityImage"
-              placeholder="Insert a url from unsplash..."
-              required
-              defaultValue={isEdit ? outivity.image ?? "" : null}
-            /> */}
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityArea">Area</label>
@@ -148,26 +130,22 @@ export default function OutivityForm({
     </main>
   );
 }
-
 const StyledNewOutivitiesForm = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
 `;
-
 const StyledNewOutivitiesFormFields = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
 `;
-
 const StyledNewOutivitiesFormField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
 `;
-
 const StyledNewOutivitiesFormInput = styled.input`
   padding: 20px;
   border: 1px solid var(--neutral-color);
@@ -175,7 +153,6 @@ const StyledNewOutivitiesFormInput = styled.input`
   font: inherit;
   resize: vertical;
 `;
-
 const StyledNewOutivitiesFormTextarea = styled.textarea`
   padding: 20px;
   border: 1px solid var(--neutral-color);
@@ -183,13 +160,11 @@ const StyledNewOutivitiesFormTextarea = styled.textarea`
   font: inherit;
   resize: vertical;
 `;
-
 const StyledNewOutivitiesFormSpan = styled.span`
   height: 60px;
   text-align: center;
   margin-bottom: 30px;
 `;
-
 const StyledCancelButton = styled.button`
   margin: 10px;
   padding: 10px 20px;
@@ -203,7 +178,6 @@ const StyledCancelButton = styled.button`
     cursor: pointer;
   }
 `;
-
 const StyledSaveButton = styled.button`
   margin: 10px;
   padding: 12px 30px;
@@ -218,12 +192,10 @@ const StyledSaveButton = styled.button`
     cursor: pointer;
   }
 `;
-
 const StyledFormPreviewImage = styled(Image)`
   width: 150px;
   height: auto;
 `;
-
 const StyledFormRemoveButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;

@@ -49,7 +49,12 @@ export default function CreateOutivity({ onAddOutivity }) {
   return (
     <>
       {errorMessage && <p>{errorMessage}</p>}
-      <OutivityForm createOutivity={createOutivity} isEdit={false} />;
+      <OutivityForm
+        createOutivity={createOutivity}
+        isEdit={false}
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+      />
     </>
   );
 }
