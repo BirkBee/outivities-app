@@ -27,6 +27,7 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
     onEditOutivity(editedNewOutivityData, id);
     router.push(`/${id}`);
   }
+
   function prepareFormData(data) {
     const editedNewOutivityData = {
       id: id,
@@ -38,6 +39,7 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
     };
     return editedNewOutivityData;
   }
+
   return (
     <OutivityForm
       outivity={outivity}
