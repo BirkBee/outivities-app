@@ -1,12 +1,25 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
+import Icon from "../Icons";
 
-export default function OutivitiesListItem({ outivity }) {
+export default function OutivitiesListItem({
+  outivity,
+  onToggleFavorite,
+  isFavorite,
+}) {
   return (
     <StyledOutivityCard>
       <Link href={`/${outivity.id}`}>
         <StyledImageContainer>
+          <StyledIcon
+            variant={"favorite"}
+            color={"var(--neutral-color)"}
+            size={"38"}
+            viewBox={"0 0 455 455"}
+            isFavorite={isFavorite}
+            onToggleFavorite={onToggleFavorite}
+          />
           <StyledOutivityImage
             src={outivity.image}
             alt={outivity.title}
@@ -58,4 +71,10 @@ const StyledOutivityImage = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -1;
+`;
+
+const StyledIcon = styled(Icon)`
+  z-index: 1;
+  position: relative;
 `;

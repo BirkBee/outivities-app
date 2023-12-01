@@ -55,10 +55,11 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         outivities={outivities}
+        favoriteInfo={favoriteInfo}
         onAddOutivity={handleAddOutivity}
         onDeleteOutivity={handleDeleteOutivity}
         onEditOutivity={handleEditOutivity}
-        onAddFavorite={handleToggleFavorite}
+        onToggleFavorite={handleToggleFavorite}
       />
       <Layout />
     </>

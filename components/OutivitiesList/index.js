@@ -1,12 +1,23 @@
 import styled from "styled-components";
 import OutivitiesListItem from "../OutivitiesListItem";
 
-export default function OutivitiesList({ outivities }) {
+export default function OutivitiesList({
+  outivities,
+  favoriteInfo,
+  onToggleFavorite,
+}) {
   return (
     <article>
       <StyledOutivityCardContainer>
         {outivities.map((outivity) => (
-          <OutivitiesListItem key={outivity.id} outivity={outivity} />
+          <OutivitiesListItem
+            key={outivity.id}
+            outivity={outivity}
+            onToggleFavorite={() => onToggleFavorite(id)}
+            isFavorite={
+              favoriteInfo?.find((outivity) => outivity.id === id)?.isFavorite
+            }
+          />
         ))}
       </StyledOutivityCardContainer>
     </article>
