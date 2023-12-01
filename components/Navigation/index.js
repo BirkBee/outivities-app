@@ -1,26 +1,45 @@
 import Link from "next/link";
 import styled from "styled-components";
-import HomeSvg from "@/public/home.svg";
-import PlusSvg from "@/public/plus.svg";
+import Icon from "../Icons";
 import { useRouter } from "next/router";
 
 export default function Navigation() {
   const router = useRouter();
   return (
     <StyledNavigation>
-      <StyledList>
-        <li>
-          <StyledLink href="/">
-            <StyledHomeSvg $isActive={router.pathname === "/"} />
-          </StyledLink>
-          <StyledSpan></StyledSpan>
-        </li>
-        <li>
-          <StyledLink href="/create">
-            <StyledPlusSvg $isActive={router.pathname === "/create"} />
-          </StyledLink>
-        </li>
-      </StyledList>
+      <StyledSpan>
+        <StyledList>
+          <li>
+            <StyledLink href="/">
+              <Icon
+                variant={"home"}
+                color={"var(--neutral-color)"}
+                size={"48"}
+                $isActive={router.pathname === "/"}
+              />
+            </StyledLink>
+          </li>
+          <li>
+            <StyledLink href="/create">
+              <Icon
+                variant={"plus"}
+                color={"var(--neutral-color)"}
+                size={"43"}
+                $isActive={router.pathname === "/create"}
+              />
+            </StyledLink>
+          </li>
+          <li>
+            <StyledLink href="/">
+              <Icon
+                variant={"noFavorite"}
+                color={"var(--neutral-color)"}
+                size={"42"}
+              />
+            </StyledLink>
+          </li>
+        </StyledList>
+      </StyledSpan>
     </StyledNavigation>
   );
 }
@@ -33,6 +52,7 @@ const StyledNavigation = styled.nav`
   bottom: 0;
   height: 70px;
   display: grid;
+  grid-template-rows: repeat(auto-fill, minmax (50px, 1fr));
   z-index: 1;
 `;
 
@@ -50,16 +70,7 @@ const StyledLink = styled(Link)`
   width: 50%;
 `;
 
-const StyledHomeSvg = styled(HomeSvg)`
-  display: grid;
-  path {
-    fill: ${(props) =>
-      props.$isActive ? "var(--third-color)" : "var(--neutral-color)"};
-    transition: fill 0.3s ease-in-out;
-  }
-`;
-
-const StyledPlusSvg = styled(PlusSvg)`
+const StyledIcon = styled.div`
   display: grid;
   path {
     fill: ${(props) =>
