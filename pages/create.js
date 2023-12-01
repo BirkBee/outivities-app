@@ -1,9 +1,9 @@
-import NewOutivityForm from "@/components/NewOutivityForm";
+import OutivityForm from "@/components/OutivityForm";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { uid } from "uid";
 
-export default function CreateOutivity({ handleAddOutivity }) {
+export default function CreateOutivity({ onAddOutivity }) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
@@ -11,13 +11,6 @@ export default function CreateOutivity({ handleAddOutivity }) {
   const uploadImage = () => {
     const formData = new FormData();
     formData.append("file", selectedImage);
-  };
-
-  const handleCancel = () => {
-    const confirmed = window.confirm("Are you sure you want to cancel?");
-    if (confirmed) {
-      router.push("/");
-    }
   };
 
   async function createOutivity(event) {
@@ -46,7 +39,7 @@ export default function CreateOutivity({ handleAddOutivity }) {
       };
 
       setSelectedImage(image);
-      handleAddOutivity(newOutivity);
+      onAddOutivity(newOutivity);
       router.push("/");
     } catch (error) {
       setErrorMessage(error.message);
@@ -56,9 +49,9 @@ export default function CreateOutivity({ handleAddOutivity }) {
   return (
     <>
       {errorMessage && <p>{errorMessage}</p>}
-      <NewOutivityForm
+      <OutivityForm
         createOutivity={createOutivity}
-        handleCancel={handleCancel}
+        isEdit={false}
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
       />

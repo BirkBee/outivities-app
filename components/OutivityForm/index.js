@@ -1,28 +1,34 @@
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
-
-export default function NewOutivityForm({
+export default function OutivityForm({
+  outivity,
+  onEditOutivity,
   createOutivity,
-  handleCancel,
+  isEdit,
   selectedImage,
   setSelectedImage,
 }) {
+  const router = useRouter();
   const inputRef = useRef(null);
   const [message, setMessage] = useState("");
-
+  const handleCancel = () => {
+    const confirmed = window.confirm("Are you sure you want to cancel?");
+    if (confirmed) {
+      router.push("/");
+    }
+  };
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
-
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
     setMessage(event.target.value);
   };
-
   const handleUnsetImagePreview = () => {
     setMessage("");
     setSelectedImage("");
@@ -30,41 +36,11 @@ export default function NewOutivityForm({
 
   return (
     <main>
-      <StyledNewOutivitiesForm onSubmit={createOutivity}>
-        <h1>New Outivity</h1>
+      <StyledNewOutivitiesForm
+        onSubmit={isEdit ? onEditOutivity : createOutivity}
+      >
+        <h1>{isEdit ? "Edit Outivity" : "New Outivity"}</h1>
         <StyledNewOutivitiesFormFields>
-          <StyledNewOutivitiesFormField>
-            <label htmlFor="outivityImage">Image</label>
-
-            {selectedImage && (
-              <>
-                <StyledFormPreviewImage
-                  alt="imagePreview"
-                  name="imagePreview"
-                  width={300}
-                  height={200}
-                  src={selectedImage}
-                />
-                <StyledFormRemoveButton
-                  type="button"
-                  onClick={handleUnsetImagePreview}
-                >
-                  Remove
-                </StyledFormRemoveButton>
-              </>
-            )}
-
-            <StyledNewOutivitiesFormInput
-              type="file"
-              class="inputfile"
-              name="outivityImage"
-              id="outivityImage"
-              accept=".png, .jpeg, .jpg, .webp"
-              required
-              value={message}
-              onChange={handleImageChange}
-            />
-          </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityName">Outivity</label>
             <StyledNewOutivitiesFormInput
@@ -75,6 +51,40 @@ export default function NewOutivityForm({
               required
               autoFocus
               ref={inputRef}
+              defaultValue={isEdit ? outivity.title ?? "" : null}
+            />
+          </StyledNewOutivitiesFormField>
+          <StyledNewOutivitiesFormField>
+            <label htmlFor="outivityImage">Image</label>
+            {selectedImage && (
+              <>
+                <StyledFormPreviewImage
+                  alt="imagePreview"
+                  name="imagePreview"
+                  width={300}
+                  height={200}
+                  src={selectedImage}
+                />
+                <StyledFormPreviewImageUrl>
+                  {outivity?.image}
+                </StyledFormPreviewImageUrl>
+                <StyledFormRemoveButton
+                  type="button"
+                  onClick={handleUnsetImagePreview}
+                >
+                  Remove
+                </StyledFormRemoveButton>
+              </>
+            )}
+            <StyledNewOutivitiesFormInput
+              type="file"
+              class="inputfile"
+              name="outivityImage"
+              id="outivityImage"
+              accept=".png, .jpeg, .jpg, .webp"
+              required={!isEdit}
+              value={message}
+              onChange={handleImageChange}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -85,6 +95,7 @@ export default function NewOutivityForm({
               id="outivityArea"
               placeholder="In which city/area is it located?"
               required
+              defaultValue={isEdit ? outivity.area : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -95,6 +106,7 @@ export default function NewOutivityForm({
               id="outivityCountry"
               placeholder="In which country?"
               required
+              defaultValue={isEdit ? outivity.country : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -106,6 +118,7 @@ export default function NewOutivityForm({
               placeholder="Type in some info..."
               rows="6"
               required
+              defaultValue={isEdit ? outivity.description : null}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormSpan>
@@ -119,48 +132,41 @@ export default function NewOutivityForm({
     </main>
   );
 }
-
 const StyledNewOutivitiesForm = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 24px;
 `;
-
 const StyledNewOutivitiesFormFields = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
 `;
-
 const StyledNewOutivitiesFormField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
 `;
-
-const StyledInput = `
+const StyledNewOutivitiesFormInput = styled.input`
   padding: 20px;
   border: 1px solid var(--neutral-color);
   border-radius: 4px;
   font: inherit;
   resize: vertical;
-  `;
-
-const StyledNewOutivitiesFormInput = styled.input`
-  ${StyledInput}
 `;
-
 const StyledNewOutivitiesFormTextarea = styled.textarea`
-  ${StyledInput}
+  padding: 20px;
+  border: 1px solid var(--neutral-color);
+  border-radius: 4px;
+  font: inherit;
+  resize: vertical;
 `;
-
 const StyledNewOutivitiesFormSpan = styled.span`
   height: 60px;
   text-align: center;
   margin-bottom: 30px;
 `;
-
 const StyledCancelButton = styled.button`
   margin: 10px;
   padding: 10px 20px;
@@ -174,7 +180,6 @@ const StyledCancelButton = styled.button`
     cursor: pointer;
   }
 `;
-
 const StyledSaveButton = styled.button`
   margin: 10px;
   padding: 12px 30px;
@@ -189,12 +194,10 @@ const StyledSaveButton = styled.button`
     cursor: pointer;
   }
 `;
-
 const StyledFormPreviewImage = styled(Image)`
   width: 150px;
   height: auto;
 `;
-
 const StyledFormRemoveButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
@@ -206,4 +209,9 @@ const StyledFormRemoveButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const StyledFormPreviewImageUrl = styled.div`
+  font-size: 11px;
+  line-height: 1;
 `;

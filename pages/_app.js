@@ -16,6 +16,14 @@ export default function App({ Component, pageProps }) {
     setOutivities(outivities.filter((outivity) => outivity.id !== id));
   }
 
+  function handleEditOutivity(editedOutivity) {
+    setOutivities(
+      outivities.map((outivity) =>
+        outivity.id === editedOutivity.id ? editedOutivity : outivity
+      )
+    );
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -23,8 +31,9 @@ export default function App({ Component, pageProps }) {
       <Component
         {...pageProps}
         outivities={outivities}
-        handleAddOutivity={handleAddOutivity}
+        onAddOutivity={handleAddOutivity}
         onDeleteOutivity={handleDeleteOutivity}
+        onEditOutivity={handleEditOutivity}
       />
       <Layout />
     </>
