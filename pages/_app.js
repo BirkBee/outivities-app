@@ -7,6 +7,12 @@ export default function App({ Component, pageProps }) {
   const [outivities, setOutivities] = useLocalStorageState("outivities", {
     defaultValue: initialOutivities,
   });
+  const [favoriteInfo, setFavoriteInfo] = useLocalStorageState([
+    "favorites",
+    {
+      defaultValue: [],
+    },
+  ]);
 
   function handleAddOutivity(newOutivity) {
     setOutivities([newOutivity, ...outivities]);
@@ -24,6 +30,24 @@ export default function App({ Component, pageProps }) {
     );
   }
 
+  function handleToggleFavorite(id) {
+    // if (favoritesList.find((entry) => entry === id)) {
+    //   setFavoritesList(favoritesList.filter((entry) => entry !== id));
+    // }
+    const outivity = favoriteInfo.find((outivity) => outivity.id === id);
+    if (outivity) {
+      setFavoriteInfo(
+        favoriteInfo.map((outivity) =>
+          outivity.id === id
+            ? { id, isFavorite: !outivity.isFavorite }
+            : outivity
+        )
+      );
+    } else {
+      setFavoriteInfo([...favoriteInfo, { id: id, isFavorite: true }]);
+    }
+  }
+
   return (
     <>
       <GlobalStyle />
@@ -34,6 +58,7 @@ export default function App({ Component, pageProps }) {
         onAddOutivity={handleAddOutivity}
         onDeleteOutivity={handleDeleteOutivity}
         onEditOutivity={handleEditOutivity}
+        onAddFavorite={handleToggleFavorite}
       />
       <Layout />
     </>
