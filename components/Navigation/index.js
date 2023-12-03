@@ -12,9 +12,12 @@ export default function Navigation() {
             <StyledLink href="/">
               <Icon
                 variant={"home"}
-                color={"var(--neutral-color)"}
                 size={54}
-                $isActive={router.pathname === "/"}
+                color={
+                  router.pathname === "/"
+                    ? "var(--third-color)"
+                    : "var(--neutral-color)"
+                }
               />
             </StyledLink>
           </li>
@@ -22,18 +25,25 @@ export default function Navigation() {
             <StyledLink href="/create">
               <Icon
                 variant={"plus"}
-                color={"var(--neutral-color)"}
                 size={50}
-                $isActive={router.pathname === "/create"}
+                color={
+                  router.pathname === "/create"
+                    ? "var(--third-color)"
+                    : "var(--neutral-color)"
+                }
               />
             </StyledLink>
           </li>
           <li>
-            <StyledLink href="/">
+            <StyledLink href="/favoriteList">
               <Icon
                 variant={"noFavorite"}
-                color={"var(--neutral-color)"}
                 size={45}
+                color={
+                  router.pathname === "/favoriteList"
+                    ? "var(--third-color)"
+                    : "var(--neutral-color)"
+                }
               />
             </StyledLink>
           </li>

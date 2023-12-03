@@ -5,7 +5,7 @@ import OutivitiesList from "@/components/OutivitiesList";
 export default function HomePage({
   outivities,
   favoriteInfo,
-  onToggleFavorite,
+  onToggleFavoriteList,
 }) {
   return (
     <>
@@ -19,7 +19,7 @@ export default function HomePage({
         <OutivitiesList
           outivities={outivities}
           favoriteInfo={favoriteInfo}
-          onToggleFavorite={onToggleFavorite}
+          onToggleFavoriteList={onToggleFavoriteList}
         />
       </main>
     </>

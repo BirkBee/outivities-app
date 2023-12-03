@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import OutivitiesListItem from "../OutivitiesListItem";
 
-export default function OutivitiesList({
-  outivities,
-  favoriteInfo,
-  onToggleFavorite,
-}) {
+export default function OutivitiesList({ outivities, onToggleFavoriteList }) {
   return (
     <article>
       <StyledOutivityCardContainer>
@@ -13,10 +9,7 @@ export default function OutivitiesList({
           <OutivitiesListItem
             key={outivity.id}
             outivity={outivity}
-            onToggleFavorite={() => onToggleFavorite(id)}
-            isFavorite={
-              favoriteInfo?.find((outivity) => outivity.id === id)?.isFavorite
-            }
+            onToggleFavoriteList={onToggleFavoriteList}
           />
         ))}
       </StyledOutivityCardContainer>
@@ -29,3 +22,8 @@ const StyledOutivityCardContainer = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 10px;
 `;
+
+// onToggleFavorite={() => onToggleFavorite(id)}
+// isFavorite={
+//   favoriteInfo?.find((outivity) => outivity.id === id)?.isFavorite
+// }
