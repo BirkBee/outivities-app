@@ -2,25 +2,12 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import Icon from "../Icons";
-import { useState, useEffect } from "react";
 
 export default function OutivitiesListItem({
   outivity,
   onToggleFavorite,
   isFavorite,
 }) {
-  // const [isFavorite, setFavorite] = useState(outivity.onFavoriteList);
-
-  // useEffect(() => {
-  //   localStorage.setItem(`favorite_${outivity.id}`, JSON.stringify(isFavorite));
-  // }, [isFavorite]);
-
-  // function handleToggleFavorite() {
-  //   const newFavoriteStatus = !isFavorite;
-  //   setFavorite(newFavoriteStatus);
-  //   onToggleFavoriteList(outivity.id, newFavoriteStatus);
-  // }
-
   return (
     <StyledOutivityCard>
       <Link href={`/${outivity.id}`}>
@@ -44,7 +31,7 @@ export default function OutivitiesListItem({
       >
         <StyledIcon
           variant="favorite"
-          color={isFavorite ? "var(--neutral-color)" : "var(--favorite-color)"}
+          color={isFavorite ? "var(--favorite-color)" : "var(--neutral-color)"}
           size={"38"}
         />
       </StyledFavoriteButton>
@@ -105,4 +92,5 @@ const StyledFavoriteButton = styled.button`
 const StyledIcon = styled(Icon)`
   z-index: 1;
   position: relative;
+  fill: ${(props) => props.color};
 `;

@@ -27,24 +27,6 @@ export default function App({ Component, pageProps }) {
     );
   }
 
-  // function handleToggleFavoriteList(id) {
-  //   if (favorites.find((entry) => entry == id)) {
-  //     setFavorites(favorites.filter((entry) => entry != id));
-  //     return;
-  //   }
-  //   setFavorites([...favorites, id]);
-  // }
-
-  // function handleFavoriteOutivity(favoriteOutivity) {
-  //   setOutivities(
-  //     outivities.map((outivity) =>
-  //       outivity.id === favoriteOutivity.id
-  //         ? { ...outivity, favoriteOutivity: !outivity.favoriteOutivity }
-  //         : outivity
-  //     )
-  //   );
-  // }
-
   function handleToggleFavorite(id) {
     if (favorites.includes(id)) {
       setFavorites(favorites?.filter((favorite) => favorite !== id));
@@ -63,8 +45,6 @@ export default function App({ Component, pageProps }) {
         onAddOutivity={handleAddOutivity}
         onDeleteOutivity={handleDeleteOutivity}
         onEditOutivity={handleEditOutivity}
-        // onToggleFavoriteList={handleToggleFavoriteList}
-        // onFavoriteOutivity={handleFavoriteOutivity}
         onToggleFavorite={handleToggleFavorite}
         favorites={favorites}
       />

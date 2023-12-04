@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import Head from "next/head";
-import OutivitiesList from "@/components/OutivitiesList";
+import OutivitiesListItem from "@/components/OutivitiesListItem";
 
-export default function favoriteList({
+export default function FavoritesList({
   outivities,
   onToggleFavorite,
   favorites,
 }) {
+  const favoriteOutivities = outivities.filter((outivity) =>
+    favorites.includes(outivity.id)
+  );
+
   return (
     <>
       <Head>
@@ -16,23 +20,23 @@ export default function favoriteList({
       <StyledTitle>Favorite Outivities</StyledTitle>
 
       <main>
-        {!outivities.find((outivity) => outivity.favorites === true) && (
+        {favoriteOutivities.length === 0 && (
           <>
             <p>You haven't saved any favorite Outivity yet.</p>
-            <p>Start adding your first favorite !</p>
+            <p>Start adding your first favorite!</p>
           </>
         )}
 
-        {outivities
-          ?.filter((outivity) => favorites.some((id) => id === outivity.id))
-          .map((outivity) => (
-            <OutivitiesList
-              outivities={outivities}
+        <StyledOutivityCardContainer>
+          {favoriteOutivities.map((outivity) => (
+            <OutivitiesListItem
               key={outivity.id}
+              outivity={outivity}
               favorites={favorites}
               onToggleFavorite={onToggleFavorite}
             />
           ))}
+        </StyledOutivityCardContainer>
       </main>
     </>
   );
@@ -46,4 +50,10 @@ const StyledTitle = styled.h1`
   place-content: center;
   background-color: var(--primary-color);
   color: var(--neutral-color);
+`;
+
+const StyledOutivityCardContainer = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 10px;
 `;
