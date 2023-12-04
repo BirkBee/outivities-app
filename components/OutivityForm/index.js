@@ -13,7 +13,7 @@ export default function OutivityForm({
   const router = useRouter();
   const inputRef = useRef(null);
   const [message, setMessage] = useState("");
-  const [showWarning, setShowWarning] = useState(false);
+  const [showWarning, setShowWarning] = useState("");
 
   const handleCancel = () => {
     const confirmed = window.confirm("Are you sure you want to cancel?");
@@ -30,6 +30,7 @@ export default function OutivityForm({
     const file = event.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
     setMessage(event.target.value);
+    setShowWarning("");
   };
   const handleUnsetImagePreview = () => {
     setShowWarning(true);
