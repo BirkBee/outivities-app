@@ -26,6 +26,7 @@ export default createGlobalStyle`
     --forth-color: #B2EEF8;
     --neutral-color: #E5E5E5;
     --danger-color: #FFBEB4;
+    --danger-textcolor: #FF3C00;
     /* --favorite-color: #FFFF01; */
     --favorite-color: #FF3C00;
 

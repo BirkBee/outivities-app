@@ -13,6 +13,8 @@ export default function OutivityForm({
   const router = useRouter();
   const inputRef = useRef(null);
   const [message, setMessage] = useState("");
+  const [showWarning, setShowWarning] = useState(false);
+
   const handleCancel = () => {
     const confirmed = window.confirm("Are you sure you want to cancel?");
     if (confirmed) {
@@ -30,6 +32,7 @@ export default function OutivityForm({
     setMessage(event.target.value);
   };
   const handleUnsetImagePreview = () => {
+    setShowWarning(true);
     setMessage("");
     setSelectedImage("");
   };
@@ -86,6 +89,13 @@ export default function OutivityForm({
               value={message}
               onChange={handleImageChange}
             />
+            {showWarning && (
+              <StyledWarningMessage>
+                <strong>
+                  Please choose an image to complete your Outivity.
+                </strong>
+              </StyledWarningMessage>
+            )}
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityArea">Area</label>
@@ -214,4 +224,9 @@ const StyledFormRemoveButton = styled.button`
 const StyledFormPreviewImageUrl = styled.div`
   font-size: 11px;
   line-height: 1;
+`;
+
+const StyledWarningMessage = styled.div`
+  color: var(--danger-textcolor);
+  font-size: smaller;
 `;
