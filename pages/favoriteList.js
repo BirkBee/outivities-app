@@ -22,7 +22,7 @@ export default function FavoritesList({
       <main>
         {favoriteOutivities.length === 0 && (
           <>
-            <p>You haven't saved any favorite Outivity yet.</p>
+            <p>You have not saved any favorite Outivity yet.</p>
             <p>Start adding your first favorite!</p>
           </>
         )}
