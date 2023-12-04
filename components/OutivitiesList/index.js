@@ -27,8 +27,3 @@ const StyledOutivityCardContainer = styled.ul`
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 10px;
 `;
-
-// onToggleFavorite={() => onToggleFavorite(id)}
-// isFavorite={
-//   favoriteInfo?.find((outivity) => outivity.id === id)?.isFavorite
-// }

@@ -20,23 +20,23 @@ export default function FavoritesList({
       <StyledTitle>Favorite Outivities</StyledTitle>
 
       <main>
-        {favoriteOutivities.length === 0 && (
+        {favoriteOutivities.length === 0 ? (
           <>
-            <p>You have not saved any favorite Outivity yet.</p>
+            <p>You have not saved any favorite Outivity.</p>
             <p>Start adding your first favorite!</p>
           </>
+        ) : (
+          <StyledOutivityCardContainer>
+            {favoriteOutivities.map((outivity) => (
+              <OutivitiesListItem
+                key={outivity.id}
+                outivity={outivity}
+                favorites={favorites}
+                onToggleFavorite={onToggleFavorite}
+              />
+            ))}
+          </StyledOutivityCardContainer>
         )}
-
-        <StyledOutivityCardContainer>
-          {favoriteOutivities.map((outivity) => (
-            <OutivitiesListItem
-              key={outivity.id}
-              outivity={outivity}
-              favorites={favorites}
-              onToggleFavorite={onToggleFavorite}
-            />
-          ))}
-        </StyledOutivityCardContainer>
       </main>
     </>
   );

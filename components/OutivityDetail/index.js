@@ -44,8 +44,9 @@ export default function OutivityDetail({
               type="button"
               onClick={() => onToggleFavorite(outivity.id)}
             >
-              <StyledIcon
+              <Icon
                 variant="favorite"
+                aria-label="favorite"
                 color={
                   isFavorite ? "var(--favorite-color)" : "var(--neutral-color)"
                 }
@@ -99,11 +100,6 @@ const StyledFavoriteButton = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
-
-const StyledIcon = styled(Icon)`
-  z-index: 1;
-  fill: ${(props) => props.color};
 `;
 
 const StyledEditLink = styled(Link)`

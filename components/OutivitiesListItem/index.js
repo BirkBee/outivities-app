@@ -29,8 +29,9 @@ export default function OutivitiesListItem({
         type="button"
         onClick={() => onToggleFavorite(outivity.id)}
       >
-        <StyledIcon
+        <Icon
           variant="favorite"
+          aria-label="favorite"
           color={isFavorite ? "var(--favorite-color)" : "var(--neutral-color)"}
           size={"38"}
         />
@@ -87,9 +88,4 @@ const StyledFavoriteButton = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
-
-const StyledIcon = styled(Icon)`
-  z-index: 1;
-  position: relative;
 `;
