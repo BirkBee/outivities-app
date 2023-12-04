@@ -2,11 +2,7 @@ import styled from "styled-components";
 import Head from "next/head";
 import OutivitiesList from "@/components/OutivitiesList";
 
-export default function HomePage({
-  outivities,
-  favoriteInfo,
-  onToggleFavoriteList,
-}) {
+export default function HomePage({ outivities, favorites, onToggleFavorite }) {
   return (
     <>
       <Head>
@@ -18,8 +14,8 @@ export default function HomePage({
       <main>
         <OutivitiesList
           outivities={outivities}
-          favoriteInfo={favoriteInfo}
-          onToggleFavoriteList={onToggleFavoriteList}
+          favorites={favorites}
+          onToggleFavorite={onToggleFavorite}
         />
       </main>
     </>

@@ -2,18 +2,27 @@ import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
 import Icon from "../Icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export default function OutivitiesListItem({ outivity, onToggleFavoriteList }) {
-  const [isFavorite, setFavorite] = useState();
+export default function OutivitiesListItem({
+  outivity,
+  onToggleFavorite,
+  isFavorite,
+}) {
+  // const [isFavorite, setFavorite] = useState(outivity.onFavoriteList);
 
-  function handleToggleFavorite() {
-    setFavorite(!isFavorite);
-    onToggleFavoriteList(outivity.id);
-  }
+  // useEffect(() => {
+  //   localStorage.setItem(`favorite_${outivity.id}`, JSON.stringify(isFavorite));
+  // }, [isFavorite]);
+
+  // function handleToggleFavorite() {
+  //   const newFavoriteStatus = !isFavorite;
+  //   setFavorite(newFavoriteStatus);
+  //   onToggleFavoriteList(outivity.id, newFavoriteStatus);
+  // }
 
   return (
-    <StyledOutivityCard $onFavoriteList={outivity.onFavoriteList}>
+    <StyledOutivityCard>
       <Link href={`/${outivity.id}`}>
         <StyledImageContainer>
           <StyledOutivityImage
@@ -29,10 +38,13 @@ export default function OutivitiesListItem({ outivity, onToggleFavoriteList }) {
       <StyledOutivityTitle>{outivity.title}</StyledOutivityTitle>
       <StyledOutivityCityName>in {outivity.area}</StyledOutivityCityName>
 
-      <StyledFavoriteButton type="button" onClick={handleToggleFavorite}>
+      <StyledFavoriteButton
+        type="button"
+        onClick={() => onToggleFavorite(outivity.id)}
+      >
         <StyledIcon
           variant="favorite"
-          color={isFavorite ? "var(--favorite-color)" : "var(--neutral-color)"}
+          color={isFavorite ? "var(--neutral-color)" : "var(--favorite-color)"}
           size={"38"}
         />
       </StyledFavoriteButton>

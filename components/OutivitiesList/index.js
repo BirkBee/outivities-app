@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import OutivitiesListItem from "../OutivitiesListItem";
 
-export default function OutivitiesList({ outivities, onToggleFavoriteList }) {
+export default function OutivitiesList({
+  outivities,
+  favorites,
+  onToggleFavorite,
+}) {
   return (
     <article>
       <StyledOutivityCardContainer>
@@ -9,7 +13,8 @@ export default function OutivitiesList({ outivities, onToggleFavoriteList }) {
           <OutivitiesListItem
             key={outivity.id}
             outivity={outivity}
-            onToggleFavoriteList={onToggleFavoriteList}
+            onToggleFavorite={onToggleFavorite}
+            isFavorite={favorites.includes(outivity.id)}
           />
         ))}
       </StyledOutivityCardContainer>

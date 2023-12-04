@@ -2,20 +2,14 @@ import GlobalStyle from "../styles";
 import { initialOutivities } from "@/lib/data";
 import Layout from "@/components/Layout";
 import useLocalStorageState from "use-local-storage-state";
-import { useState } from "react";
 
 export default function App({ Component, pageProps }) {
   const [outivities, setOutivities] = useLocalStorageState("outivities", {
     defaultValue: initialOutivities,
   });
-  const [favorites, setFavorites] = useLocalStorageState([
-    "favorites",
-    {
-      defaultValue: [],
-    },
-  ]);
-
-  // const [favorites, setFavorites] = useState([]);
+  const [favorites, setFavorites] = useLocalStorageState("favorites", {
+    defaultValue: [],
+  });
 
   function handleAddOutivity(newOutivity) {
     setOutivities([newOutivity, ...outivities]);
@@ -33,47 +27,30 @@ export default function App({ Component, pageProps }) {
     );
   }
 
-  // function handleToggleFavorite(id) {
-  //   const outivity = favoriteInfo.find((outivity) => outivity.id === id);
-  //   if (outivity) {
-  //     setFavoriteInfo(
-  //       favoriteInfo.map((outivity) =>
-  //         outivity.id === id
-  //           ? { id, isFavorite: !outivity.isFavorite }
-  //           : outivity
-  //       )
-  //     );
-  //   } else {
-  //     setFavoriteInfo([...favoriteInfo, { id: id, isFavorite: true }]);
+  // function handleToggleFavoriteList(id) {
+  //   if (favorites.find((entry) => entry == id)) {
+  //     setFavorites(favorites.filter((entry) => entry != id));
+  //     return;
   //   }
+  //   setFavorites([...favorites, id]);
   // }
 
-  function handleToggleFavoriteList(id) {
-    if (favorites.find((entry) => entry == id)) {
-      setFavorites(favorites.filter((entry) => entry != id));
-      return;
-    }
-    setFavorites([...favorites, id]);
-  }
-
-  // function handleToggleFavoriteList(outivityToFavoriteList) {
+  // function handleFavoriteOutivity(favoriteOutivity) {
   //   setOutivities(
   //     outivities.map((outivity) =>
-  //       outivity.id === outivityToFavoriteList.id
-  //         ? { ...outivity, onOutivityList: !outivity.onOutivityList }
+  //       outivity.id === favoriteOutivity.id
+  //         ? { ...outivity, favoriteOutivity: !outivity.favoriteOutivity }
   //         : outivity
   //     )
   //   );
   // }
 
-  function handleFavoriteOutivity(favoriteOutivity) {
-    setOutivities(
-      outivities.map((outivity) =>
-        outivity.id === favoriteOutivity.id
-          ? { ...outivity, favoriteOutivity: !outivity.favoriteOutivity }
-          : outivity
-      )
-    );
+  function handleToggleFavorite(id) {
+    if (favorites.includes(id)) {
+      setFavorites(favorites?.filter((favorite) => favorite !== id));
+    } else {
+      setFavorites([...favorites, id]);
+    }
   }
 
   return (
@@ -86,8 +63,10 @@ export default function App({ Component, pageProps }) {
         onAddOutivity={handleAddOutivity}
         onDeleteOutivity={handleDeleteOutivity}
         onEditOutivity={handleEditOutivity}
-        onToggleFavoriteList={handleToggleFavoriteList}
-        onFavoriteOutivity={handleFavoriteOutivity}
+        // onToggleFavoriteList={handleToggleFavoriteList}
+        // onFavoriteOutivity={handleFavoriteOutivity}
+        onToggleFavorite={handleToggleFavorite}
+        favorites={favorites}
       />
       <Layout />
     </>
