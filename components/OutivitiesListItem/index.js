@@ -6,7 +6,7 @@ import Icon from "../Icons";
 export default function OutivitiesListItem({
   outivity,
   onToggleFavorite,
-  isFavorite,
+  isFavorite = true,
 }) {
   return (
     <StyledOutivityCard>
@@ -92,5 +92,4 @@ const StyledFavoriteButton = styled.button`
 const StyledIcon = styled(Icon)`
   z-index: 1;
   position: relative;
-  fill: ${(props) => props.color};
 `;
