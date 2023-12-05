@@ -5,12 +5,21 @@ import { useRouter } from "next/router";
 
 export default function Navigation() {
   const router = useRouter();
+
+  const handleHomeClick = () => {
+    if (router.pathname === "/") {
+      router.reload();
+    } else {
+      router.push("/");
+    }
+  };
+
   return (
     <StyledNavigation>
       <StyledSpan>
         <StyledList>
           <li>
-            <StyledLink href="/">
+            <StyledLink href="/" onClick={handleHomeClick}>
               <Icon
                 variant={"home"}
                 size={54}
