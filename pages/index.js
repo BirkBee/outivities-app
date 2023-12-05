@@ -6,19 +6,12 @@ import SearchBar from "@/components/SearchBar";
 
 export default function HomePage({ outivities, favorites, onToggleFavorite }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [foundOutivities, setfoundOutivities] = useState();
 
-  useEffect(() => {
-    const filteredOutivities = outivities.filter((outivity) =>
+  const foundOutivities = outivities
+    .filter((outivity) =>
       outivity.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-    const sortedOutivities = filteredOutivities.sort((a, b) =>
-      a.title.localeCompare(b.title)
-    );
-
-    setfoundOutivities(sortedOutivities);
-  }, [searchTerm, outivities]);
+    )
+    .sort((a, b) => a.title.localeCompare(b.title));
 
   return (
     <>

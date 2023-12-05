@@ -2,16 +2,20 @@ import styled from "styled-components";
 import Icon from "../Icons";
 
 export default function SearchBar({ setSearchTerm }) {
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+  };
+
   return (
     <StyledSearchContainer>
-      <StyledSearchForm>
+      <StyledSearchForm onSubmit={handleFormSubmit}>
         <StyledSearchInput
           onChange={(event) => setSearchTerm(event.target.value)}
           type="text"
           id="searchTerm"
           name="searchTerm"
           placeholder="Search Outivities..."
-        ></StyledSearchInput>
+        />
         <Icon variant={"search"} size={25} color={"var(--primary-color)"} />
       </StyledSearchForm>
     </StyledSearchContainer>

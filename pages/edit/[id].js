@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import OutivityForm from "@/components/OutivityForm";
 import { useEffect, useState } from "react";
+import Head from "next/head";
 
 export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
   const router = useRouter();
@@ -40,12 +41,18 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
   }
 
   return (
-    <OutivityForm
-      outivity={outivity}
-      selectedImage={selectedImage}
-      setSelectedImage={setSelectedImage}
-      onEditOutivity={handleEditOutivity}
-      isEdit={true}
-    />
+    <>
+      <Head>
+        <title>Edit Outivity</title>
+      </Head>
+
+      <OutivityForm
+        outivity={outivity}
+        selectedImage={selectedImage}
+        setSelectedImage={setSelectedImage}
+        onEditOutivity={handleEditOutivity}
+        isEdit={true}
+      />
+    </>
   );
 }
