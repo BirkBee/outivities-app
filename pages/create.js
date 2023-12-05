@@ -8,11 +8,6 @@ export default function CreateOutivity({ onAddOutivity }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
 
-  const uploadImage = () => {
-    const formData = new FormData();
-    formData.append("file", selectedImage);
-  };
-
   async function createOutivity(event) {
     event.preventDefault();
 
