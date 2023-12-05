@@ -3,8 +3,14 @@ import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Icon from "../Icons";
 
-export default function OutivityDetail({ outivity, onDeleteOutivity }) {
+export default function OutivityDetail({
+  outivity,
+  onDeleteOutivity,
+  onToggleFavorite,
+  isFavorite,
+}) {
   const router = useRouter();
 
   const confirmDelete = () => {
@@ -25,13 +31,30 @@ export default function OutivityDetail({ outivity, onDeleteOutivity }) {
       <main>
         <article>
           <h1>{outivity.title}</h1>
-          <StyledOutivityImage
-            src={outivity.image}
-            alt={outivity.image}
-            width={300}
-            height={200}
-            layout="fixed"
-          />
+
+          <StyledImageContainer>
+            <StyledOutivityImage
+              src={outivity.image}
+              alt={outivity.image}
+              width={300}
+              height={200}
+              layout="fixed"
+            />
+            <StyledFavoriteButton
+              type="button"
+              onClick={() => onToggleFavorite(outivity.id)}
+            >
+              <Icon
+                variant="favorite"
+                aria-label="favorite"
+                color={
+                  isFavorite ? "var(--favorite-color)" : "var(--neutral-color)"
+                }
+                size={"38"}
+              />
+            </StyledFavoriteButton>
+          </StyledImageContainer>
+
           <p>
             <strong>Location: </strong> {outivity.area},
             <StyledCountryName>{outivity.country}</StyledCountryName>
@@ -40,6 +63,7 @@ export default function OutivityDetail({ outivity, onDeleteOutivity }) {
           <p>
             <strong>Description: </strong> {outivity.description}
           </p>
+
           <StyledDeleteButton type="button" onClick={confirmDelete}>
             delete
           </StyledDeleteButton>
@@ -51,6 +75,11 @@ export default function OutivityDetail({ outivity, onDeleteOutivity }) {
   );
 }
 
+const StyledImageContainer = styled.div`
+  position: relative;
+  width: 300px;
+`;
+
 const StyledCountryName = styled.span`
   margin-left: 7px;
 `;
@@ -59,6 +88,18 @@ const StyledOutivityImage = styled(Image)`
   overflow: clip;
   overflow-clip-margin: content-box;
   height: auto;
+`;
+
+const StyledFavoriteButton = styled.button`
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  z-index: 1;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const StyledEditLink = styled(Link)`

@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import Link from "next/link";
 import Image from "next/image";
+import Icon from "../Icons";
 
-export default function OutivitiesListItem({ outivity }) {
+export default function OutivitiesListItem({
+  outivity,
+  onToggleFavorite,
+  isFavorite = true,
+}) {
   return (
     <StyledOutivityCard>
       <Link href={`/${outivity.id}`}>
@@ -19,6 +24,18 @@ export default function OutivitiesListItem({ outivity }) {
 
       <StyledOutivityTitle>{outivity.title}</StyledOutivityTitle>
       <StyledOutivityCityName>in {outivity.area}</StyledOutivityCityName>
+
+      <StyledFavoriteButton
+        type="button"
+        onClick={() => onToggleFavorite(outivity.id)}
+      >
+        <Icon
+          variant="favorite"
+          aria-label="favorite"
+          color={isFavorite ? "var(--favorite-color)" : "var(--neutral-color)"}
+          size={"38"}
+        />
+      </StyledFavoriteButton>
     </StyledOutivityCard>
   );
 }
@@ -58,4 +75,17 @@ const StyledOutivityImage = styled(Image)`
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: -1;
+`;
+
+const StyledFavoriteButton = styled.button`
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  z-index: 1;
+  &:hover {
+    cursor: pointer;
+  }
 `;
