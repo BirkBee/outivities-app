@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Icon from "../Icons";
 
 export default function SearchBar({ setSearchTerm }) {
   return (
@@ -11,7 +12,7 @@ export default function SearchBar({ setSearchTerm }) {
           name="searchTerm"
           placeholder="Search Outivities..."
         ></StyledSearchInput>
-        <div>🔍</div>
+        <Icon variant={"search"} size={25} color={"var(--primary-color)"} />
       </StyledSearchForm>
     </StyledSearchContainer>
   );
@@ -23,7 +24,7 @@ const StyledSearchContainer = styled.div`
 `;
 
 const StyledSearchForm = styled.form`
-  padding: 0px 15px 0px 30px;
+  padding: 0px 25px 0px 30px;
   color: var(--primary-color);
   display: grid;
   grid-template-columns: 1fr 24px;
