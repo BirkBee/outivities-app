@@ -2,16 +2,12 @@ import OutivityForm from "@/components/OutivityForm";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { uid } from "uid";
+import Head from "next/head";
 
 export default function CreateOutivity({ onAddOutivity }) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
-
-  const uploadImage = () => {
-    const formData = new FormData();
-    formData.append("file", selectedImage);
-  };
 
   async function createOutivity(event) {
     event.preventDefault();
@@ -48,6 +44,10 @@ export default function CreateOutivity({ onAddOutivity }) {
 
   return (
     <>
+      <Head>
+        <title>New Outivity</title>
+      </Head>
+
       {errorMessage && <p>{errorMessage}</p>}
       <OutivityForm
         createOutivity={createOutivity}

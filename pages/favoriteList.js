@@ -14,7 +14,7 @@ export default function FavoritesList({
   return (
     <>
       <Head>
-        <title>My Outivities</title>
+        <title>Favorite Outivities</title>
       </Head>
 
       <StyledTitle>Favorite Outivities</StyledTitle>
