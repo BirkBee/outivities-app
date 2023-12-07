@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { Poppins } from "next/font/google";
 import { Chivo } from "next/font/google";
+import { Cinzel } from "next/font/google";
 
 export const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -9,6 +10,10 @@ export const poppins = Poppins({
 
 export const chivo = Chivo({
   weight: ["800"],
+  subsets: ["latin"],
+});
+export const cinzel = Cinzel({
+  weight: ["400"],
   subsets: ["latin"],
 });
 
@@ -22,7 +27,7 @@ export default createGlobalStyle`
   :root {
     --primary-color: #172633;
     --secondary-color: #323332;
-    --third-color: #0C71E0;
+    --third-color: #0C71E0: ;
     --forth-color: #B2EEF8;
     --neutral-color: #E5E5E5;
     --danger-color: #FFBEB4;
@@ -54,7 +59,7 @@ export default createGlobalStyle`
   }
 
   h1 {
-    font-family: ${chivo.style.fontFamily};
+    font-family: ${cinzel.style.fontFamily};
     font-size: 36px;
   }
   

@@ -46,8 +46,10 @@ const StyledTitle = styled.h1`
   display: grid;
   top: 0;
   margin: 0;
+  padding: auto;
   height: 70px;
   place-content: center;
+  font-size: 32px;
   background-color: var(--primary-color);
   color: var(--neutral-color);
 `;

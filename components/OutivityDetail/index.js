@@ -56,6 +56,8 @@ export default function OutivityDetail({
             </StyledFavoriteButton>
           </StyledImageContainer>
 
+          <Weather area={outivity.area} initialWeatherData={null} />
+
           <p>
             <strong>Location: </strong> {outivity.area},
             <StyledCountryName>{outivity.country}</StyledCountryName>
@@ -71,7 +73,6 @@ export default function OutivityDetail({
 
           <StyledEditLink href={`edit/${outivity.id}`}>edit</StyledEditLink>
         </article>
-        <Weather />
       </main>
     </>
   );
@@ -134,3 +135,14 @@ const StyledDeleteButton = styled.button`
     cursor: pointer;
   }
 `;
+/*const StyledWeatherContainer = styled.div`
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  width: auto;
+  max-width: 300px;
+  height: 70px;
+  padding: 20px;
+`;*/
