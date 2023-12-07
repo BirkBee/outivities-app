@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Icon from "../Icons";
+import Weather from "../Weather";
 
 export default function OutivityDetail({
   outivity,
@@ -70,6 +71,7 @@ export default function OutivityDetail({
 
           <StyledEditLink href={`edit/${outivity.id}`}>edit</StyledEditLink>
         </article>
+        <Weather />
       </main>
     </>
   );
