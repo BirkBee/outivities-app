@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import Weather from "../Weather";
 
 export default function OutivityForm({
   outivity,
