@@ -2,12 +2,24 @@ import OutivityForm from "@/components/OutivityForm";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { uid } from "uid";
+import useSWR from "swr";
+import React from "react";
 import Head from "next/head";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
-export default function CreateOutivity({ onAddOutivity }) {
+export default function CreateOutivity({ onAddOutivity, outivities }) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
+  const [newArea, setNewArea] = useState("");
+
+  const newAreaURL = `https://nominatim.openstreetmap.org/search?format=json&limit=3&q=${newArea}`;
+  const { data: currentCoordinates, isLoading } = useSWR(newAreaURL);
+
+  if (!outivities || isLoading) {
+    return <h2>is Loading...</h2>;
+  }
 
   async function createOutivity(event) {
     event.preventDefault();
@@ -32,6 +44,8 @@ export default function CreateOutivity({ onAddOutivity }) {
         country: data.outivityCountry,
         image: image.secure_url,
         description: data.outivityDescription,
+        lat: outivities.lat,
+        long: outivities.long,
       };
 
       setSelectedImage(image);
@@ -42,11 +56,21 @@ export default function CreateOutivity({ onAddOutivity }) {
     }
   }
 
+  function handleNewArea(area) {
+    setNewArea(area);
+  }
+
   return (
     <>
       <Head>
         <title>New Outivity</title>
       </Head>
+
+      <Map
+        outivities={outivities}
+        currentCoordinates={currentCoordinates}
+        isLoading={isLoading}
+      />
 
       {errorMessage && <p>{errorMessage}</p>}
       <OutivityForm
@@ -54,6 +78,8 @@ export default function CreateOutivity({ onAddOutivity }) {
         isEdit={false}
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
+        newArea={newArea}
+        onNewArea={handleNewArea}
       />
     </>
   );

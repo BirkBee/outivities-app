@@ -2,16 +2,24 @@ import Head from "next/head";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import Link from "next/link";
 import Icon from "../Icons";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
 export default function OutivityDetail({
   outivity,
   onDeleteOutivity,
   onToggleFavorite,
   isFavorite,
+  outivities,
 }) {
   const router = useRouter();
+  const [isHidden, setIsHidden] = useState(true);
+  function toggleHiddenLocation() {
+    setIsHidden(!isHidden);
+  }
 
   const confirmDelete = () => {
     const confirmed = window.confirm(
@@ -55,15 +63,17 @@ export default function OutivityDetail({
             </StyledFavoriteButton>
           </StyledImageContainer>
 
-          <p>
+          <StyledOutivityLocation>
             <strong>Location: </strong> {outivity.area},
             <StyledCountryName>{outivity.country}</StyledCountryName>
-          </p>
-
-          <p>
+          </StyledOutivityLocation>
+          <StyledHideButton onClick={toggleHiddenLocation}>
+            {isHidden ? "↓ Show Location" : "↑ Hide Location"}
+          </StyledHideButton>
+          {!isHidden && <Map outivities={outivities} />}
+          <StyledOutivityDescription>
             <strong>Description: </strong> {outivity.description}
-          </p>
-
+          </StyledOutivityDescription>
           <StyledDeleteButton type="button" onClick={confirmDelete}>
             delete
           </StyledDeleteButton>
@@ -131,4 +141,20 @@ const StyledDeleteButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+`;
+
+const StyledHideButton = styled.button`
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 800;
+  color: var(--third-color);
+`;
+
+const StyledOutivityLocation = styled.p`
+  margin: 20px 0 0 0;
+`;
+
+const StyledOutivityDescription = styled.p`
+  margin: 20px 0 20px 0;
 `;

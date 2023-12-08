@@ -9,6 +9,7 @@ export default function OutivityForm({
   isEdit,
   selectedImage,
   setSelectedImage,
+  currentCoordinates,
 }) {
   const router = useRouter();
   const inputRef = useRef(null);

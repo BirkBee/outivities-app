@@ -11,6 +11,10 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
 
+  const [weather, setWeather] = useLocalStorageState("weather", {
+    defaultValue: [],
+  });
+
   function handleAddOutivity(newOutivity) {
     setOutivities([newOutivity, ...outivities]);
   }
@@ -47,6 +51,7 @@ export default function App({ Component, pageProps }) {
         onEditOutivity={handleEditOutivity}
         onToggleFavorite={handleToggleFavorite}
         favorites={favorites}
+        weather={weather}
       />
       <Layout />
     </>
