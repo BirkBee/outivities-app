@@ -31,9 +31,10 @@ const areaCoordinates = {
     longitude: 178.065,
   },
 };
+// This code is only for our initial dummy data//
 
-export default function Weather({ area, initialWeatherData }) {
-  const [weatherData, setWeatherData] = useState(initialWeatherData);
+export default function Weather({ area }) {
+  const [weatherData, setWeatherData] = useState();
 
   const { latitude, longitude } = areaCoordinates[area] || {};
 
@@ -58,27 +59,42 @@ export default function Weather({ area, initialWeatherData }) {
   }, [latitude, longitude]);
 
   return (
-    <div>
+    <>
       {weatherData ? (
         <StyledWeatherContainer>
-          <div>
-            <TemperatureSvg /> {weatherData.main.temp}°C
-          </div>
-          <div>
-            <DescriptionSvg /> {weatherData.weather[0].description}
-          </div>
-          <div>
-            <HumiditySvg /> {weatherData.main.humidity}%
-          </div>
+          <StyledWeatherInfo>
+            {" "}
+            <TemperatureSvg />
+            <StyledWeatherData>{weatherData.main.temp}°C</StyledWeatherData>
+          </StyledWeatherInfo>
+          <StyledWeatherInfo>
+            <DescriptionSvg />
+            <StyledWeatherData>
+              {weatherData.weather[0].description}
+            </StyledWeatherData>
+          </StyledWeatherInfo>
+          <StyledWeatherInfo>
+            <HumiditySvg />
+            <StyledWeatherData>{weatherData.main.humidity}%</StyledWeatherData>
+          </StyledWeatherInfo>
         </StyledWeatherContainer>
       ) : (
         <p>Loading weather data...</p>
       )}
-    </div>
+    </>
   );
 }
 const StyledWeatherContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   font-size: 11px;
+  width: 300px;
+  margin: 10px 0 0 0;
+`;
+const StyledWeatherInfo = styled.div`
+  text-align: center;
+  align-items: center;
+`;
+const StyledWeatherData = styled.p`
+  margin: 0;
 `;
