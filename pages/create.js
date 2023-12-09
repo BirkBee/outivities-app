@@ -1,24 +1,27 @@
 import OutivityForm from "@/components/OutivityForm";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useEffect } from "react";
 import { uid } from "uid";
-import useSWR from "swr";
-import React from "react";
 import Head from "next/head";
-import dynamic from "next/dynamic";
-const Map = dynamic(() => import("@/components/Map"), { ssr: false });
+import opencage from "opencage-api-client";
 
-export default function CreateOutivity({ onAddOutivity, outivities }) {
+export default function CreateOutivity({ onAddOutivity }) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
-  const [newArea, setNewArea] = useState("");
+  const [outivityArea, setOutivityArea] = useState("");
 
-  const newAreaURL = `https://nominatim.openstreetmap.org/search?format=json&limit=3&q=${newArea}`;
-  const { data: currentCoordinates } = useSWR(newAreaURL);
-
-  if (!outivities) {
-    return <h2>is Loading...</h2>;
+  async function fetchData(query) {
+    if (!query) {
+      return null;
+    }
+    const data = await opencage.geocode({
+      q: query,
+      key: process.env.NEXT_PUBLIC_OPENCAGE_API_KEY,
+    });
+    return data;
+    console.log("data: ", data);
   }
 
   async function createOutivity(event) {
@@ -27,6 +30,14 @@ export default function CreateOutivity({ onAddOutivity, outivities }) {
     try {
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData);
+
+      // Fetch geolocation data
+      const geolocationData = await fetchData(data.outivityArea);
+
+      if (!geolocationData) {
+        throw new Error("Geolocation data not available");
+      }
+
       const response = await fetch("/api/upload", {
         method: "POST",
         body: formData,
@@ -44,20 +55,17 @@ export default function CreateOutivity({ onAddOutivity, outivities }) {
         country: data.outivityCountry,
         image: image.secure_url,
         description: data.outivityDescription,
-        lat: outivities && outivities.lat ? outivities.lat : null,
-        long: outivities && outivities.long ? outivities.long : null,
+        lat: geolocationData.results[0].geometry.lat,
+        long: geolocationData.results[0].geometry.lng,
       };
 
       setSelectedImage(image);
       onAddOutivity(newOutivity);
+      console.log(newOutivity);
       router.push("/");
     } catch (error) {
       setErrorMessage(error.message);
     }
-  }
-
-  function handleNewArea(area) {
-    setNewArea(area);
   }
 
   return (
@@ -66,17 +74,14 @@ export default function CreateOutivity({ onAddOutivity, outivities }) {
         <title>New Outivity</title>
       </Head>
 
-      <Map outivities={outivities} currentCoordinates={currentCoordinates} />
-
       {errorMessage && <p>{errorMessage}</p>}
       <OutivityForm
         createOutivity={createOutivity}
         isEdit={false}
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
-        currentCoordinates={currentCoordinates}
-        newArea={newArea}
-        onNewArea={handleNewArea}
+        outivityArea={outivityArea}
+        setOutivityArea={setOutivityArea}
       />
     </>
   );

@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
-import opencage from "opencage-api-client";
 
 export default function OutivityForm({
   outivity,
@@ -11,13 +10,17 @@ export default function OutivityForm({
   isEdit,
   selectedImage,
   setSelectedImage,
-  newArea,
-  onNewArea,
+  outivityArea,
+  setOutivityArea,
 }) {
   const router = useRouter();
   const inputRef = useRef(null);
   const [message, setMessage] = useState("");
   const [showWarning, setShowWarning] = useState("");
+
+  const handleOutivityAreaChange = (event) => {
+    setOutivityArea(event.target.value);
+  };
 
   const handleCancel = () => {
     const confirmed = window.confirm("Are you sure you want to cancel?");
@@ -42,20 +45,6 @@ export default function OutivityForm({
     setSelectedImage("");
   };
 
-  useEffect(() => {
-    async function fetchData(query) {
-      if (!query) {
-        return;
-      }
-      const data = await opencage.geocode({
-        q: query,
-        key: process.env.NEXT_PUBLIC_OPENCAGE_API_KEY,
-      });
-      console.log("data: ", data);
-    }
-    fetchData("lyon");
-  }, []);
-
   return (
     <main>
       <StyledNewOutivitiesForm
@@ -73,7 +62,7 @@ export default function OutivityForm({
               required
               autoFocus
               ref={inputRef}
-              defaultValue={isEdit ? outivity.title ?? "" : null}
+              defaultValue={isEdit ? outivity.title ?? "" : ""}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -124,9 +113,9 @@ export default function OutivityForm({
               id="outivityArea"
               placeholder="In which city/area is it located?"
               required
-              defaultValue={isEdit ? outivity.area : null}
-              value={newArea}
-              onChange={(event) => onNewArea(event.target.value)}
+              defaultValue={isEdit ? outivity.area : "null"}
+              value={outivityArea}
+              onChange={handleOutivityAreaChange}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>
@@ -163,6 +152,7 @@ export default function OutivityForm({
     </main>
   );
 }
+
 const StyledNewOutivitiesForm = styled.form`
   width: 100%;
   display: flex;
