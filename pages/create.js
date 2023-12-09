@@ -44,8 +44,8 @@ export default function CreateOutivity({ onAddOutivity, outivities }) {
         country: data.outivityCountry,
         image: image.secure_url,
         description: data.outivityDescription,
-        lat: outivities.lat,
-        long: outivities.long,
+        lat: outivities && outivities.lat ? outivities.lat : null,
+        long: outivities && outivities.long ? outivities.long : null,
       };
 
       setSelectedImage(image);

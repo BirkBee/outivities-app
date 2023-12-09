@@ -17,7 +17,7 @@ export default function LocationMarker() {
 
   return (
     position && (
-      <Marker position={position} icon={redIcon} draggable>
+      <Marker position={position} icon={redIcon}>
         <Popup>You are here</Popup>
       </Marker>
     )

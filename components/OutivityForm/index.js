@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import opencage from "opencage-api-client";
+
 export default function OutivityForm({
   outivity,
   onEditOutivity,
@@ -9,7 +11,8 @@ export default function OutivityForm({
   isEdit,
   selectedImage,
   setSelectedImage,
-  currentCoordinates,
+  newArea,
+  onNewArea,
 }) {
   const router = useRouter();
   const inputRef = useRef(null);
@@ -38,6 +41,20 @@ export default function OutivityForm({
     setMessage("");
     setSelectedImage("");
   };
+
+  useEffect(() => {
+    async function fetchData(query) {
+      if (!query) {
+        return;
+      }
+      const data = await opencage.geocode({
+        q: query,
+        key: process.env.NEXT_PUBLIC_OPENCAGE_API_KEY,
+      });
+      console.log("data: ", data);
+    }
+    fetchData("lyon");
+  }, []);
 
   return (
     <main>
@@ -108,6 +125,8 @@ export default function OutivityForm({
               placeholder="In which city/area is it located?"
               required
               defaultValue={isEdit ? outivity.area : null}
+              value={newArea}
+              onChange={(event) => onNewArea(event.target.value)}
             />
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormField>

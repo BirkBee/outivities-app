@@ -19,8 +19,9 @@ export default function Map({
       : ["", ""];
 
   return (
-    <StyledMapContainer center={[lat, long]} zoom={0} scrollWheelZoom>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    <StyledMapContainer center={[lat, long]} zoom={1} scrollWheelZoom>
+      <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
+
       {isCreateOutivity && (
         <LocationMarker
           key="locationMarker"

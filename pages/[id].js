@@ -4,8 +4,6 @@ import { useState } from "react";
 import OutivityDetail from "@/components/OutivityDetail";
 import useSWR from "swr";
 import { initialOutivities } from "@/lib/data";
-import dynamic from "next/dynamic";
-const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
 export default function OutivityDetailsPage({
   outivities,
