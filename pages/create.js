@@ -1,7 +1,6 @@
 import OutivityForm from "@/components/OutivityForm";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { useEffect } from "react";
 import { uid } from "uid";
 import Head from "next/head";
 import opencage from "opencage-api-client";
@@ -30,8 +29,6 @@ export default function CreateOutivity({ onAddOutivity }) {
     try {
       const formData = new FormData(event.target);
       const data = Object.fromEntries(formData);
-
-      // Fetch geolocation data
       const geolocationData = await fetchData(data.outivityArea);
 
       if (!geolocationData) {
