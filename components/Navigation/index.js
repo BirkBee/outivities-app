@@ -71,7 +71,7 @@ const StyledNavigation = styled.nav`
   height: 70px;
   display: grid;
   grid-template-rows: repeat(auto-fill, minmax (50px, 1fr));
-  z-index: 1;
+  z-index: 2;
 `;
 const StyledList = styled.ul`
   display: flex;

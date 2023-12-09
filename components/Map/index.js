@@ -4,52 +4,39 @@ import * as L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
-import LocationMarker from "./LocationMarker";
+import CurrentOutivityMarker from "./CurrentOutivityMarker";
 import Link from "next/link";
+import useLocalStorage from "use-local-storage";
 
-export default function Map({
-  currentOutivity = {},
-  outivities,
-  currentCoordinates,
-}) {
-  const isCreateOutivity = Object.keys(currentOutivity).length === 0;
-  const [lat, long] =
-    currentCoordinates && currentCoordinates.length
-      ? [currentCoordinates[0].lat, currentCoordinates[0].long]
-      : ["", ""];
+export default function Map({ currentOutivity = {}, outivities }) {
+  const [userPosition, setUserPosition] = useLocalStorage("userPosition", {
+    lat: "",
+    lng: "",
+  });
+  function handleSetUserPosition(coordinates) {
+    setUserPosition(coordinates);
+  }
 
   return (
-    <StyledMapContainer center={[lat, long]} zoom={1} scrollWheelZoom>
+    <StyledMapContainer
+      center={userPosition ? [userPosition.lat, userPosition.lng] : ["", ""]}
+      zoom={10}
+      scrollWheelZoom
+    >
       <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
-
-      {isCreateOutivity && (
-        <LocationMarker
-          key="locationMarker"
-          position={
-            currentCoordinates && currentCoordinates.length
-              ? [currentCoordinates[0].lat, currentCoordinates[0].long]
-              : ["", ""]
-          }
-          isCreateOutivity={isCreateOutivity}
-        />
-      )}
 
       {outivities.map((outivity) =>
         outivity.id === currentOutivity.id ? (
-          <LocationMarker
+          <CurrentOutivityMarker
             key={outivity.id}
             outivity={outivity}
-            position={
-              currentCoordinates && currentCoordinates.length
-                ? [currentCoordinates[0].lat, currentCoordinates[0].long]
-                : ["", ""]
-            }
+            position={[outivity.lat, outivity.long]}
           />
         ) : (
           <Marker
             key={outivity.id}
             position={[outivity.lat, outivity.long]}
-            icon={goldIcon}
+            icon={greyIcon}
             title={outivity.title}
           >
             <Popup>
@@ -68,11 +55,12 @@ export default function Map({
 const StyledMapContainer = styled(MapContainer)`
   height: 200px;
   width: 300px;
+  z-index: 1;
 `;
 
-const goldIcon = new L.Icon({
+const greyIcon = new L.Icon({
   iconUrl:
-    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png",
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png",
   shadowUrl:
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
   iconSize: [25, 41],

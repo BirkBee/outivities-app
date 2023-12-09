@@ -29,7 +29,7 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
         q: query,
         key: process.env.NEXT_PUBLIC_OPENCAGE_API_KEY,
       });
-      console.log("data: ", data); // Log the fetched data
+      console.log("data: ", data);
       return data;
     } catch (error) {
       console.error("Error fetching geolocation data:", error);
@@ -50,6 +50,7 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
         newOutivityData,
         geolocationData
       );
+
       onEditOutivity(editedNewOutivityData, id);
       router.push(`/${id}`);
     } catch (error) {
