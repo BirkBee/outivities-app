@@ -15,9 +15,9 @@ export default function CreateOutivity({ onAddOutivity, outivities }) {
   const [newArea, setNewArea] = useState("");
 
   const newAreaURL = `https://nominatim.openstreetmap.org/search?format=json&limit=3&q=${newArea}`;
-  const { data: currentCoordinates, isLoading } = useSWR(newAreaURL);
+  const { data: currentCoordinates } = useSWR(newAreaURL);
 
-  if (!outivities || isLoading) {
+  if (!outivities) {
     return <h2>is Loading...</h2>;
   }
 
@@ -66,11 +66,7 @@ export default function CreateOutivity({ onAddOutivity, outivities }) {
         <title>New Outivity</title>
       </Head>
 
-      <Map
-        outivities={outivities}
-        currentCoordinates={currentCoordinates}
-        isLoading={isLoading}
-      />
+      <Map outivities={outivities} currentCoordinates={currentCoordinates} />
 
       {errorMessage && <p>{errorMessage}</p>}
       <OutivityForm
@@ -78,6 +74,7 @@ export default function CreateOutivity({ onAddOutivity, outivities }) {
         isEdit={false}
         selectedImage={selectedImage}
         setSelectedImage={setSelectedImage}
+        currentCoordinates={currentCoordinates}
         newArea={newArea}
         onNewArea={handleNewArea}
       />

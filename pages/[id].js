@@ -17,8 +17,6 @@ export default function OutivityDetailsPage({
   const { id } = router.query;
   const [newArea, setNewArea] = useState("");
   const outivity = outivities.find((outivity) => outivity.id === id);
-  // const longitude = outivity ? outivity.long : null;
-  // const latitude = outivity ? outivity.lat : null;
 
   function handleNewArea(area) {
     setNewArea(area);
