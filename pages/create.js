@@ -58,7 +58,7 @@ export default function CreateOutivity({ onAddOutivity }) {
 
       setSelectedImage(image);
       onAddOutivity(newOutivity);
-      console.log(newOutivity);
+      console.log("newOutivity: ", newOutivity);
       router.push("/");
     } catch (error) {
       setErrorMessage(error.message);

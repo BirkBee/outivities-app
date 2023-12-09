@@ -14,7 +14,6 @@ export default function OutivityDetail({
   onToggleFavorite,
   isFavorite,
   outivities,
-  handleNewPosition,
 }) {
   const router = useRouter();
   const [isHidden, setIsHidden] = useState(true);
@@ -72,13 +71,8 @@ export default function OutivityDetail({
             {isHidden ? "↓ Show Location" : "↑ Hide Location"}
           </StyledHideButton>
 
-          {!isHidden && (
-            <Map
-              outivities={outivities}
-              newOutivityPosition={handleNewPosition}
-              currentOutivity={outivity}
-            />
-          )}
+          {!isHidden && <Map outivities={outivities} />}
+
           <StyledOutivityDescription>
             <strong>Description: </strong> {outivity.description}
           </StyledOutivityDescription>
