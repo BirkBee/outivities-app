@@ -71,7 +71,9 @@ export default function OutivityDetail({
             {isHidden ? "↓ Show Location" : "↑ Hide Location"}
           </StyledHideButton>
 
-          {!isHidden && <Map outivities={outivities} />}
+          {!isHidden && (
+            <Map outivities={outivities} currentOutivity={outivity} />
+          )}
 
           <StyledOutivityDescription>
             <strong>Description: </strong> {outivity.description}
