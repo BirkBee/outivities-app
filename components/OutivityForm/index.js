@@ -68,6 +68,7 @@ export default function OutivityForm({
               defaultValue={isEdit ? outivity.title ?? "" : ""}
             />
           </StyledNewOutivitiesFormField>
+
           <StyledNewOutivitiesFormField>
             <label htmlFor="outivityImage">Image</label>
             {selectedImage && (
@@ -79,27 +80,26 @@ export default function OutivityForm({
                   height={200}
                   src={selectedImage}
                 />
-                <StyledFormPreviewImageUrl>
-                  {outivity?.image}
-                </StyledFormPreviewImageUrl>
                 <StyledFormRemoveButton
                   type="button"
                   onClick={handleUnsetImagePreview}
                 >
-                  Remove
+                  → remove image
                 </StyledFormRemoveButton>
               </>
             )}
-            <StyledNewOutivitiesFormInput
-              type="file"
-              class="inputfile"
-              name="outivityImage"
-              id="outivityImage"
-              accept=".png, .jpeg, .jpg, .webp"
-              required={!isEdit}
-              value={message}
-              onChange={handleImageChange}
-            />
+            {!selectedImage && (
+              <StyledNewOutivitiesImageInput
+                type="file"
+                class="inputfile"
+                name="outivityImage"
+                id="outivityImage"
+                accept=".png, .jpeg, .jpg, .webp"
+                required={!isEdit}
+                value={message}
+                onChange={handleImageChange}
+              />
+            )}
             {showWarning && (
               <StyledWarningMessage>
                 <strong>
@@ -183,6 +183,14 @@ const StyledNewOutivitiesFormInput = styled.input`
   resize: vertical;
 `;
 
+const StyledNewOutivitiesImageInput = styled.input`
+  padding: 3px;
+  border: 1px solid var(--neutral-color);
+  border-radius: 4px;
+  font: inherit;
+  resize: vertical;
+`;
+
 const StyledNewOutivitiesFormTextarea = styled.textarea`
   padding: 20px;
   border: 1px solid var(--neutral-color);
@@ -237,18 +245,14 @@ const StyledFormRemoveButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   font-weight: 400;
-  border-radius: 3px;
-  border: 1px solid var(--secondary-color);
+  width: 150px;
+  border: none;
   color: var(--secondary-color);
   background-color: var(--neutral-color);
+  box-shadow: var(--lightgray-color) 1px 2px 2px 0;
   &:hover {
     cursor: pointer;
   }
-`;
-
-const StyledFormPreviewImageUrl = styled.div`
-  font-size: 11px;
-  line-height: 1;
 `;
 
 const StyledWarningMessage = styled.div`

@@ -1,26 +1,8 @@
-import { useEffect, useState } from "react";
-import { useMapEvents } from "react-leaflet/hooks";
 import { Marker, Popup } from "react-leaflet";
 import Link from "next/link";
 import styled from "styled-components";
 
-export default function CurrentOutivityMarker({
-  outivity,
-  position,
-  onSetUserPosition,
-}) {
-  const map = useMapEvents({
-    locationfound: (event) => {
-      const userCoordinates = event.latlng;
-      onSetUserPosition({ lat: userCoordinates.lat, lng: userCoordinates.lng });
-      map.flyTo([position[0], position[1]], map.getZoom(12));
-    },
-  });
-
-  useEffect(() => {
-    map.locate();
-  }, [map]);
-
+export default function CurrentOutivityMarker({ outivity, position }) {
   return (
     position && (
       <Marker position={position} icon={blueIcon}>

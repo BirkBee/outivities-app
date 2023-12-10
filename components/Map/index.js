@@ -6,19 +6,11 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import CurrentOutivityMarker from "./CurrentOutivityMarker";
 import Link from "next/link";
-import useLocalStorage from "use-local-storage";
 
-export default function Map({ currentOutivity = {}, outivities }) {
-  const [userPosition, setUserPosition] = useLocalStorage("userPosition", {
-    lat: "",
-    lng: "",
-  });
-  function handleSetUserPosition(userCoordinates) {
-    setUserPosition(userCoordinates);
-  }
+export default function Map({ currentOutivity = {}, outivities, outivity }) {
   return (
     <StyledMapContainer
-      center={userPosition ? [userPosition.lat, userPosition.lng] : ["", ""]}
+      center={[outivity.lat, outivity.long]}
       zoom={10}
       scrollWheelZoom
     >
@@ -30,7 +22,6 @@ export default function Map({ currentOutivity = {}, outivities }) {
             key={outivity.id}
             outivity={outivity}
             position={[outivity.lat, outivity.long]}
-            onSetUserPosition={handleSetUserPosition}
           />
         ) : (
           <Marker

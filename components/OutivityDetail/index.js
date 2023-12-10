@@ -72,7 +72,11 @@ export default function OutivityDetail({
           </StyledHideButton>
 
           {!isHidden && (
-            <Map outivities={outivities} currentOutivity={outivity} />
+            <Map
+              outivity={outivity}
+              outivities={outivities}
+              currentOutivity={outivity}
+            />
           )}
           {!isHidden && (
             <StyledMapInfo>

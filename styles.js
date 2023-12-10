@@ -63,4 +63,13 @@ export default createGlobalStyle`
     font-family: ${poppins.style.fontFamily};
   }
 
+  input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: var(--primary-color);
+  padding: 10px 20px;
+  color: var(--neutral-color);
+  cursor: pointer;
+  border-radius: 5px;
+}
 `;
