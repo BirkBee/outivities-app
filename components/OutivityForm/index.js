@@ -209,6 +209,7 @@ const StyledCancelButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+  box-shadow: var(--lightgray-color) 1px 2px 2px 0;
 `;
 
 const StyledSaveButton = styled.button`
@@ -224,6 +225,7 @@ const StyledSaveButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+  box-shadow: var(--lightgray-color) 1px 2px 2px 0;
 `;
 
 const StyledFormPreviewImage = styled(Image)`

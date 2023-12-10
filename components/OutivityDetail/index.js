@@ -133,6 +133,7 @@ const StyledEditLink = styled(Link)`
   &:hover {
     cursor: pointer;
   }
+  box-shadow: var(--lightgray-color) 1px 2px 2px 0;
 `;
 const StyledDeleteButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
@@ -148,6 +149,7 @@ const StyledDeleteButton = styled.button`
   &:hover {
     cursor: pointer;
   }
+  box-shadow: var(--lightgray-color) 1px 2px 2px 0;
 `;
 
 const StyledHideButton = styled.button`
