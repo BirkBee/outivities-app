@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import OutivityDetail from "@/components/OutivityDetail";
-import { initialOutivities } from "@/lib/data";
 
 export default function OutivityDetailsPage({
   outivities,
@@ -19,7 +18,7 @@ export default function OutivityDetailsPage({
   return (
     <OutivityDetail
       outivity={outivity}
-      outivities={initialOutivities}
+      outivities={outivities}
       onDeleteOutivity={onDeleteOutivity}
       isFavorite={favorites.includes(outivity.id)}
       onToggleFavorite={onToggleFavorite}

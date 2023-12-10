@@ -46,12 +46,9 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
 
     try {
       const geolocationData = await fetchData(newOutivityData.outivityArea);
-      const editedNewOutivityData = prepareFormData(
-        newOutivityData,
-        geolocationData
-      );
+      const updatedOutivity = prepareFormData(newOutivityData, geolocationData);
 
-      onEditOutivity(editedNewOutivityData, id);
+      onEditOutivity(updatedOutivity, id);
       router.push(`/${id}`);
     } catch (error) {
       console.error("Error fetching geolocation data:", error);
@@ -59,7 +56,7 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
   }
 
   function prepareFormData(data, geolocationData) {
-    const editedNewOutivityData = {
+    const updatedOutivity = {
       id: id,
       title: data.outivityName,
       area: data.outivityArea,
@@ -70,8 +67,8 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
       long: geolocationData.results[0].geometry.lng,
     };
 
-    console.log("editedNewOutivityData: ", editedNewOutivityData);
-    return editedNewOutivityData;
+    console.log("updatedOutivity: ", updatedOutivity);
+    return updatedOutivity;
   }
 
   return (
