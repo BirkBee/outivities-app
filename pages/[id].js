@@ -18,6 +18,7 @@ export default function OutivityDetailsPage({
   return (
     <OutivityDetail
       outivity={outivity}
+      outivities={outivities}
       onDeleteOutivity={onDeleteOutivity}
       isFavorite={favorites.includes(outivity.id)}
       onToggleFavorite={onToggleFavorite}

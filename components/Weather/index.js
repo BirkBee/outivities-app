@@ -1,19 +1,44 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import useLocalStorage from "use-local-storage";
 import HumiditySvg from "@/public/humidity.svg";
 import TemperatureSvg from "@/public/thermometer.svg";
 import DescriptionSvg from "@/public/day.svg";
 import styled from "styled-components";
-import { initialOutivities } from "@/lib/data";
 
-export default function Weather({ initialOutivities }) {
+// export default function Weather({ currentOutivity = {}, outivities }) {
+//   const [weatherData, setWeatherData] = useLocalStorage({ lat: "", lng: "" });
+
+//   const fetchData = async () => {
+//     try {
+//       const latitude = initialOutivities.latitude;
+//       const longitude = initialOutivities.longitude;
+
+//       if (!latitude || !longitude) {
+//         console.error(`Coordinates not found for area: ${area}`);
+//         return;
+//       }
+
+//       const response = await axios.get(
+//         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&appid=9e7a02e3cc30d92b7c137c9919b52688`
+//       );
+//       setWeatherData(response.data);
+//     } catch (error) {
+//       console.error("Error fetching weather data:", error);
+//     }
+//   };
+
+//   useEffect(() => {
+//     fetchData();
+//   }, []);
+
+export default function Weather({ area }) {
   const [weatherData, setWeatherData] = useState();
+
+  const { latitude, longitude } = areaCoordinates[area] || {};
 
   const fetchData = async () => {
     try {
-      const latitude = initialOutivities.latitude;
-      const longitude = initialOutivities.longitude;
-
       if (!latitude || !longitude) {
         console.error(`Coordinates not found for area: ${area}`);
         return;
@@ -30,8 +55,7 @@ export default function Weather({ initialOutivities }) {
 
   useEffect(() => {
     fetchData();
-  }, []);
-
+  }, [latitude, longitude]);
   return (
     <>
       {weatherData ? (
@@ -57,6 +81,7 @@ export default function Weather({ initialOutivities }) {
     </>
   );
 }
+
 const StyledWeatherContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);

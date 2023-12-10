@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Head from "next/head";
 import OutivitiesList from "@/components/OutivitiesList";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 
 export default function HomePage({ outivities, favorites, onToggleFavorite }) {
