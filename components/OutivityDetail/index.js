@@ -158,14 +158,6 @@ const StyledHideButton = styled.button`
   color: var(--third-color);
 `;
 
-const StyledOutivityLocation = styled.p`
-  margin: 20px 0 0 0;
-`;
-
-const StyledOutivityDescription = styled.p`
-  margin: 20px 0 20px 0;
-`;
-
 const StyledMapInfo = styled.div`
   color: var(--third-color);
   width: 300px;
@@ -173,4 +165,12 @@ const StyledMapInfo = styled.div`
   line-height: 1;
   padding-top: 7px;
   font-style: italic;
+`;
+
+const StyledOutivityLocation = styled.p`
+  margin: 20px 0 0 0;
+`;
+
+const StyledOutivityDescription = styled.p`
+  margin: 20px 0 20px 0;
 `;
