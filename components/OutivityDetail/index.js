@@ -74,7 +74,12 @@ export default function OutivityDetail({
           {!isHidden && (
             <Map outivities={outivities} currentOutivity={outivity} />
           )}
-
+          {!isHidden && (
+            <StyledMapInfo>
+              *If the location is not set right, please add a postal code to
+              your area.
+            </StyledMapInfo>
+          )}
           <StyledOutivityDescription>
             <strong>Description: </strong> {outivity.description}
           </StyledOutivityDescription>
@@ -147,6 +152,14 @@ const StyledDeleteButton = styled.button`
   }
 `;
 
+const StyledOutivityLocation = styled.p`
+  margin: 20px 0 0 0;
+`;
+
+const StyledOutivityDescription = styled.p`
+  margin: 20px 0 20px 0;
+`;
+
 const StyledHideButton = styled.button`
   background-color: transparent;
   border: none;
@@ -155,10 +168,11 @@ const StyledHideButton = styled.button`
   color: var(--third-color);
 `;
 
-const StyledOutivityLocation = styled.p`
-  margin: 20px 0 0 0;
-`;
-
-const StyledOutivityDescription = styled.p`
-  margin: 20px 0 20px 0;
+const StyledMapInfo = styled.div`
+  color: var(--third-color);
+  width: 300px;
+  font-size: 11px;
+  line-height: 1;
+  padding-top: 7px;
+  font-style: italic;
 `;
