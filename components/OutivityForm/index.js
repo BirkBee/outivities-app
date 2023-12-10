@@ -146,9 +146,9 @@ export default function OutivityForm({
           </StyledNewOutivitiesFormField>
           <StyledNewOutivitiesFormSpan>
             <StyledCancelButton type="button" onClick={handleCancel}>
-              cancel
+              ✗ cancel
             </StyledCancelButton>
-            <StyledSaveButton type="submit">save</StyledSaveButton>
+            <StyledSaveButton type="submit">✓ save</StyledSaveButton>
           </StyledNewOutivitiesFormSpan>
         </StyledNewOutivitiesFormFields>
       </StyledNewOutivitiesForm>
@@ -203,7 +203,7 @@ const StyledCancelButton = styled.button`
   font-weight: 400;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid var(--secondary-color);
+  border: transparent;
   color: var(--secondary-color);
   background-color: var(--neutral-color);
   &:hover {
@@ -213,14 +213,14 @@ const StyledCancelButton = styled.button`
 
 const StyledSaveButton = styled.button`
   margin: 10px;
-  padding: 12px 30px;
+  padding: 10px 20px;
   font-weight: 500;
   font-size: 16px;
   border-radius: 5px;
   border: none;
   color: var(--neutral-color);
   background-color: var(--third-color);
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   &:hover {
     cursor: pointer;
   }

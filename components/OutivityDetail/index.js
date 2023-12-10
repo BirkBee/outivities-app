@@ -84,10 +84,10 @@ export default function OutivityDetail({
             <strong>Description: </strong> {outivity.description}
           </StyledOutivityDescription>
           <StyledDeleteButton type="button" onClick={confirmDelete}>
-            delete
+            ✗ delete
           </StyledDeleteButton>
 
-          <StyledEditLink href={`edit/${outivity.id}`}>edit</StyledEditLink>
+          <StyledEditLink href={`edit/${outivity.id}`}>→ edit</StyledEditLink>
         </article>
       </main>
     </>
@@ -124,14 +124,12 @@ const StyledFavoriteButton = styled.button`
 const StyledEditLink = styled(Link)`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
-  margin: 10px;
-  padding: 10px 20px;
+  margin: 10px 0 50px 10px;
+  padding: 5px 10px;
   font-weight: 400;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid var(--secondary-color);
-  color: var(--secondary-color);
-  background-color: var(--neutral-color);
+  font-size: 14px;
+  color: var(--neutral-color);
+  background-color: var(--third-color);
   &:hover {
     cursor: pointer;
   }
@@ -139,25 +137,17 @@ const StyledEditLink = styled(Link)`
 const StyledDeleteButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
-  margin: 10px;
-  padding: 10px 20px;
+  font-size: 14px;
+  margin: 10px 0 50px 0px;
+  padding: 5px 10px;
+  color: var(--neutral-color);
   font-weight: 400;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid var(--secondary-color);
+  border: none;
   color: var(--secondary-color);
-  background-color: var(--danger-color);
+  background-color: var(--neutral-color);
   &:hover {
     cursor: pointer;
   }
-`;
-
-const StyledOutivityLocation = styled.p`
-  margin: 20px 0 0 0;
-`;
-
-const StyledOutivityDescription = styled.p`
-  margin: 20px 0 20px 0;
 `;
 
 const StyledHideButton = styled.button`
@@ -166,6 +156,14 @@ const StyledHideButton = styled.button`
   padding: 0;
   font-weight: 800;
   color: var(--third-color);
+`;
+
+const StyledOutivityLocation = styled.p`
+  margin: 20px 0 0 0;
+`;
+
+const StyledOutivityDescription = styled.p`
+  margin: 20px 0 20px 0;
 `;
 
 const StyledMapInfo = styled.div`
