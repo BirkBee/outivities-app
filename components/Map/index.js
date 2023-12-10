@@ -13,7 +13,9 @@ export default function Map({ currentOutivity = {}, outivities }) {
     lat: "",
     lng: "",
   });
-
+  function handleSetUserPosition(userCoordinates) {
+    setUserPosition(userCoordinates);
+  }
   return (
     <StyledMapContainer
       center={userPosition ? [userPosition.lat, userPosition.lng] : ["", ""]}
@@ -28,6 +30,7 @@ export default function Map({ currentOutivity = {}, outivities }) {
             key={outivity.id}
             outivity={outivity}
             position={[outivity.lat, outivity.long]}
+            onSetUserPosition={handleSetUserPosition}
           />
         ) : (
           <Marker

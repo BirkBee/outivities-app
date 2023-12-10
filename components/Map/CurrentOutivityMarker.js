@@ -4,26 +4,26 @@ import { Marker, Popup } from "react-leaflet";
 import Link from "next/link";
 import styled from "styled-components";
 
-export default function CurrentOutivityMarker({ outivity, position }) {
-  const [currentPosition, setCurrentPosition] = useState(position);
-
+export default function CurrentOutivityMarker({
+  outivity,
+  position,
+  onSetUserPosition,
+}) {
   const map = useMapEvents({
     locationfound: (event) => {
-      setCurrentPosition(event.latlng);
-      map.flyTo(event.latlng, map.getZoom());
+      const userCoordinates = event.latlng;
+      onSetUserPosition({ lat: userCoordinates.lat, lng: userCoordinates.lng });
+      map.flyTo([position[0], position[1]], map.getZoom(12));
     },
   });
 
   useEffect(() => {
-    if (position) {
-      setCurrentPosition(position);
-      map.flyTo(position, map.getZoom());
-    }
-  }, [position, map]);
+    map.locate();
+  }, [map]);
 
   return (
-    currentPosition && (
-      <Marker position={currentPosition} icon={blueIcon}>
+    position && (
+      <Marker position={position} icon={blueIcon}>
         <Popup>
           <StyledLink href={`//${outivity.id}`}>
             <h2>{outivity.title}</h2>

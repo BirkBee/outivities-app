@@ -135,11 +135,12 @@ const StyledEditLink = styled(Link)`
   }
   box-shadow: var(--lightgray-color) 1px 2px 2px 0;
 `;
+
 const StyledDeleteButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
   font-size: 14px;
-  margin: 10px 0 50px 0px;
+  margin: 10px 0 50px 0;
   padding: 5px 10px;
   color: var(--neutral-color);
   font-weight: 400;
