@@ -13,9 +13,6 @@ export default function Map({ currentOutivity = {}, outivities }) {
     lat: "",
     lng: "",
   });
-  function handleSetUserPosition(coordinates) {
-    setUserPosition(coordinates);
-  }
 
   return (
     <StyledMapContainer

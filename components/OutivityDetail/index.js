@@ -76,8 +76,8 @@ export default function OutivityDetail({
           )}
           {!isHidden && (
             <StyledMapInfo>
-              *If the location is not set right, please add a postal code to
-              your area.
+              *If the location is not set right, please add the zip code to your
+              area.
             </StyledMapInfo>
           )}
           <StyledOutivityDescription>
@@ -162,7 +162,7 @@ const StyledMapInfo = styled.div`
   color: var(--third-color);
   width: 300px;
   font-size: 11px;
-  line-height: 1;
+  line-height: 1.2;
   padding-top: 7px;
   font-style: italic;
 `;
