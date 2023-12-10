@@ -4,42 +4,16 @@ import HumiditySvg from "@/public/humidity.svg";
 import TemperatureSvg from "@/public/thermometer.svg";
 import DescriptionSvg from "@/public/day.svg";
 import styled from "styled-components";
+import { initialOutivities } from "@/lib/data";
 
-const areaCoordinates = {
-  Hossegor: {
-    latitude: 43.671285818213235,
-    longitude: -1.4391322627467373,
-  },
-  Garmisch: {
-    latitude: 47.455819636652656,
-    longitude: 11.091488699407106,
-  },
-  "Phang Nga Bay": {
-    latitude: 8.431539,
-    longitude: 98.534256,
-  },
-  Onomichi: {
-    latitude: 34.4029,
-    longitude: 133.1952,
-  },
-  Cappadocia: {
-    latitude: 38.6431,
-    longitude: 34.8284,
-  },
-  "Fiji Islands": {
-    latitude: -17.7134,
-    longitude: 178.065,
-  },
-};
-// This code is only for our initial dummy data//
-
-export default function Weather({ area }) {
+export default function Weather({ initialOutivities }) {
   const [weatherData, setWeatherData] = useState();
-
-  const { latitude, longitude } = areaCoordinates[area] || {};
 
   const fetchData = async () => {
     try {
+      const latitude = initialOutivities.latitude;
+      const longitude = initialOutivities.longitude;
+
       if (!latitude || !longitude) {
         console.error(`Coordinates not found for area: ${area}`);
         return;
@@ -56,14 +30,13 @@ export default function Weather({ area }) {
 
   useEffect(() => {
     fetchData();
-  }, [latitude, longitude]);
+  }, []);
 
   return (
     <>
       {weatherData ? (
         <StyledWeatherContainer>
           <StyledWeatherInfo>
-            {" "}
             <TemperatureSvg />
             <StyledWeatherData>{weatherData.main.temp}°C</StyledWeatherData>
           </StyledWeatherInfo>
