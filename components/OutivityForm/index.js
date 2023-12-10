@@ -28,17 +28,20 @@ export default function OutivityForm({
       router.push("/");
     }
   };
+
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
     }
   }, []);
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setSelectedImage(URL.createObjectURL(file));
     setMessage(event.target.value);
     setShowWarning("");
   };
+
   const handleUnsetImagePreview = () => {
     setShowWarning(true);
     setMessage("");
@@ -159,16 +162,19 @@ const StyledNewOutivitiesForm = styled.form`
   flex-direction: column;
   gap: 24px;
 `;
+
 const StyledNewOutivitiesFormFields = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
 `;
+
 const StyledNewOutivitiesFormField = styled.div`
   display: flex;
   flex-direction: column;
   gap: 6px;
 `;
+
 const StyledNewOutivitiesFormInput = styled.input`
   padding: 20px;
   border: 1px solid var(--neutral-color);
@@ -176,6 +182,7 @@ const StyledNewOutivitiesFormInput = styled.input`
   font: inherit;
   resize: vertical;
 `;
+
 const StyledNewOutivitiesFormTextarea = styled.textarea`
   padding: 20px;
   border: 1px solid var(--neutral-color);
@@ -183,11 +190,13 @@ const StyledNewOutivitiesFormTextarea = styled.textarea`
   font: inherit;
   resize: vertical;
 `;
+
 const StyledNewOutivitiesFormSpan = styled.span`
   height: 60px;
   text-align: center;
   margin-bottom: 30px;
 `;
+
 const StyledCancelButton = styled.button`
   margin: 10px;
   padding: 10px 20px;
@@ -201,6 +210,7 @@ const StyledCancelButton = styled.button`
     cursor: pointer;
   }
 `;
+
 const StyledSaveButton = styled.button`
   margin: 10px;
   padding: 12px 30px;
@@ -215,10 +225,12 @@ const StyledSaveButton = styled.button`
     cursor: pointer;
   }
 `;
+
 const StyledFormPreviewImage = styled(Image)`
   width: 150px;
   height: auto;
 `;
+
 const StyledFormRemoveButton = styled.button`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;

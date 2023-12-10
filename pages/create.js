@@ -20,7 +20,6 @@ export default function CreateOutivity({ onAddOutivity }) {
       key: process.env.NEXT_PUBLIC_OPENCAGE_API_KEY,
     });
     return data;
-    console.log("data: ", data);
   }
 
   async function createOutivity(event) {
@@ -32,7 +31,7 @@ export default function CreateOutivity({ onAddOutivity }) {
       const geolocationData = await fetchData(data.outivityArea);
 
       if (!geolocationData) {
-        throw new Error("Geolocation data not available");
+        throw new Error("Geolocation data is not available.");
       }
 
       const response = await fetch("/api/upload", {
@@ -58,7 +57,6 @@ export default function CreateOutivity({ onAddOutivity }) {
 
       setSelectedImage(image);
       onAddOutivity(newOutivity);
-      console.log("newOutivity: ", newOutivity);
       router.push("/");
     } catch (error) {
       setErrorMessage(error.message);

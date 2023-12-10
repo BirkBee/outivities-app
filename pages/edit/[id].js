@@ -29,7 +29,6 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
         q: query,
         key: process.env.NEXT_PUBLIC_OPENCAGE_API_KEY,
       });
-      console.log("data: ", data);
       return data;
     } catch (error) {
       console.error("Error fetching geolocation data:", error);
@@ -67,7 +66,6 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
       long: geolocationData.results[0].geometry.lng,
     };
 
-    console.log("updatedOutivity: ", updatedOutivity);
     return updatedOutivity;
   }
 
