@@ -90,15 +90,6 @@ const StyledLink = styled(Link)`
   width: 50%;
 `;
 
-const StyledIcon = styled.div`
-  display: grid;
-  path {
-    fill: ${(props) =>
-      props.$isActive ? "var(--third-color)" : "var(--neutral-color)"};
-    transition: fill 0.3s ease-in-out;
-  }
-`;
-
 const StyledSpan = styled.span`
   font-weight: 200;
   font-size: 12px;

@@ -6,44 +6,36 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import Link from "next/link";
 
-export default function Map({ currentOutivity = {}, outivities, outivity }) {
+export default function Map({ outivity, outivities }) {
   return (
     <StyledMapContainer
       center={[outivity.lat, outivity.long]}
-      zoom={10}
+      zoom={1}
       scrollWheelZoom
     >
       <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
 
-      {outivities.map((outivity) =>
-        outivity.id === currentOutivity.id ? (
-          <Marker
-            key={outivity.id}
-            icon={blueIcon}
-            position={[outivity.lat, outivity.long]}
-          />
-        ) : (
-          <Marker
-            key={outivity.id}
-            icon={greyIcon}
-            position={[outivity.lat, outivity.long]}
-          >
-            <Popup>
-              <StyledLink href={`//${outivity.id}`}>
-                <h2>{outivity.title}</h2>
-              </StyledLink>
-              <StyledInfo>in {outivity.area}</StyledInfo>
-            </Popup>
-          </Marker>
-        )
-      )}
+      {outivities.map((outivity) => (
+        <Marker
+          key={outivity.id}
+          icon={greyIcon}
+          position={[outivity.lat, outivity.long]}
+        >
+          <Popup>
+            <StyledLink href={`//${outivity.id}`}>
+              <h2>{outivity.title}</h2>
+            </StyledLink>
+            <StyledInfo>in {outivity.area}</StyledInfo>
+          </Popup>
+        </Marker>
+      ))}
     </StyledMapContainer>
   );
 }
 
 const StyledMapContainer = styled(MapContainer)`
-  height: 200px;
-  width: 300px;
+  width: 100vh;
+  height: 75vh;
   z-index: 1;
 `;
 
@@ -58,9 +50,9 @@ const greyIcon = new L.Icon({
   shadowSize: [41, 41],
 });
 
-const blueIcon = new L.Icon({
+const goldIcon = new L.Icon({
   iconUrl:
-    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png",
   shadowUrl:
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
   iconSize: [25, 41],
