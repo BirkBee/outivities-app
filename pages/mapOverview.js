@@ -2,8 +2,10 @@ import Head from "next/head";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import Icon from "@/components/Icons";
+import { useRouter } from "next/router";
 
-export default function MapOverview({ outivities }) {
+export default function MapOverviewPage({ outivities }) {
+  const router = useRouter();
   const MapOverview = dynamic(() => import("@/components/MapOverview"), {
     ssr: false,
   });
