@@ -88,18 +88,16 @@ export default function OutivityForm({
                 </StyledFormRemoveButton>
               </>
             )}
-            {!selectedImage && (
-              <StyledNewOutivitiesImageInput
-                type="file"
-                class="inputfile"
-                name="outivityImage"
-                id="outivityImage"
-                accept=".png, .jpeg, .jpg, .webp"
-                required={!isEdit}
-                value={message}
-                onChange={handleImageChange}
-              />
-            )}
+            <StyledNewOutivitiesImageInput
+              type="file"
+              class="inputfile"
+              name="outivityImage"
+              id="outivityImage"
+              accept=".png, .jpeg, .jpg, .webp"
+              required={!isEdit}
+              value={message}
+              onChange={handleImageChange}
+            />
             {showWarning && (
               <StyledWarningMessage>
                 <strong>

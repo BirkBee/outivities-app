@@ -4,7 +4,6 @@ import * as L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-defaulticon-compatibility";
-import CurrentOutivityMarker from "./CurrentOutivityMarker";
 import Link from "next/link";
 
 export default function Map({ currentOutivity = {}, outivities, outivity }) {
@@ -18,17 +17,16 @@ export default function Map({ currentOutivity = {}, outivities, outivity }) {
 
       {outivities.map((outivity) =>
         outivity.id === currentOutivity.id ? (
-          <CurrentOutivityMarker
+          <Marker
             key={outivity.id}
-            outivity={outivity}
+            icon={blueIcon}
             position={[outivity.lat, outivity.long]}
           />
         ) : (
           <Marker
             key={outivity.id}
-            position={[outivity.lat, outivity.long]}
             icon={greyIcon}
-            title={outivity.title}
+            position={[outivity.lat, outivity.long]}
           >
             <Popup>
               <StyledLink href={`//${outivity.id}`}>
@@ -52,6 +50,17 @@ const StyledMapContainer = styled(MapContainer)`
 const greyIcon = new L.Icon({
   iconUrl:
     "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+const blueIcon = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
   shadowUrl:
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
   iconSize: [25, 41],
