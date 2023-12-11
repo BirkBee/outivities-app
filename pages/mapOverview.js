@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
+import Icon from "@/components/Icons";
 
 export default function MapOverview({ outivities }) {
   const MapOverview = dynamic(() => import("@/components/MapOverview"), {
@@ -23,6 +24,12 @@ export default function MapOverview({ outivities }) {
       <StyledTitle>Outivities Map</StyledTitle>
       <main>
         <MapOverview outivity={outivity} outivities={outivities} />
+        <StyledMapInfoContainer>
+          <Icon variant={"pin"} size={30} color={"var(--pin-color)"} />
+          <StyledMapInfo>
+            You are here. Zoom out to explore your Outivities.
+          </StyledMapInfo>
+        </StyledMapInfoContainer>
       </main>
     </>
   );
@@ -36,4 +43,20 @@ const StyledTitle = styled.h1`
   place-content: center;
   background-color: var(--primary-color);
   color: var(--neutral-color);
+`;
+
+const StyledMapInfoContainer = styled.div`
+  color: var(--primary-color);
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  margin-top: 10px;
+  align-items: center;
+`;
+
+const StyledMapInfo = styled.div`
+  color: var(--third-color);
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.2;
+  padding-top: 7px;
 `;
