@@ -57,6 +57,19 @@ export default function Navigation() {
               />
             </StyledLink>
           </li>
+          <li>
+            <StyledLink href="/mapOverview">
+              <Icon
+                variant={"map"}
+                size={54}
+                color={
+                  router.pathname === "/mapOverview"
+                    ? "var(--third-color)"
+                    : "var(--neutral-color)"
+                }
+              />
+            </StyledLink>
+          </li>
         </StyledList>
       </StyledSpan>
     </StyledNavigation>
