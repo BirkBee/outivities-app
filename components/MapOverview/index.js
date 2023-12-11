@@ -7,7 +7,7 @@ import "leaflet-defaulticon-compatibility";
 import Link from "next/link";
 import useLocalStorageState from "use-local-storage-state";
 
-export default function Map({ outivities }) {
+export default function MapOverview({ outivities }) {
   const [position, setPosition] = useLocalStorageState("position", {
     lat: "",
     lng: "",
