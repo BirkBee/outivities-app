@@ -4,9 +4,7 @@ import dynamic from "next/dynamic";
 import Icon from "@/components/Icons";
 
 export default function MapOverviewPage({ outivities }) {
-  const Map = dynamic(() => import("@/components/MapOverview"), {
-    ssr: false,
-  });
+  const Map = dynamic(() => import("@/components/MapOverview"), { ssr: false });
   const outivity = outivities.find((outivities) => {
     return outivities;
   });
