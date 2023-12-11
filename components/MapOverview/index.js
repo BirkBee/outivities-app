@@ -42,8 +42,8 @@ export default function Map({ outivities }) {
 }
 
 const StyledMapContainer = styled(MapContainer)`
-  width: 45vh;
-  height: 65vh;
+  min-width: 45vh;
+  min-height: 65vh;
   z-index: 1;
 `;
 
@@ -88,6 +88,6 @@ const goldIcon = new L.Icon({
 });
 
 const StyledPopUp = styled(Popup)`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 800;
 `;
