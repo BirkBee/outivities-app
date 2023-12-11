@@ -15,7 +15,11 @@ export default function MapOverview({ outivities }) {
 
   return (
     <>
-      <StyledMapContainer center={position} zoom={5} scrollWheelZoom>
+      <StyledMapContainer
+        center={position || ["", ""]}
+        zoom={5}
+        scrollWheelZoom
+      >
         <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
 
         <Marker position={position} icon={goldIcon}>
