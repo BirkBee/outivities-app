@@ -2,11 +2,9 @@ import Head from "next/head";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import Icon from "@/components/Icons";
-import { useRouter } from "next/router";
 
 export default function MapOverviewPage({ outivities }) {
-  const router = useRouter();
-  const MapOverview = dynamic(() => import("@/components/MapOverview"), {
+  const Map = dynamic(() => import("@/components/MapOverview"), {
     ssr: false,
   });
   const outivity = outivities.find((outivities) => {
@@ -25,7 +23,7 @@ export default function MapOverviewPage({ outivities }) {
 
       <StyledTitle>Outivities Map</StyledTitle>
       <main>
-        <MapOverview outivity={outivity} outivities={outivities} />
+        <Map outivity={outivity} outivities={outivities} />
         <StyledMapInfoContainer>
           <Icon variant={"pin"} size={30} color={"var(--pin-color)"} />
           <StyledMapInfo>
