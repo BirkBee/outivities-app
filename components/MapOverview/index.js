@@ -6,6 +6,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import Link from "next/link";
 import useLocalStorageState from "use-local-storage-state";
+import UserLocationMarker from "./UserLocationMarker";
 
 export default function MapOverview({ outivities }) {
   const [position, setPosition] = useLocalStorageState("position", {
@@ -13,35 +14,38 @@ export default function MapOverview({ outivities }) {
     lng: "",
   });
 
+  function handleSetPosition(userCoordinates) {
+    setPosition(userCoordinates);
+  }
+
   return (
-    <>
-      <StyledMapContainer
-        center={position || ["", ""]}
-        zoom={5}
-        scrollWheelZoom
-      >
-        <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
+    <StyledMapContainer
+      center={position ? [position.lat, position.lng] : ["", ""]}
+      zoom={5}
+      scrollWheelZoom
+    >
+      <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
 
-        <Marker position={position} icon={goldIcon}>
-          <StyledPopUp>You are here</StyledPopUp>
+      <UserLocationMarker
+        onSetPosition={handleSetPosition}
+        position={position}
+      />
+
+      {outivities.map((outivity) => (
+        <Marker
+          key={outivity.id}
+          icon={greyIcon}
+          position={[outivity.lat, outivity.long]}
+        >
+          <Popup>
+            <StyledLink href={`//${outivity.id}`}>
+              <h2>{outivity.title}</h2>
+            </StyledLink>
+            <StyledInfo>in {outivity.area}</StyledInfo>
+          </Popup>
         </Marker>
-
-        {outivities.map((outivity) => (
-          <Marker
-            key={outivity.id}
-            icon={greyIcon}
-            position={[outivity.lat, outivity.long]}
-          >
-            <Popup>
-              <StyledLink href={`//${outivity.id}`}>
-                <h2>{outivity.title}</h2>
-              </StyledLink>
-              <StyledInfo>in {outivity.area}</StyledInfo>
-            </Popup>
-          </Marker>
-        ))}
-      </StyledMapContainer>
-    </>
+      ))}
+    </StyledMapContainer>
   );
 }
 
@@ -78,20 +82,4 @@ const StyledLink = styled(Link)`
 
 const StyledInfo = styled.p`
   font-size: 11px;
-`;
-
-const goldIcon = new L.Icon({
-  iconUrl:
-    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-gold.png",
-  shadowUrl:
-    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
-});
-
-const StyledPopUp = styled(Popup)`
-  font-size: 12px;
-  font-weight: 800;
 `;
