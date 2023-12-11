@@ -2,16 +2,24 @@ import Head from "next/head";
 import styled from "styled-components";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import Link from "next/link";
 import Icon from "../Icons";
+import dynamic from "next/dynamic";
+const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
 export default function OutivityDetail({
   outivity,
   onDeleteOutivity,
   onToggleFavorite,
   isFavorite,
+  outivities,
 }) {
   const router = useRouter();
+  const [isHidden, setIsHidden] = useState(true);
+  function toggleHiddenLocation() {
+    setIsHidden(!isHidden);
+  }
 
   const confirmDelete = () => {
     const confirmed = window.confirm(
@@ -55,20 +63,35 @@ export default function OutivityDetail({
             </StyledFavoriteButton>
           </StyledImageContainer>
 
-          <p>
+          <StyledOutivityLocation>
             <strong>Location: </strong> {outivity.area},
             <StyledCountryName>{outivity.country}</StyledCountryName>
-          </p>
+          </StyledOutivityLocation>
+          <StyledHideButton onClick={toggleHiddenLocation}>
+            {isHidden ? "↓ Show Location" : "↑ Hide Location"}
+          </StyledHideButton>
 
-          <p>
+          {!isHidden && (
+            <Map
+              outivity={outivity}
+              outivities={outivities}
+              currentOutivity={outivity}
+            />
+          )}
+          {!isHidden && (
+            <StyledMapInfo>
+              *If the location is not set right, please add the zip code to your
+              area.
+            </StyledMapInfo>
+          )}
+          <StyledOutivityDescription>
             <strong>Description: </strong> {outivity.description}
-          </p>
-
+          </StyledOutivityDescription>
           <StyledDeleteButton type="button" onClick={confirmDelete}>
-            delete
+            ✗ delete
           </StyledDeleteButton>
 
-          <StyledEditLink href={`edit/${outivity.id}`}>edit</StyledEditLink>
+          <StyledEditLink href={`edit/${outivity.id}`}>→ edit</StyledEditLink>
         </article>
       </main>
     </>
@@ -105,30 +128,56 @@ const StyledFavoriteButton = styled.button`
 const StyledEditLink = styled(Link)`
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
-  margin: 10px;
-  padding: 10px 20px;
+  margin: 10px 0 50px 10px;
+  padding: 5px 10px;
   font-weight: 400;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid var(--secondary-color);
+  font-size: 14px;
+  color: var(--neutral-color);
+  background-color: var(--third-color);
+  &:hover {
+    cursor: pointer;
+  }
+  box-shadow: var(--lightgray-color) 1px 2px 2px 0;
+`;
+
+const StyledDeleteButton = styled.button`
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 10px 0 50px 0;
+  padding: 5px 10px;
+  color: var(--neutral-color);
+  font-weight: 400;
+  border: none;
   color: var(--secondary-color);
   background-color: var(--neutral-color);
   &:hover {
     cursor: pointer;
   }
+  box-shadow: var(--lightgray-color) 1px 2px 2px 0;
 `;
-const StyledDeleteButton = styled.button`
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
-  margin: 10px;
-  padding: 10px 20px;
-  font-weight: 400;
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid var(--secondary-color);
-  color: var(--secondary-color);
-  background-color: var(--danger-color);
-  &:hover {
-    cursor: pointer;
-  }
+
+const StyledHideButton = styled.button`
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 800;
+  color: var(--third-color);
+`;
+
+const StyledMapInfo = styled.div`
+  color: var(--third-color);
+  width: 300px;
+  font-size: 11px;
+  line-height: 1.2;
+  padding-top: 7px;
+  font-style: italic;
+`;
+
+const StyledOutivityLocation = styled.p`
+  margin: 20px 0 0 0;
+`;
+
+const StyledOutivityDescription = styled.p`
+  margin: 20px 0 20px 0;
 `;

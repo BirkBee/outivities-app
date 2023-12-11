@@ -27,6 +27,7 @@ export default createGlobalStyle`
     --neutral-color: #E5E5E5;
     --danger-color: #FFBEB4;
     --danger-textcolor: #FF3C00;
+    --lightgray-color: #b8b8bb;
     /* --favorite-color: #FFFF01; */
     --favorite-color: #FF3C00;
 
@@ -62,4 +63,13 @@ export default createGlobalStyle`
     font-family: ${poppins.style.fontFamily};
   }
 
+  input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: var(--primary-color);
+  padding: 10px 20px;
+  color: var(--neutral-color);
+  cursor: pointer;
+  border-radius: 5px;
+}
 `;

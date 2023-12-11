@@ -15,9 +15,13 @@ export default function OutivityDetailsPage({
     return <p>Loading...</p>;
   }
 
+  console.log("outivity.lat: ", outivity.lat);
+  console.log("outivity.long: ", outivity.long);
+
   return (
     <OutivityDetail
       outivity={outivity}
+      outivities={outivities}
       onDeleteOutivity={onDeleteOutivity}
       isFavorite={favorites.includes(outivity.id)}
       onToggleFavorite={onToggleFavorite}

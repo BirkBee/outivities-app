@@ -62,6 +62,7 @@ export default function Navigation() {
     </StyledNavigation>
   );
 }
+
 const StyledNavigation = styled.nav`
   width: 100%;
   background-color: var(--primary-color);
@@ -71,8 +72,9 @@ const StyledNavigation = styled.nav`
   height: 70px;
   display: grid;
   grid-template-rows: repeat(auto-fill, minmax (50px, 1fr));
-  z-index: 1;
+  z-index: 2;
 `;
+
 const StyledList = styled.ul`
   display: flex;
   flex-direction: row;
@@ -81,11 +83,13 @@ const StyledList = styled.ul`
   text-align: center;
   margin-top: 8px;
 `;
+
 const StyledLink = styled(Link)`
   text-decoration: none;
   align-items: center;
   width: 50%;
 `;
+
 const StyledIcon = styled.div`
   display: grid;
   path {
@@ -94,6 +98,7 @@ const StyledIcon = styled.div`
     transition: fill 0.3s ease-in-out;
   }
 `;
+
 const StyledSpan = styled.span`
   font-weight: 200;
   font-size: 12px;
