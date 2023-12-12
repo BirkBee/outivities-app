@@ -57,6 +57,19 @@ export default function Navigation() {
               />
             </StyledLink>
           </li>
+          <li>
+            <StyledLink href="/mapOverview">
+              <Icon
+                variant={"map"}
+                size={54}
+                color={
+                  router.pathname === "/mapOverview"
+                    ? "var(--third-color)"
+                    : "var(--neutral-color)"
+                }
+              />
+            </StyledLink>
+          </li>
         </StyledList>
       </StyledSpan>
     </StyledNavigation>
@@ -88,15 +101,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   align-items: center;
   width: 50%;
-`;
-
-const StyledIcon = styled.div`
-  display: grid;
-  path {
-    fill: ${(props) =>
-      props.$isActive ? "var(--third-color)" : "var(--neutral-color)"};
-    transition: fill 0.3s ease-in-out;
-  }
 `;
 
 const StyledSpan = styled.span`

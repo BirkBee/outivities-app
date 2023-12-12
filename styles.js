@@ -23,12 +23,10 @@ export default createGlobalStyle`
     --primary-color: #172633;
     --secondary-color: #323332;
     --third-color: #0C71E0;
-    --forth-color: #B2EEF8;
+    --pin-color: #ffd326;
     --neutral-color: #E5E5E5;
-    --danger-color: #FFBEB4;
     --danger-textcolor: #FF3C00;
     --lightgray-color: #b8b8bb;
-    /* --favorite-color: #FFFF01; */
     --favorite-color: #FF3C00;
 
     @media (max-width: 599px) {font-size: 14px;}

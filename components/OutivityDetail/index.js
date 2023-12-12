@@ -6,7 +6,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Icon from "../Icons";
 import dynamic from "next/dynamic";
-const Map = dynamic(() => import("@/components/Map"), { ssr: false });
 
 export default function OutivityDetail({
   outivity,
@@ -15,6 +14,7 @@ export default function OutivityDetail({
   isFavorite,
   outivities,
 }) {
+  const Map = dynamic(() => import("@/components/MapDetail"), { ssr: false });
   const router = useRouter();
   const [isHidden, setIsHidden] = useState(true);
   function toggleHiddenLocation() {
