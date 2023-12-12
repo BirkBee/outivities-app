@@ -54,7 +54,6 @@ const StyledMapInfoContainer = styled.div`
 const StyledMapInfo = styled.div`
   color: var(--third-color);
   font-weight: 500;
-  width: 300px;
   font-size: 11px;
   line-height: 1.2;
   padding-top: 7px;
