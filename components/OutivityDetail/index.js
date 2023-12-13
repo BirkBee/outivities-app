@@ -63,7 +63,7 @@ export default function OutivityDetail({
               />
             </StyledFavoriteButton>
           </StyledImageContainer>
-          <Weather area={outivity.area} />
+          <Weather outivity={outivity} />
 
           <StyledOutivityLocation>
             <strong>Location: </strong> {outivity.area},
