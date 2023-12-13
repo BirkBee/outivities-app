@@ -2,11 +2,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import Icon from "../Icons";
-import { icon } from "leaflet";
 
 export default function Weather({ outivity }) {
   const [weatherData, setWeatherData] = useState(null);
-
   const { lat, lng } = [outivity.lat, outivity.lng];
 
   const fetchData = async () => {
