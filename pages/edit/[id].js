@@ -63,7 +63,7 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
       image: selectedImage || image.secure_url,
       description: data.outivityDescription,
       lat: geolocationData.results[0].geometry.lat,
-      long: geolocationData.results[0].geometry.lng,
+      lng: geolocationData.results[0].geometry.lng,
     };
 
     return updatedOutivity;
