@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import Icon from "../Icons";
 
@@ -10,7 +10,7 @@ export default function Weather({ outivity }) {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${outivity.lat}&lon=${outivity.lng}&units=metric&appid=9e7a02e3cc30d92b7c137c9919b52688`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${outivity.lat}&lon=${outivity.lng}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY}`
       );
 
       setWeatherData(response.data);
@@ -21,7 +21,7 @@ export default function Weather({ outivity }) {
     }
   };
 
-  useEffect(() => {
+  useState(() => {
     fetchData();
   }, [outivity.lat, outivity.lng]);
 
