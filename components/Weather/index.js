@@ -5,19 +5,20 @@ import Icon from "../Icons";
 
 export default function Weather({ outivity }) {
   const [weatherData, setWeatherData] = useState(null);
-  const { lat, lng } = [outivity.lat, outivity.lng];
+  const [errorMessage, setErrorMessage] = useState(null);
 
   const fetchData = async () => {
     try {
-      if (!outivity.lat || !outivity.lng) {
-      }
-
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${outivity.lat}&lon=${outivity.lng}&units=metric&appid=9e7a02e3cc30d92b7c137c9919b52688`
       );
 
-      setWeatherData(response);
-    } catch (error) {}
+      setWeatherData(response.data);
+      setErrorMessage(null);
+    } catch (error) {
+      console.error("Error fetching weather data: ", error);
+      setErrorMessage("Weather data is not available at the moment...");
+    }
   };
 
   useEffect(() => {
@@ -26,33 +27,32 @@ export default function Weather({ outivity }) {
 
   return (
     <>
-      {weatherData ? (
+      {errorMessage ? (
+        <StyledInfoMessage>{errorMessage}</StyledInfoMessage>
+      ) : weatherData ? (
         <StyledWeatherContainer>
           <StyledWeatherInfo>
             <Icon variant={"temperature"} size={25} />
-            <StyledWeatherData>
-              {weatherData.data.main.temp}°C
-            </StyledWeatherData>
+            <StyledWeatherData>{weatherData.main.temp}°C</StyledWeatherData>
           </StyledWeatherInfo>
           <StyledWeatherInfo>
             <Icon variant={"weather"} size={25} />
             <StyledWeatherData>
-              {weatherData.data.weather[0].description}
+              {weatherData.weather[0].description}
             </StyledWeatherData>
           </StyledWeatherInfo>
           <StyledWeatherInfo>
             <Icon variant={"humidity"} size={25} />
-            <StyledWeatherData>
-              {weatherData.data.main.humidity}%
-            </StyledWeatherData>
+            <StyledWeatherData>{weatherData.main.humidity}%</StyledWeatherData>
           </StyledWeatherInfo>
         </StyledWeatherContainer>
       ) : (
-        <p>Loading weather data...</p>
+        <StyledInfoMessage>Loading weather data...</StyledInfoMessage>
       )}
     </>
   );
 }
+
 const StyledWeatherContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -60,11 +60,17 @@ const StyledWeatherContainer = styled.div`
   width: 300px;
   margin: 10px 0 0 0;
 `;
+
 const StyledWeatherInfo = styled.div`
   text-align: center;
-  align-items: center;
 `;
+
 const StyledWeatherData = styled.p`
   margin: 0;
   font-size: 10px;
+`;
+
+const StyledInfoMessage = styled.p`
+  color: var(--lightgray-color);
+  font-size: 12px;
 `;
