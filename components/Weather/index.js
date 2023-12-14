@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import Icon from "../Icons";
@@ -9,11 +8,12 @@ export default function Weather({ outivity }) {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get(
+      const response = await fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${outivity.lat}&lon=${outivity.lng}&units=metric&appid=${process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY}`
       );
+      const data = await response.json();
 
-      setWeatherData(response.data);
+      setWeatherData(data);
       setErrorMessage(null);
     } catch (error) {
       console.error("Error fetching weather data: ", error);
