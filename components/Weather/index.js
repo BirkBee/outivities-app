@@ -70,6 +70,8 @@ const StyledWeatherData = styled.p`
   font-size: 10px;
 `;
 
+//
+
 const StyledInfoMessage = styled.p`
   color: var(--lightgray-color);
   font-size: 12px;
