@@ -6,6 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Icon from "../Icons";
 import dynamic from "next/dynamic";
+import Weather from "../Weather";
 
 export default function OutivityDetail({
   outivity,
@@ -62,6 +63,7 @@ export default function OutivityDetail({
               />
             </StyledFavoriteButton>
           </StyledImageContainer>
+          <Weather outivity={outivity} />
 
           <StyledOutivityLocation>
             <strong>Location: </strong> {outivity.area},

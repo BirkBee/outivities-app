@@ -35,7 +35,7 @@ export default function MapOverview({ outivities }) {
         <Marker
           key={outivity.id}
           icon={greyIcon}
-          position={[outivity.lat, outivity.long]}
+          position={[outivity.lat, outivity.lng]}
         >
           <Popup>
             <StyledLink href={`//${outivity.id}`}>
