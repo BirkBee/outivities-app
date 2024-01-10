@@ -20,15 +20,15 @@ export default function MapDetail({
       <TileLayer url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png" />
 
       {outivities.map((outivity) =>
-        outivity.id === currentOutivity.id ? (
+        outivity._id === currentOutivity._id ? (
           <Marker
-            key={outivity.id}
+            key={outivity._id}
             icon={blueIcon}
             position={[outivity.lat, outivity.lng]}
           />
         ) : (
           <Marker
-            key={outivity.id}
+            key={outivity._id}
             icon={greyIcon}
             position={[outivity.lat, outivity.lng]}
           >

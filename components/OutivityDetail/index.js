@@ -51,7 +51,7 @@ export default function OutivityDetail({
             />
             <StyledFavoriteButton
               type="button"
-              onClick={() => onToggleFavorite(outivity.id)}
+              onClick={() => onToggleFavorite(outivity._id)}
             >
               <Icon
                 variant="favorite"
@@ -93,7 +93,7 @@ export default function OutivityDetail({
             ✗ delete
           </StyledDeleteButton>
 
-          <StyledEditLink href={`edit/${outivity.id}`}>→ edit</StyledEditLink>
+          <StyledEditLink href={`edit/${outivity._id}`}>→ edit</StyledEditLink>
         </article>
       </main>
     </>
