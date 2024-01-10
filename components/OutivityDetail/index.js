@@ -13,7 +13,6 @@ export default function OutivityDetail({
   onDeleteOutivity,
   onToggleFavorite,
   isFavorite,
-  outivities,
 }) {
   const Map = dynamic(() => import("@/components/MapDetail"), { ssr: false });
   const router = useRouter();
@@ -73,13 +72,7 @@ export default function OutivityDetail({
             {isHidden ? "↓ Show Location" : "↑ Hide Location"}
           </StyledHideButton>
 
-          {!isHidden && (
-            <Map
-              outivity={outivity}
-              outivities={outivities}
-              currentOutivity={outivity}
-            />
-          )}
+          {!isHidden && <Map outivity={outivity} currentOutivity={outivity} />}
           {!isHidden && (
             <StyledMapInfo>
               *If the location is not set right, please add the zip code to your

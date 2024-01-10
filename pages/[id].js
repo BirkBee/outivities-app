@@ -3,7 +3,7 @@ import OutivityDetail from "@/components/OutivityDetail";
 import useSWR from "swr";
 import useFavorites from "@/lib/useFavorites";
 
-export default function OutivityDetailsPage({ outivities }) {
+export default function OutivityDetailsPage() {
   const router = useRouter();
   const { id } = router.query;
 
@@ -28,7 +28,6 @@ export default function OutivityDetailsPage({ outivities }) {
   return (
     <OutivityDetail
       outivity={outivity}
-      outivities={outivities}
       onDeleteOutivity={handleDeleteOutivity}
       isFavorite={favorites.includes(outivity._id)}
       onToggleFavorite={toggleFavorite}

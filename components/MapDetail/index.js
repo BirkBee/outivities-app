@@ -1,4 +1,5 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import useSWR from "swr";
 import styled from "styled-components";
 import * as L from "leaflet";
 import "leaflet/dist/leaflet.css";
@@ -6,11 +7,9 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import "leaflet-defaulticon-compatibility";
 import Link from "next/link";
 
-export default function MapDetail({
-  currentOutivity = {},
-  outivities,
-  outivity,
-}) {
+export default function MapDetail({ currentOutivity = {}, outivity }) {
+  const { data: outivities } = useSWR("/api/outivities");
+
   return (
     <StyledMapContainer
       center={[outivity.lat, outivity.lng]}
@@ -33,7 +32,7 @@ export default function MapDetail({
             position={[outivity.lat, outivity.lng]}
           >
             <Popup>
-              <StyledLink href={`//${outivity.id}`}>
+              <StyledLink href={`//${outivity._id}`}>
                 <h2>{outivity.title}</h2>
               </StyledLink>
               <StyledInfo>in {outivity.area}</StyledInfo>

@@ -3,7 +3,7 @@ import OutivityForm from "@/components/OutivityForm";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import opencage from "opencage-api-client";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
 
 export default function UpdateOutivityDetails() {
   const router = useRouter();
@@ -59,17 +59,14 @@ export default function UpdateOutivityDetails() {
     }
   }
 
-  async function handleEditOutivity(event) {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const newOutivity = Object.fromEntries(formData);
+  async function prepareFormData(data, geolocationData) {
     const updatedOutivity = {
       id: id,
-      title: newOutivity.outivityName,
-      area: newOutivity.outivityArea,
-      country: newOutivity.outivityCountry,
+      title: data.outivityName,
+      area: data.outivityArea,
+      country: data.outivityCountry,
       image: selectedImage || image.secure_url,
-      description: newOutivity.outivityDescription,
+      description: data.outivityDescription,
       lat: geolocationData.results[0].geometry.lat,
       lng: geolocationData.results[0].geometry.lng,
     };
@@ -79,7 +76,7 @@ export default function UpdateOutivityDetails() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(editedNewOutivityData),
+      body: JSON.stringify(updatedOutivity),
     });
 
     if (response.ok) {
