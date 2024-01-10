@@ -1,20 +1,19 @@
 import styled from "styled-components";
 import OutivitiesListItem from "../OutivitiesListItem";
+import useFavorites from "@/lib/useFavorites";
 
-export default function OutivitiesList({
-  outivities,
-  favorites,
-  onToggleFavorite,
-}) {
+export default function OutivitiesList({ outivities }) {
+  const { favorites, toggleFavorite } = useFavorites();
+
   return (
     <article>
       <StyledOutivityCardContainer>
         {outivities.map((outivity) => (
           <OutivitiesListItem
-            key={outivity.id}
+            key={outivity._id}
             outivity={outivity}
-            onToggleFavorite={onToggleFavorite}
-            isFavorite={favorites.includes(outivity.id)}
+            onToggleFavorite={toggleFavorite}
+            isFavorite={favorites.includes(outivity._id)}
           />
         ))}
       </StyledOutivityCardContainer>

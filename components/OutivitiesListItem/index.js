@@ -10,7 +10,7 @@ export default function OutivitiesListItem({
 }) {
   return (
     <StyledOutivityCard>
-      <Link href={`/${outivity.id}`}>
+      <Link href={`/${outivity._id}`}>
         <StyledImageContainer>
           <StyledOutivityImage
             src={outivity.image}
@@ -27,7 +27,7 @@ export default function OutivitiesListItem({
 
       <StyledFavoriteButton
         type="button"
-        onClick={() => onToggleFavorite(outivity.id)}
+        onClick={() => onToggleFavorite(outivity._id)}
       >
         <Icon
           variant="favorite"
