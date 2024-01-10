@@ -1,7 +1,7 @@
 import OutivityForm from "@/components/OutivityForm";
 import { useRouter } from "next/router";
+import useSWR from "swr";
 import { useState } from "react";
-import { uid } from "uid";
 import Head from "next/head";
 import opencage from "opencage-api-client";
 
@@ -10,6 +10,7 @@ export default function CreateOutivity({ onAddOutivity }) {
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedImage, setSelectedImage] = useState("");
   const [outivityArea, setOutivityArea] = useState("");
+  const { mutate } = useSWR("/api/outivities");
 
   async function fetchData(query) {
     if (!query) {
@@ -45,7 +46,6 @@ export default function CreateOutivity({ onAddOutivity }) {
 
       const image = await response.json();
       const newOutivity = {
-        id: uid(),
         title: data.outivityName,
         area: data.outivityArea,
         country: data.outivityCountry,
@@ -55,9 +55,18 @@ export default function CreateOutivity({ onAddOutivity }) {
         lng: geolocationData.results[0].geometry.lng,
       };
 
-      setSelectedImage(image);
-      onAddOutivity(newOutivity);
-      router.push("/");
+      const outivityResponse = await fetch("/api/outivities", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newOutivity),
+      });
+
+      if (outivityResponse.ok) {
+        setSelectedImage(image);
+        router.push("/");
+      }
     } catch (error) {
       setErrorMessage(error.message);
     }
