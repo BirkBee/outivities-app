@@ -7,7 +7,7 @@ const outivitySchema = new Schema({
   area: { type: String, required: true },
   country: { type: String, required: true },
   description: { type: String, required: true },
-  image: { type: String, required: false },
+  image: { type: String, required: true },
   lat: { type: Number, required: false },
   lng: { type: Number, required: false },
 });
