@@ -8,8 +8,8 @@ const outivitySchema = new Schema({
   country: { type: String, required: true },
   description: { type: String, required: true },
   image: { type: String, required: false },
-  lat: { type: String, required: true },
-  lng: { type: String, required: true },
+  lat: { type: Number, required: false },
+  lng: { type: Number, required: false },
 });
 
 const Outivity =
