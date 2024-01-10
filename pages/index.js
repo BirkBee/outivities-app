@@ -3,9 +3,13 @@ import Head from "next/head";
 import OutivitiesList from "@/components/OutivitiesList";
 import { useState } from "react";
 import SearchBar from "@/components/SearchBar";
+import useSWR from "swr";
 
-export default function HomePage({ outivities, favorites, onToggleFavorite }) {
+export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState("");
+  const { data: outivities } = useSWR("/api/outivities");
+
+  if (!outivities) return;
 
   const foundOutivities = outivities
     .filter((outivity) =>
@@ -25,8 +29,6 @@ export default function HomePage({ outivities, favorites, onToggleFavorite }) {
         <SearchBar setSearchTerm={setSearchTerm} />
         <OutivitiesList
           outivities={searchTerm.length === 0 ? outivities : foundOutivities}
-          favorites={favorites}
-          onToggleFavorite={onToggleFavorite}
         />
         {searchTerm.length > 0 && foundOutivities.length === 0 && (
           <>
