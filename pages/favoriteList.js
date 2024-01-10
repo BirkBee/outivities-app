@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Head from "next/head";
 import OutivitiesListItem from "@/components/OutivitiesListItem";
+import useFavorites from "@/lib/useFavorites";
+import useSWR from "swr";
 
 export default function FavoritesList({
   outivities,
