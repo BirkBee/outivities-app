@@ -3,22 +3,23 @@ import OutivityForm from "@/components/OutivityForm";
 import { useEffect, useState } from "react";
 import Head from "next/head";
 import opencage from "opencage-api-client";
+import useSWR, { mutate } from "swr";
 
-export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
+export default function UpdateOutivityDetails() {
   const router = useRouter();
   const { id } = router.query;
   const [selectedImage, setSelectedImage] = useState("");
-  const [outivity, setOutivity] = useState(null);
   const [outivityArea, setOutivityArea] = useState("");
+  const { data: outivity, isLoading } = useSWR(
+    id ? `/api/outivities/${id}` : null
+  );
 
   useEffect(() => {
-    const currentOutivity = outivities.find((outivity) => outivity.id === id);
-    if (currentOutivity) {
-      setOutivity(currentOutivity);
-      setSelectedImage(currentOutivity.image);
-      setOutivityArea(currentOutivity.area);
+    if (outivity) {
+      setSelectedImage(outivity.image);
+      setOutivityArea(outivity.area);
     }
-  }, [id, outivities]);
+  }, [outivity]);
 
   async function fetchData(query) {
     if (!query) {
@@ -34,6 +35,10 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
       console.error("Error fetching geolocation data:", error);
       return null;
     }
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
 
   if (!outivity) return <h2>Sorry. Outivity not found.</h2>;
@@ -54,19 +59,32 @@ export default function UpdateOutivityDetails({ outivities, onEditOutivity }) {
     }
   }
 
-  function prepareFormData(data, geolocationData) {
+  async function handleEditOutivity(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const newOutivity = Object.fromEntries(formData);
     const updatedOutivity = {
       id: id,
-      title: data.outivityName,
-      area: data.outivityArea,
-      country: data.outivityCountry,
+      title: newOutivity.outivityName,
+      area: newOutivity.outivityArea,
+      country: newOutivity.outivityCountry,
       image: selectedImage || image.secure_url,
-      description: data.outivityDescription,
+      description: newOutivity.outivityDescription,
       lat: geolocationData.results[0].geometry.lat,
       lng: geolocationData.results[0].geometry.lng,
     };
 
-    return updatedOutivity;
+    const response = await fetch(`/api/outivities/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(editedNewOutivityData),
+    });
+
+    if (response.ok) {
+      router.push(`/${id}`);
+    }
   }
 
   return (
