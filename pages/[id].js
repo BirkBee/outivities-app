@@ -19,6 +19,8 @@ export default function OutivityDetailsPage() {
 
     if (!response.ok) {
       console.log(response.status);
+      alert("Failed to delete the Outivity. Please try again.");
+      router.push("/");
       return;
     }
 
