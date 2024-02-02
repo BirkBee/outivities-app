@@ -1,12 +1,17 @@
-import useSWR from "swr";
 import Head from "next/head";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import Icon from "@/components/Icons";
 
-export default function MapOverviewPage() {
+export default function MapOverviewPage({ outivities }) {
   const Map = dynamic(() => import("@/components/MapOverview"), { ssr: false });
-  const { data: outivities } = useSWR("/api/outivities");
+  const outivity = outivities.find((outivities) => {
+    return outivities;
+  });
+
+  if (!outivity) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
@@ -16,7 +21,7 @@ export default function MapOverviewPage() {
 
       <StyledTitle>Outivities Map</StyledTitle>
       <main>
-        <Map outivities={outivities} />
+        <Map outivity={outivity} outivities={outivities} />
         <StyledMapInfoContainer>
           <Icon variant={"pin"} size={30} color={"var(--pin-color)"} />
           <StyledMapInfo>

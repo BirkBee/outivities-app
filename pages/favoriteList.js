@@ -1,17 +1,14 @@
 import styled from "styled-components";
 import Head from "next/head";
 import OutivitiesListItem from "@/components/OutivitiesListItem";
-import useFavorites from "@/lib/useFavorites";
-import useSWR from "swr";
 
-export default function FavoritesList() {
-  const { data: outivities } = useSWR("/api/outivities");
-  const { favorites, toggleFavorite } = useFavorites();
-
-  if (!outivities) return;
-
+export default function FavoritesList({
+  outivities,
+  onToggleFavorite,
+  favorites,
+}) {
   const favoriteOutivities = outivities.filter((outivity) =>
-    favorites.includes(outivity._id)
+    favorites.includes(outivity.id)
   );
 
   return (
@@ -32,9 +29,10 @@ export default function FavoritesList() {
           <StyledOutivityCardContainer>
             {favoriteOutivities.map((outivity) => (
               <OutivitiesListItem
-                key={outivity._id}
+                key={outivity.id}
                 outivity={outivity}
-                onToggleFavorite={toggleFavorite}
+                favorites={favorites}
+                onToggleFavorite={onToggleFavorite}
               />
             ))}
           </StyledOutivityCardContainer>
