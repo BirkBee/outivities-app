@@ -33,12 +33,12 @@ export default function MapOverview({ outivities }) {
 
       {outivities.map((outivity) => (
         <Marker
-          key={outivity._id}
+          key={outivity.id}
           icon={greyIcon}
           position={[outivity.lat, outivity.lng]}
         >
           <Popup>
-            <StyledLink href={`//${outivity._id}`}>
+            <StyledLink href={`//${outivity.id}`}>
               <h2>{outivity.title}</h2>
             </StyledLink>
             <StyledInfo>in {outivity.area}</StyledInfo>

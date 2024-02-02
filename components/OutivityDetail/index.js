@@ -13,6 +13,7 @@ export default function OutivityDetail({
   onDeleteOutivity,
   onToggleFavorite,
   isFavorite,
+  outivities,
 }) {
   const Map = dynamic(() => import("@/components/MapDetail"), { ssr: false });
   const router = useRouter();
@@ -50,7 +51,7 @@ export default function OutivityDetail({
             />
             <StyledFavoriteButton
               type="button"
-              onClick={() => onToggleFavorite(outivity._id)}
+              onClick={() => onToggleFavorite(outivity.id)}
             >
               <Icon
                 variant="favorite"
@@ -72,7 +73,13 @@ export default function OutivityDetail({
             {isHidden ? "↓ Show Location" : "↑ Hide Location"}
           </StyledHideButton>
 
-          {!isHidden && <Map outivity={outivity} currentOutivity={outivity} />}
+          {!isHidden && (
+            <Map
+              outivity={outivity}
+              outivities={outivities}
+              currentOutivity={outivity}
+            />
+          )}
           {!isHidden && (
             <StyledMapInfo>
               *If the location is not set right, please add the zip code to your
@@ -86,7 +93,7 @@ export default function OutivityDetail({
             ✗ delete
           </StyledDeleteButton>
 
-          <StyledEditLink href={`edit/${outivity._id}`}>→ edit</StyledEditLink>
+          <StyledEditLink href={`edit/${outivity.id}`}>→ edit</StyledEditLink>
         </article>
       </main>
     </>
