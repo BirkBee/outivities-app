@@ -33,7 +33,7 @@ export default function MapDetail({
             position={[outivity.lat, outivity.lng]}
           >
             <Popup>
-              <StyledLink href={`//${outivity.id}`}>
+              <StyledLink href={`/${outivity.id}`}>
                 <h2>{outivity.title}</h2>
               </StyledLink>
               <StyledInfo>in {outivity.area}</StyledInfo>
